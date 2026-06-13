@@ -1,0 +1,14 @@
+# Mayur Chaudhari
+
+> AI Business Transformation Manager helping organizations unlock productivity through Agentic AI, workflow automation, and intelligent digital systems.
+
+Mayur Chaudhari is an AI Business Transformation Manager focused on connecting business problems with AI-powered solutions. He designs systems that improve operations, automate repetitive work, and create scalable business outcomes. Currently leading AI Transformation at EDGE, he specializes in multi-agent systems, business process automation, AI strategy consulting, and cross-platform development with Flutter.
+
+## Pages
+
+- [Home](/): Portfolio and landing page with services overview, experience, expertise, projects, and contact information.
+
+## Optional
+
+- [LinkedIn](https://www.linkedin.com/in/mayuro/): Professional profile and network.
+- [GitHub](https://github.com/mayuro): Open-source projects and code repositories.
