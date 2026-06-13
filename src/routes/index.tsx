@@ -22,8 +22,8 @@ import {
   Phone,
 } from "lucide-react";
 import { WebGLBackground } from "@/components/WebGLBackground";
-import mayurPortrait from "@/assets/mayur-portrait.png.asset.json";
-import videoPoster from "@/assets/mayur-video-poster.png.asset.json";
+import mayurPortrait from "@/assets/mayur-portrait.png";
+import videoPoster from "@/assets/mayur-video-poster.png";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -46,7 +46,7 @@ export const Route = createFileRoute("/")({
     ],
     links: [
       { rel: "canonical", href: "/" },
-      { rel: "preload", as: "image", href: mayurPortrait.url, fetchpriority: "high" },
+      { rel: "preload", as: "image", href: mayurPortrait, fetchpriority: "high" },
     ],
     scripts: [
       {
@@ -181,7 +181,7 @@ function Hero() {
           <div className="absolute -inset-4 rounded-[2rem] bg-gradient-to-br from-[#00A85A]/30 via-[#00A85A]/10 to-transparent blur-2xl" />
           <div className="glass-strong relative overflow-hidden rounded-[2rem] p-2">
             <img
-              src={mayurPortrait.url}
+              src={mayurPortrait}
               alt="Mayur Chaudhari, AI Business Transformation Manager"
               width={900}
               height={900}
@@ -242,7 +242,7 @@ function VideoSection() {
                 className="group absolute inset-0 h-full w-full"
               >
                 <img
-                  src={videoPoster.url}
+                  src={videoPoster}
                   alt="Mayur Chaudhari explaining AI automation"
                   loading="lazy"
                   decoding="async"
