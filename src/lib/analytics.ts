@@ -75,14 +75,14 @@ let sessionStart = 0;
 let pageViews = 0;
 let entryPage = "";
 let lastPage = "";
-let geo: { country?: string; city?: string; region?: string; ip?: string } = {};
+let geo: { country?: string; city?: string; region?: string; ip?: string; isp?: string } = {};
 
 async function fetchGeo() {
   try {
     const res = await fetch("https://ipapi.co/json/");
     if (res.ok) {
       const j = await res.json();
-      geo = { country: j.country_name, city: j.city, region: j.region, ip: j.ip };
+      geo = { country: j.country_name, city: j.city, region: j.region, ip: j.ip, isp: j.org };
     }
   } catch {}
 }
@@ -119,6 +119,7 @@ export async function initSession() {
       city: geo.city || null,
       region: geo.region || null,
       ip: geo.ip || null,
+      isp: geo.isp || null,
       connectionType: conn.effectiveType || null,
       downlink: conn.downlink || null,
       utm: {

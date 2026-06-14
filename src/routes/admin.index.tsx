@@ -41,6 +41,7 @@ type Session = {
   browser?: string;
   country?: string;
   city?: string;
+  isp?: string;
   pageViews?: number;
   duration?: number;
   utm?: any;
@@ -174,6 +175,7 @@ function AdminDashboard() {
       topDevices: top(sessions, (s) => s.device),
       topOS: top(sessions, (s) => s.os),
       topReferrers: top(sessions, (s) => s.referrer),
+      topISPs: top(sessions, (s) => s.isp),
       ipVisits,
     };
   }, [sessions, leads, events]);
@@ -242,9 +244,10 @@ function AdminDashboard() {
               <Stat label="GitHub Clicks" value={stats.githubClicks} />
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
               <TopList title="Top Countries" data={stats.topCountries} />
               <TopList title="Top Cities" data={stats.topCities} />
+              <TopList title="Top ISPs" data={stats.topISPs} />
               <TopList title="Top Browsers" data={stats.topBrowsers} />
               <TopList title="Top Devices" data={stats.topDevices} />
               <TopList title="Top OS" data={stats.topOS} />
@@ -292,6 +295,7 @@ function AdminDashboard() {
                       <TableHead>Start</TableHead>
                       <TableHead>Country</TableHead>
                       <TableHead>City</TableHead>
+                      <TableHead>ISP</TableHead>
                       <TableHead>IP</TableHead>
                       <TableHead>Visits</TableHead>
                       <TableHead>Device</TableHead>
@@ -312,6 +316,7 @@ function AdminDashboard() {
                         <TableCell>{fmtDate(s.startedAt)}</TableCell>
                         <TableCell>{s.country || "—"}</TableCell>
                         <TableCell>{s.city || "—"}</TableCell>
+                        <TableCell className="max-w-[150px] truncate" title={s.isp}>{s.isp || "—"}</TableCell>
                         <TableCell className="font-mono text-xs">{s.ip || "—"}</TableCell>
                         <TableCell>{stats.ipVisits[s.ip || "Unknown"] || 1}</TableCell>
                         <TableCell>{s.device}</TableCell>
