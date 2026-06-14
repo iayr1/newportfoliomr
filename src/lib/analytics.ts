@@ -34,13 +34,37 @@ function parseUA(): UA {
   return { device, os, browser };
 }
 
+function generateUUID(): string {
+  if (typeof crypto !== "undefined" && typeof crypto.randomUUID === "function") {
+    try {
+      return crypto.randomUUID();
+    } catch (e) {
+      // Fallback
+    }
+  }
+  return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, (c) => {
+    const r = (Math.random() * 16) | 0;
+    const v = c === "x" ? r : (r & 0x3) | 0x8;
+    return v.toString(16);
+  });
+}
+
 function getOrCreateVisitorId(): { id: string; isNew: boolean } {
   const key = "visitor_id";
-  let id = localStorage.getItem(key);
+  let id: string | null = null;
+  try {
+    id = localStorage.getItem(key);
+  } catch (e) {
+    console.warn("localStorage is not accessible:", e);
+  }
   let isNew = false;
   if (!id) {
-    id = crypto.randomUUID();
-    localStorage.setItem(key, id);
+    id = generateUUID();
+    try {
+      localStorage.setItem(key, id);
+    } catch (e) {
+      console.warn("Could not save visitor_id to localStorage:", e);
+    }
     isNew = true;
   }
   return { id, isNew };
@@ -65,70 +89,74 @@ async function fetchGeo() {
 
 export async function initSession() {
   if (sessionId) return;
-  sessionId = crypto.randomUUID();
-  sessionStart = Date.now();
-  pageViews = 0;
-  entryPage = window.location.pathname;
-  lastPage = entryPage;
-  const { id: visitorId, isNew } = getOrCreateVisitorId();
-  const ua = parseUA();
-  await fetchGeo();
-  const params = new URLSearchParams(window.location.search);
-  const conn = (navigator as any).connection || {};
+  try {
+    sessionId = generateUUID();
+    sessionStart = Date.now();
+    pageViews = 0;
+    entryPage = window.location.pathname;
+    lastPage = entryPage;
+    const { id: visitorId, isNew } = getOrCreateVisitorId();
+    const ua = parseUA();
+    await fetchGeo();
+    const params = new URLSearchParams(window.location.search);
+    const conn = (navigator as any).connection || {};
 
-  await setDoc(doc(db, "sessions", sessionId), {
-    visitorId,
-    isNewVisitor: isNew,
-    startedAt: serverTimestamp(),
-    entryPage,
-    referrer: document.referrer || "Direct",
-    userAgent: navigator.userAgent,
-    device: ua.device,
-    os: ua.os,
-    browser: ua.browser,
-    language: navigator.language,
-    screen: `${screen.width}x${screen.height}`,
-    viewport: `${window.innerWidth}x${window.innerHeight}`,
-    timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
-    country: geo.country || null,
-    city: geo.city || null,
-    region: geo.region || null,
-    ip: geo.ip || null,
-    connectionType: conn.effectiveType || null,
-    downlink: conn.downlink || null,
-    utm: {
-      source: params.get("utm_source"),
-      medium: params.get("utm_medium"),
-      campaign: params.get("utm_campaign"),
-      term: params.get("utm_term"),
-      content: params.get("utm_content"),
-    },
-    pageViews: 0,
-  });
-
-  trackPageView(window.location.pathname);
-
-  const endSession = () => {
-    if (!sessionId) return;
-    const duration = Math.round((Date.now() - sessionStart) / 1000);
-    const payload = JSON.stringify({
-      sessionId,
-      duration,
-      exitPage: lastPage,
-      endedAt: new Date().toISOString(),
+    await setDoc(doc(db, "sessions", sessionId), {
+      visitorId,
+      isNewVisitor: isNew,
+      startedAt: serverTimestamp(),
+      entryPage,
+      referrer: document.referrer || "Direct",
+      userAgent: navigator.userAgent,
+      device: ua.device,
+      os: ua.os,
+      browser: ua.browser,
+      language: navigator.language,
+      screen: `${screen.width}x${screen.height}`,
+      viewport: `${window.innerWidth}x${window.innerHeight}`,
+      timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+      country: geo.country || null,
+      city: geo.city || null,
+      region: geo.region || null,
+      ip: geo.ip || null,
+      connectionType: conn.effectiveType || null,
+      downlink: conn.downlink || null,
+      utm: {
+        source: params.get("utm_source"),
+        medium: params.get("utm_medium"),
+        campaign: params.get("utm_campaign"),
+        term: params.get("utm_term"),
+        content: params.get("utm_content"),
+      },
+      pageViews: 0,
     });
-    navigator.sendBeacon?.(
-      `https://firestore.googleapis.com/v1/projects/portfolio-44af5/databases/(default)/documents/session_ends`,
-      new Blob([payload], { type: "application/json" }),
-    );
-    updateDoc(doc(db, "sessions", sessionId), {
-      duration,
-      exitPage: lastPage,
-      endedAt: serverTimestamp(),
-    }).catch(() => {});
-  };
-  window.addEventListener("beforeunload", endSession);
-  window.addEventListener("pagehide", endSession);
+
+    trackPageView(window.location.pathname);
+
+    const endSession = () => {
+      if (!sessionId) return;
+      const duration = Math.round((Date.now() - sessionStart) / 1000);
+      const payload = JSON.stringify({
+        sessionId,
+        duration,
+        exitPage: lastPage,
+        endedAt: new Date().toISOString(),
+      });
+      navigator.sendBeacon?.(
+        `https://firestore.googleapis.com/v1/projects/portfolio-44af5/databases/(default)/documents/session_ends`,
+        new Blob([payload], { type: "application/json" }),
+      );
+      updateDoc(doc(db, "sessions", sessionId), {
+        duration,
+        exitPage: lastPage,
+        endedAt: serverTimestamp(),
+      }).catch(() => {});
+    };
+    window.addEventListener("beforeunload", endSession);
+    window.addEventListener("pagehide", endSession);
+  } catch (err) {
+    console.error("initSession failed:", err);
+  }
 }
 
 export async function trackPageView(path: string) {
@@ -150,10 +178,14 @@ export async function trackPageView(path: string) {
 
 export async function trackEvent(name: string, data: Record<string, any> = {}) {
   try {
+    let visitorId = null;
+    try {
+      visitorId = localStorage.getItem("visitor_id");
+    } catch {}
     await addDoc(collection(db, "events"), {
       name,
       sessionId,
-      visitorId: localStorage.getItem("visitor_id"),
+      visitorId,
       data,
       path: window.location.pathname,
       timestamp: serverTimestamp(),
@@ -180,10 +212,14 @@ export async function trackLead(data: { name: string; email: string; message?: s
     throw new Error("Invalid lead data");
   }
   try {
+    let visitorId = null;
+    try {
+      visitorId = localStorage.getItem("visitor_id");
+    } catch {}
     await addDoc(collection(db, "leads"), {
       ...parsed.data,
       sessionId,
-      visitorId: localStorage.getItem("visitor_id"),
+      visitorId,
       timestamp: serverTimestamp(),
     });
   } catch (err) {
