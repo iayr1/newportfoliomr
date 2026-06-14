@@ -1,16 +1,22 @@
 import { useEffect } from "react";
-import { initSession, trackEvent, trackDownload } from "@/lib/analytics";
+import { useLocation } from "@tanstack/react-router";
+import { initSession, trackEvent, trackDownload, trackPageView } from "@/lib/analytics";
 import { CLARITY_PROJECT_ID } from "@/lib/firebase";
 
 export function AnalyticsProvider() {
+  const location = useLocation();
+
   useEffect(() => {
     initSession();
     // Microsoft Clarity
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     if (!(window as any).clarity) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       (function (c: any, l: any, a: any, r: any, i: any) {
         c[a] =
           c[a] ||
           function () {
+            // eslint-disable-next-line prefer-rest-params
             (c[a].q = c[a].q || []).push(arguments);
           };
         const t = l.createElement(r);
@@ -34,7 +40,7 @@ export function AnalyticsProvider() {
           : lower.includes("portfolio")
             ? "portfolio"
             : "brochure";
-        trackDownload(type as any, href);
+        trackDownload(type as "resume" | "portfolio" | "brochure", href);
         return;
       }
       try {
@@ -42,11 +48,17 @@ export function AnalyticsProvider() {
         if (url.origin !== window.location.origin) {
           trackEvent("outbound_click", { url: href });
         }
-      } catch {}
+      } catch (err) {
+        // Ignore parsing errors for invalid/internal URLs
+      }
     };
     document.addEventListener("click", onClick);
     return () => document.removeEventListener("click", onClick);
   }, []);
+
+  useEffect(() => {
+    trackPageView(location.pathname);
+  }, [location.pathname]);
+
   return null;
 }
-

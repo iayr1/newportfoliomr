@@ -41,8 +41,16 @@ export const Route = createFileRoute("/")({
           "Transforming Businesses with Agentic AI. Workflow automation, AI strategy, and intelligent systems for measurable impact.",
       },
       { property: "og:url", content: "/" },
-      { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/b1c4b602-3de3-4ac2-9607-51748b390274" },
-      { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/b1c4b602-3de3-4ac2-9607-51748b390274" },
+      {
+        property: "og:image",
+        content:
+          "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/b1c4b602-3de3-4ac2-9607-51748b390274",
+      },
+      {
+        name: "twitter:image",
+        content:
+          "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/b1c4b602-3de3-4ac2-9607-51748b390274",
+      },
     ],
     links: [
       { rel: "canonical", href: "/" },
@@ -61,10 +69,7 @@ export const Route = createFileRoute("/")({
             name: "EDGE",
           },
           url: "https://mayuro.lovable.app/",
-          sameAs: [
-            "https://www.linkedin.com/in/iayr1",
-            "https://www.github.com/iayr1",
-          ],
+          sameAs: ["https://www.linkedin.com/in/iayr1", "https://www.github.com/iayr1"],
         }),
       },
     ],
@@ -126,19 +131,16 @@ function Hero() {
         <div>
           <div className="glass inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs">
             <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-[#00A85A]" />
-            <span className="text-muted-foreground">
-              AI Business Transformation Manager · EDGE
-            </span>
+            <span className="text-muted-foreground">AI Business Transformation Manager · EDGE</span>
           </div>
 
           <h1 className="mt-6 text-5xl font-semibold leading-[1.05] md:text-6xl lg:text-7xl">
-            Transforming Businesses with{" "}
-            <span className="text-gradient-green">Agentic AI</span>
+            Transforming Businesses with <span className="text-gradient-green">Agentic AI</span>
           </h1>
 
           <p className="mt-7 max-w-xl text-lg text-muted-foreground md:text-xl">
-            I help organizations automate workflows, redesign operations, and deploy
-            intelligent AI systems that create measurable business impact.
+            I help organizations automate workflows, redesign operations, and deploy intelligent AI
+            systems that create measurable business impact.
           </p>
 
           <div className="mt-9 flex flex-wrap items-center gap-4">
@@ -169,9 +171,7 @@ function Hero() {
                 <div className="font-display text-2xl font-semibold text-[#00723D] md:text-3xl">
                   {s.k}
                 </div>
-                <div className="mt-1 text-xs text-muted-foreground md:text-sm">
-                  {s.v}
-                </div>
+                <div className="mt-1 text-xs text-muted-foreground md:text-sm">{s.v}</div>
               </div>
             ))}
           </div>
@@ -219,8 +219,8 @@ function VideoSection() {
             AI Automation, <span className="text-gradient-green">explained simply</span>.
           </h2>
           <p className="mt-5 max-w-2xl text-lg text-muted-foreground">
-            A walkthrough of how I help teams adopt Agentic AI and automate real
-            business workflows — strategy, tools, and outcomes.
+            A walkthrough of how I help teams adopt Agentic AI and automate real business workflows
+            — strategy, tools, and outcomes.
           </p>
         </div>
 
@@ -278,10 +278,7 @@ function VideoSection() {
                 YouTube
               </a>
             </div>
-            <a
-              href="#contact"
-              className="text-sm font-medium text-[#00723D] hover:underline"
-            >
+            <a href="#contact" className="text-sm font-medium text-[#00723D] hover:underline">
               Want this for your team? →
             </a>
           </div>
@@ -318,10 +315,7 @@ function StackMarquee() {
           <div className="pointer-events-none absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-[#F7F8F5] to-transparent z-10" />
           <div className="marquee-track flex w-max gap-3">
             {row.map((s, i) => (
-              <span
-                key={`${s}-${i}`}
-                className="chip whitespace-nowrap font-medium"
-              >
+              <span key={`${s}-${i}`} className="chip whitespace-nowrap font-medium">
                 <span className="h-1.5 w-1.5 rounded-full bg-[#00A85A]" />
                 {s}
               </span>
@@ -338,31 +332,40 @@ function About() {
     <section id="about" className="relative py-32">
       <div className="mx-auto max-w-6xl px-4">
         <div className="max-w-3xl">
-          <div className="section-eyebrow">
-            Who I Am
-          </div>
+          <div className="section-eyebrow">Who I Am</div>
           <h2 className="mt-4 text-4xl font-semibold md:text-6xl">
             Beyond AI. <span className="text-gradient">Beyond Automation.</span>
           </h2>
           <div className="mt-8 space-y-5 text-lg text-muted-foreground">
             <p>
-              I am an AI Business Transformation Manager focused on helping organizations
-              unlock productivity through Agentic AI, workflow automation, and intelligent
-              digital systems.
+              I am an AI Business Transformation Manager focused on helping organizations unlock
+              productivity through Agentic AI, workflow automation, and intelligent digital systems.
             </p>
             <p>
-              My expertise lies in connecting business problems with AI-powered solutions.
-              Instead of building models in isolation, I design systems that improve
-              operations, automate repetitive work, and create scalable business outcomes.
+              My expertise lies in connecting business problems with AI-powered solutions. Instead
+              of building models in isolation, I design systems that improve operations, automate
+              repetitive work, and create scalable business outcomes.
             </p>
           </div>
         </div>
 
         <div className="mt-16 grid gap-4 md:grid-cols-3">
           {[
-            { icon: Brain, title: "Strategy First", desc: "Business outcomes drive every AI deployment." },
-            { icon: Workflow, title: "Systems Thinking", desc: "Connected workflows over isolated models." },
-            { icon: Target, title: "Measurable Impact", desc: "ROI, productivity, and operational lift." },
+            {
+              icon: Brain,
+              title: "Strategy First",
+              desc: "Business outcomes drive every AI deployment.",
+            },
+            {
+              icon: Workflow,
+              title: "Systems Thinking",
+              desc: "Connected workflows over isolated models.",
+            },
+            {
+              icon: Target,
+              title: "Measurable Impact",
+              desc: "ROI, productivity, and operational lift.",
+            },
           ].map((c) => (
             <div key={c.title} className="glass hover-lift rounded-2xl p-6">
               <c.icon className="h-6 w-6 text-[#00723D]" />
@@ -391,9 +394,7 @@ function Experience() {
     <section id="experience" className="relative py-32">
       <div className="mx-auto max-w-6xl px-4">
         <div>
-          <div className="section-eyebrow">
-            Current Role
-          </div>
+          <div className="section-eyebrow">Current Role</div>
           <h2 className="mt-4 text-4xl font-semibold md:text-6xl">
             Leading AI Transformation at <span className="text-gradient-green">EDGE</span>
           </h2>
@@ -431,8 +432,16 @@ function Experience() {
 
         <div className="mt-8 grid gap-4 md:grid-cols-3">
           {[
-            { role: "Agentic AI Engineer", company: "Colage Communication", date: "July 2025 — July 2026" },
-            { role: "Chatbot Developer", company: "Eazr Digipayments", date: "June 2024 — July 2025" },
+            {
+              role: "Agentic AI Engineer",
+              company: "Colage Communication",
+              date: "July 2025 — July 2026",
+            },
+            {
+              role: "Chatbot Developer",
+              company: "Eazr Digipayments",
+              date: "June 2024 — July 2025",
+            },
             { role: "SDE", company: "ShareShiksha", date: "Nov 2023 — June 2024" },
           ].map((p) => (
             <div key={p.role} className="glass hover-lift rounded-2xl p-5">
@@ -455,7 +464,14 @@ function Expertise() {
     {
       icon: Bot,
       title: "Agentic AI",
-      items: ["Multi-Agent Systems", "AI Agents", "CrewAI", "LangGraph", "OpenAI Agents", "Autonomous Workflows"],
+      items: [
+        "Multi-Agent Systems",
+        "AI Agents",
+        "CrewAI",
+        "LangGraph",
+        "OpenAI Agents",
+        "Autonomous Workflows",
+      ],
     },
     {
       icon: Workflow,
@@ -465,7 +481,13 @@ function Expertise() {
     {
       icon: TrendingUp,
       title: "AI Transformation",
-      items: ["AI Strategy", "AI Consulting", "Business Analysis", "Change Management", "Digital Transformation"],
+      items: [
+        "AI Strategy",
+        "AI Consulting",
+        "Business Analysis",
+        "Change Management",
+        "Digital Transformation",
+      ],
     },
     {
       icon: Smartphone,
@@ -477,9 +499,7 @@ function Expertise() {
     <section id="expertise" className="relative py-32">
       <div className="mx-auto max-w-6xl px-4">
         <div className="max-w-3xl">
-          <div className="section-eyebrow">
-            Core Expertise
-          </div>
+          <div className="section-eyebrow">Core Expertise</div>
           <h2 className="mt-4 text-4xl font-semibold md:text-6xl">
             A full stack for <span className="text-gradient-green">AI transformation</span>.
           </h2>
@@ -592,9 +612,7 @@ function Projects() {
     <section id="projects" className="relative py-32">
       <div className="mx-auto max-w-6xl px-4">
         <div className="max-w-3xl">
-          <div className="section-eyebrow">
-            Featured Projects
-          </div>
+          <div className="section-eyebrow">Featured Projects</div>
           <h2 className="mt-4 text-4xl font-semibold md:text-6xl">
             Shipping AI systems that <span className="text-gradient-green">move the business</span>.
           </h2>
@@ -617,21 +635,15 @@ function Projects() {
 
               <div className="mt-5 grid gap-3 text-sm sm:grid-cols-3">
                 <div>
-                  <div className="text-xs uppercase tracking-wider text-[#00723D]">
-                    Challenge
-                  </div>
+                  <div className="text-xs uppercase tracking-wider text-[#00723D]">Challenge</div>
                   <div className="mt-1 text-muted-foreground">{p.challenges}</div>
                 </div>
                 <div>
-                  <div className="text-xs uppercase tracking-wider text-[#00723D]">
-                    Solution
-                  </div>
+                  <div className="text-xs uppercase tracking-wider text-[#00723D]">Solution</div>
                   <div className="mt-1 text-muted-foreground">{p.solutions}</div>
                 </div>
                 <div>
-                  <div className="text-xs uppercase tracking-wider text-[#00723D]">
-                    Result
-                  </div>
+                  <div className="text-xs uppercase tracking-wider text-[#00723D]">Result</div>
                   <div className="mt-1 text-muted-foreground">{p.results}</div>
                 </div>
               </div>
@@ -691,9 +703,7 @@ function Services() {
     <section id="services" className="relative py-32">
       <div className="mx-auto max-w-6xl px-4">
         <div className="max-w-3xl">
-          <div className="section-eyebrow">
-            Services
-          </div>
+          <div className="section-eyebrow">Services</div>
           <h2 className="mt-4 text-4xl font-semibold md:text-6xl">
             How we can <span className="text-gradient-green">work together</span>.
           </h2>
@@ -701,10 +711,7 @@ function Services() {
 
         <div className="mt-14 grid gap-5 md:grid-cols-3">
           {services.map((s) => (
-            <div
-              key={s.title}
-              className="glass hover-lift relative rounded-3xl p-7"
-            >
+            <div key={s.title} className="glass hover-lift relative rounded-3xl p-7">
               <div className="text-xs uppercase tracking-wider text-[#00723D]">{s.tier}</div>
               <h3 className="mt-3 text-lg font-semibold">{s.title}</h3>
               <p className="mt-2 text-sm text-muted-foreground">{s.desc}</p>
@@ -726,18 +733,21 @@ function Articles() {
   const articles = [
     { title: "The Future of Agentic AI", read: "8 min read", tag: "Agentic AI" },
     { title: "How Businesses Can Adopt AI Successfully", read: "6 min read", tag: "Strategy" },
-    { title: "Building AI Workflows That Actually Deliver ROI", read: "10 min read", tag: "Automation" },
+    {
+      title: "Building AI Workflows That Actually Deliver ROI",
+      read: "10 min read",
+      tag: "Automation",
+    },
     { title: "AI Transformation vs Digital Transformation", read: "7 min read", tag: "Leadership" },
   ];
   return (
     <section className="relative py-32">
       <div className="mx-auto max-w-6xl px-4">
         <div className="max-w-3xl">
-          <div className="section-eyebrow">
-            Thought Leadership
-          </div>
+          <div className="section-eyebrow">Thought Leadership</div>
           <h2 className="mt-4 text-4xl font-semibold md:text-6xl">
-            Writing on AI, automation, and <span className="text-gradient-green">business impact</span>.
+            Writing on AI, automation, and{" "}
+            <span className="text-gradient-green">business impact</span>.
           </h2>
         </div>
         <div className="mt-14 grid gap-5 md:grid-cols-2">
@@ -789,9 +799,7 @@ function Testimonials() {
     <section className="relative py-32">
       <div className="mx-auto max-w-4xl px-4">
         <div className="text-center">
-          <div className="section-eyebrow">
-            Testimonials
-          </div>
+          <div className="section-eyebrow">Testimonials</div>
           <h2 className="mt-4 text-4xl font-semibold md:text-5xl">
             Trusted by <span className="text-gradient-green">teams shipping AI</span>.
           </h2>
@@ -843,8 +851,8 @@ function Contact() {
               Let's build the <span className="text-gradient-green">future together</span>.
             </h2>
             <p className="mt-5 max-w-2xl text-lg text-muted-foreground">
-              Whether you're exploring AI strategy, automating a workflow, or building an
-              agentic system — I'd love to help you ship it.
+              Whether you're exploring AI strategy, automating a workflow, or building an agentic
+              system — I'd love to help you ship it.
             </p>
 
             <div className="mt-10 flex flex-wrap items-center gap-4">
@@ -876,7 +884,10 @@ function Contact() {
                   <div className="text-sm font-medium">Mumbai, India</div>
                 </div>
               </div>
-              <a href="tel:+918087205660" className="flex items-center gap-3 transition-colors hover:text-[#00723D]">
+              <a
+                href="tel:+918087205660"
+                className="flex items-center gap-3 transition-colors hover:text-[#00723D]"
+              >
                 <Phone className="h-5 w-5 text-[#00723D]" />
                 <div>
                   <div className="text-xs uppercase tracking-wider text-muted-foreground">
@@ -885,7 +896,12 @@ function Contact() {
                   <div className="text-sm font-medium">+91 808 720 5660</div>
                 </div>
               </a>
-              <a href="https://www.linkedin.com/in/iayr1" target="_blank" rel="noreferrer" className="flex items-center gap-3 transition-colors hover:text-[#00723D]">
+              <a
+                href="https://www.linkedin.com/in/iayr1"
+                target="_blank"
+                rel="noreferrer"
+                className="flex items-center gap-3 transition-colors hover:text-[#00723D]"
+              >
                 <Linkedin className="h-5 w-5 text-[#00723D]" />
                 <div>
                   <div className="text-xs uppercase tracking-wider text-muted-foreground">
@@ -894,7 +910,12 @@ function Contact() {
                   <div className="text-sm font-medium">Connect</div>
                 </div>
               </a>
-              <a href="https://www.github.com/iayr1" target="_blank" rel="noreferrer" className="flex items-center gap-3 transition-colors hover:text-[#00723D]">
+              <a
+                href="https://www.github.com/iayr1"
+                target="_blank"
+                rel="noreferrer"
+                className="flex items-center gap-3 transition-colors hover:text-[#00723D]"
+              >
                 <Github className="h-5 w-5 text-[#00723D]" />
                 <div>
                   <div className="text-xs uppercase tracking-wider text-muted-foreground">
@@ -918,7 +939,10 @@ function Footer() {
         <div>© {new Date().getFullYear()} Mayur Chaudhari. All rights reserved.</div>
         <div className="flex items-center gap-4">
           <span>AI Business Transformation · Mumbai, India</span>
-          <a href="/admin" className="text-xs text-muted-foreground/60 hover:text-[#00723D] transition-colors">
+          <a
+            href="/admin"
+            className="text-xs text-muted-foreground/60 hover:text-[#00723D] transition-colors"
+          >
             Admin
           </a>
         </div>
@@ -945,8 +969,7 @@ function Portfolio() {
         style={{
           left: pos.x - 200,
           top: pos.y - 200,
-          background:
-            "radial-gradient(circle, rgba(0,168,90,0.18) 0%, transparent 60%)",
+          background: "radial-gradient(circle, rgba(0,168,90,0.18) 0%, transparent 60%)",
           transition: "left 0.15s ease-out, top 0.15s ease-out",
         }}
       />

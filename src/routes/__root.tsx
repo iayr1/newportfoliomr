@@ -79,9 +79,17 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "Mayur Chaudhari | AI Business Transformation Manager" },
-      { name: "description", content: "AI Business Transformation Manager specializing in Agentic AI, Workflow Automation, Business Process Optimization, AI Strategy, and Flutter Development." },
+      {
+        name: "description",
+        content:
+          "AI Business Transformation Manager specializing in Agentic AI, Workflow Automation, Business Process Optimization, AI Strategy, and Flutter Development.",
+      },
       { name: "author", content: "Mayur Chaudhari" },
-      { name: "keywords", content: "Agentic AI, AI Business Transformation, Workflow Automation, AI Consultant, Business Automation, AI Strategy, Chatbot Developer, Digital Transformation, AI Manager" },
+      {
+        name: "keywords",
+        content:
+          "Agentic AI, AI Business Transformation, Workflow Automation, AI Consultant, Business Automation, AI Strategy, Chatbot Developer, Digital Transformation, AI Manager",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "google-site-verification", content: "iDC9yTz5Zz7qJytI5JKbAad1NhVOqa2YYIXD1FjWP8Q" },
@@ -91,7 +99,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "stylesheet", href: appCss },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
-      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" },
+      {
+        rel: "stylesheet",
+        href: "https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap",
+      },
     ],
     scripts: [
       {

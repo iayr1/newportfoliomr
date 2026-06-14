@@ -10,9 +10,15 @@ export const Route = createFileRoute("/admin/login")({
   head: () => ({
     meta: [
       { title: "Admin Login — Mayur Chaudhari" },
-      { name: "description", content: "Secure admin login for the Mayur Chaudhari portfolio analytics dashboard." },
+      {
+        name: "description",
+        content: "Secure admin login for the Mayur Chaudhari portfolio analytics dashboard.",
+      },
       { property: "og:title", content: "Admin Login — Mayur Chaudhari" },
-      { property: "og:description", content: "Secure admin login for the Mayur Chaudhari portfolio analytics dashboard." },
+      {
+        property: "og:description",
+        content: "Secure admin login for the Mayur Chaudhari portfolio analytics dashboard.",
+      },
       { name: "robots", content: "noindex, nofollow" },
     ],
   }),

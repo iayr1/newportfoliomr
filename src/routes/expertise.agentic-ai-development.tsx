@@ -16,8 +16,7 @@ export const Route = createFileRoute("/expertise/agentic-ai-development")({
   head: () => ({
     meta: [
       {
-        title:
-          "Agentic AI Development Company | Multi-Agent Systems with LangGraph & CrewAI",
+        title: "Agentic AI Development Company | Multi-Agent Systems with LangGraph & CrewAI",
       },
       {
         name: "description",
@@ -31,8 +30,7 @@ export const Route = createFileRoute("/expertise/agentic-ai-development")({
       },
       {
         property: "og:title",
-        content:
-          "Agentic AI Development Company | Multi-Agent Systems with LangGraph & CrewAI",
+        content: "Agentic AI Development Company | Multi-Agent Systems with LangGraph & CrewAI",
       },
       {
         property: "og:description",
@@ -100,18 +98,8 @@ export const Route = createFileRoute("/expertise/agentic-ai-development")({
   component: AgenticAIDevelopmentPage,
 });
 
-function Section({
-  children,
-  className = "",
-}: {
-  children: React.ReactNode;
-  className?: string;
-}) {
-  return (
-    <section className={`mx-auto max-w-4xl px-6 py-16 ${className}`}>
-      {children}
-    </section>
-  );
+function Section({ children, className = "" }: { children: React.ReactNode; className?: string }) {
+  return <section className={`mx-auto max-w-4xl px-6 py-16 ${className}`}>{children}</section>;
 }
 
 function AgenticAIDevelopmentPage() {
@@ -132,30 +120,25 @@ function AgenticAIDevelopmentPage() {
           Agentic AI Development Company for Multi-Agent Systems
         </h1>
         <p className="text-lg text-muted-foreground leading-relaxed">
-          A practical guide to how we design, build, and deploy multi-agent
-          systems using LangGraph and CrewAI — and how autonomous AI agents
-          transform business operations like content production, research, and
-          financial analysis.
+          A practical guide to how we design, build, and deploy multi-agent systems using LangGraph
+          and CrewAI — and how autonomous AI agents transform business operations like content
+          production, research, and financial analysis.
         </p>
       </Section>
 
       {/* What is agentic AI */}
       <Section>
-        <h2 className="text-2xl md:text-3xl font-bold mb-4">
-          What is agentic AI?
-        </h2>
+        <h2 className="text-2xl md:text-3xl font-bold mb-4">What is agentic AI?</h2>
         <p className="text-muted-foreground leading-relaxed mb-4">
-          Agentic AI describes software systems where one or more LLM-powered
-          agents plan, decide, and act across multiple steps to complete a
-          goal. Unlike a single prompt-and-response chatbot, an agentic system
-          maintains state, calls tools, retries, and coordinates with other
-          agents.
+          Agentic AI describes software systems where one or more LLM-powered agents plan, decide,
+          and act across multiple steps to complete a goal. Unlike a single prompt-and-response
+          chatbot, an agentic system maintains state, calls tools, retries, and coordinates with
+          other agents.
         </p>
         <p className="text-muted-foreground leading-relaxed">
-          As an agentic AI development company, we focus on shipping these
-          systems into real business workflows — not demos. That means
-          observability, evaluations, guardrails, and a clear path from a
-          pilot to a production deployment your team can rely on.
+          As an agentic AI development company, we focus on shipping these systems into real
+          business workflows — not demos. That means observability, evaluations, guardrails, and a
+          clear path from a pilot to a production deployment your team can rely on.
         </p>
       </Section>
 
@@ -206,9 +189,7 @@ function AgenticAIDevelopmentPage() {
               </div>
               <div>
                 <h3 className="font-semibold mb-2">{step.title}</h3>
-                <p className="text-muted-foreground leading-relaxed">
-                  {step.body}
-                </p>
+                <p className="text-muted-foreground leading-relaxed">{step.body}</p>
               </div>
             </div>
           ))}
@@ -221,8 +202,7 @@ function AgenticAIDevelopmentPage() {
           LangGraph vs CrewAI: choosing the right framework
         </h2>
         <p className="text-muted-foreground leading-relaxed mb-6">
-          Most agentic AI projects live or die on framework fit. Here's how we
-          choose:
+          Most agentic AI projects live or die on framework fit. Here's how we choose:
         </p>
         <div className="grid md:grid-cols-2 gap-4">
           <div className="p-6 rounded-xl border border-border bg-card">
@@ -230,11 +210,10 @@ function AgenticAIDevelopmentPage() {
               <Layers className="w-5 h-5 text-primary" /> LangGraph
             </h3>
             <p className="text-muted-foreground text-sm leading-relaxed">
-              Best for stateful, branching workflows. Explicit nodes and edges
-              make retries, checkpoints, and human approvals straightforward.
-              We reach for LangGraph when correctness, auditability, and
-              recovery matter — for example, financial analysis pipelines and
-              compliance-sensitive automations.
+              Best for stateful, branching workflows. Explicit nodes and edges make retries,
+              checkpoints, and human approvals straightforward. We reach for LangGraph when
+              correctness, auditability, and recovery matter — for example, financial analysis
+              pipelines and compliance-sensitive automations.
             </p>
           </div>
           <div className="p-6 rounded-xl border border-border bg-card">
@@ -242,10 +221,9 @@ function AgenticAIDevelopmentPage() {
               <Bot className="w-5 h-5 text-primary" /> CrewAI
             </h3>
             <p className="text-muted-foreground text-sm leading-relaxed">
-              Best for role-based collaboration. A researcher, writer, and
-              editor agent collaborating on a deliverable maps cleanly to a
-              CrewAI crew. We reach for CrewAI when the work is naturally
-              modeled as a team and orchestration overhead should stay light.
+              Best for role-based collaboration. A researcher, writer, and editor agent
+              collaborating on a deliverable maps cleanly to a CrewAI crew. We reach for CrewAI when
+              the work is naturally modeled as a team and orchestration overhead should stay light.
             </p>
           </div>
         </div>
@@ -257,9 +235,8 @@ function AgenticAIDevelopmentPage() {
           How AI agents transform business operations
         </h2>
         <p className="text-muted-foreground leading-relaxed mb-6">
-          The biggest wins from agentic AI come from compressing multi-step
-          knowledge work that previously required a coordinated team. Three
-          patterns recur across our engagements:
+          The biggest wins from agentic AI come from compressing multi-step knowledge work that
+          previously required a coordinated team. Three patterns recur across our engagements:
         </p>
         <div className="space-y-6">
           <div className="p-6 rounded-xl border border-border bg-card">
@@ -267,10 +244,9 @@ function AgenticAIDevelopmentPage() {
               <FileText className="w-5 h-5 text-primary" /> Content production
             </h3>
             <p className="text-muted-foreground leading-relaxed">
-              A research agent gathers sources, a writer agent drafts against a
-              brand voice spec, an editor agent enforces structure and fact
-              consistency, and a publisher agent pushes to the CMS. Cycle time
-              drops from days to hours; humans review and approve instead of
+              A research agent gathers sources, a writer agent drafts against a brand voice spec, an
+              editor agent enforces structure and fact consistency, and a publisher agent pushes to
+              the CMS. Cycle time drops from days to hours; humans review and approve instead of
               drafting from scratch.
             </p>
           </div>
@@ -279,21 +255,19 @@ function AgenticAIDevelopmentPage() {
               <TrendingUp className="w-5 h-5 text-primary" /> Financial analysis
             </h3>
             <p className="text-muted-foreground leading-relaxed">
-              Agents pull filings, normalize statements, run ratio analysis,
-              and assemble briefing memos with citations. LangGraph
-              checkpoints let analysts step in at defined points to validate
-              assumptions before the next stage runs.
+              Agents pull filings, normalize statements, run ratio analysis, and assemble briefing
+              memos with citations. LangGraph checkpoints let analysts step in at defined points to
+              validate assumptions before the next stage runs.
             </p>
           </div>
           <div className="p-6 rounded-xl border border-border bg-card">
             <h3 className="font-semibold mb-2 flex items-center gap-2">
-              <Workflow className="w-5 h-5 text-primary" /> Operations &
-              back-office
+              <Workflow className="w-5 h-5 text-primary" /> Operations & back-office
             </h3>
             <p className="text-muted-foreground leading-relaxed">
-              Triage, classification, enrichment, and routing tasks — the
-              workflows hiding inside support, finance ops, and HR — become
-              autonomous pipelines with human escalation paths for edge cases.
+              Triage, classification, enrichment, and routing tasks — the workflows hiding inside
+              support, finance ops, and HR — become autonomous pipelines with human escalation paths
+              for edge cases.
             </p>
           </div>
         </div>
@@ -306,9 +280,8 @@ function AgenticAIDevelopmentPage() {
             Ready to scope an agentic AI build?
           </h2>
           <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
-            I help teams move from "we should try agents" to a deployed,
-            measurable system. Start with a discovery call to identify the
-            highest-leverage use case in your operations.
+            I help teams move from "we should try agents" to a deployed, measurable system. Start
+            with a discovery call to identify the highest-leverage use case in your operations.
           </p>
           <Link
             to="/"

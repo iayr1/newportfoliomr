@@ -1,7 +1,16 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState, useMemo } from "react";
 import { onAuthStateChanged, signOut } from "firebase/auth";
-import { collection, getDocs, query, orderBy, limit, deleteDoc, doc, writeBatch } from "firebase/firestore";
+import {
+  collection,
+  getDocs,
+  query,
+  orderBy,
+  limit,
+  deleteDoc,
+  doc,
+  writeBatch,
+} from "firebase/firestore";
 import { auth, db, ADMIN_EMAIL } from "@/lib/firebase";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -18,9 +27,17 @@ export const Route = createFileRoute("/admin/")({
   head: () => ({
     meta: [
       { title: "Analytics Dashboard — Mayur Chaudhari" },
-      { name: "description", content: "Admin analytics dashboard tracking visitors, leads, downloads, and engagement metrics for the portfolio." },
+      {
+        name: "description",
+        content:
+          "Admin analytics dashboard tracking visitors, leads, downloads, and engagement metrics for the portfolio.",
+      },
       { property: "og:title", content: "Analytics Dashboard — Mayur Chaudhari" },
-      { property: "og:description", content: "Admin analytics dashboard tracking visitors, leads, downloads, and engagement metrics for the portfolio." },
+      {
+        property: "og:description",
+        content:
+          "Admin analytics dashboard tracking visitors, leads, downloads, and engagement metrics for the portfolio.",
+      },
       { name: "robots", content: "noindex, nofollow" },
     ],
   }),
@@ -129,8 +146,7 @@ function AdminDashboard() {
     today.setHours(0, 0, 0, 0);
     const monthStart = new Date(today.getFullYear(), today.getMonth(), 1);
 
-    const sessionDate = (s: Session) =>
-      s.startedAt?.toDate ? s.startedAt.toDate().getTime() : 0;
+    const sessionDate = (s: Session) => (s.startedAt?.toDate ? s.startedAt.toDate().getTime() : 0);
 
     const visitors = new Set(sessions.map((s) => s.visitorId).filter(Boolean));
     const todaySessions = sessions.filter((s) => sessionDate(s) >= today.getTime());
@@ -316,7 +332,9 @@ function AdminDashboard() {
                         <TableCell>{fmtDate(s.startedAt)}</TableCell>
                         <TableCell>{s.country || "—"}</TableCell>
                         <TableCell>{s.city || "—"}</TableCell>
-                        <TableCell className="max-w-[150px] truncate" title={s.isp}>{s.isp || "—"}</TableCell>
+                        <TableCell className="max-w-[150px] truncate" title={s.isp}>
+                          {s.isp || "—"}
+                        </TableCell>
                         <TableCell className="font-mono text-xs">{s.ip || "—"}</TableCell>
                         <TableCell>{stats.ipVisits[s.ip || "Unknown"] || 1}</TableCell>
                         <TableCell>{s.device}</TableCell>
@@ -334,7 +352,11 @@ function AdminDashboard() {
                               Delete
                             </Button>
                             {s.ip && (
-                              <Button size="sm" variant="destructive" onClick={() => deleteByIp(s.ip)}>
+                              <Button
+                                size="sm"
+                                variant="destructive"
+                                onClick={() => deleteByIp(s.ip)}
+                              >
                                 Delete IP
                               </Button>
                             )}

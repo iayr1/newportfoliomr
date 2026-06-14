@@ -177,8 +177,7 @@ export function WebGLBackground() {
       aria-hidden
       className="pointer-events-none fixed inset-0 -z-10"
       style={{
-        background:
-          "radial-gradient(ellipse at top, #E8F5EC 0%, #F7F8F5 55%, #F7F8F5 100%)",
+        background: "radial-gradient(ellipse at top, #E8F5EC 0%, #F7F8F5 55%, #F7F8F5 100%)",
       }}
     />
   );

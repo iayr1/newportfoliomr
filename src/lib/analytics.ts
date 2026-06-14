@@ -1,13 +1,6 @@
 import { db } from "./firebase";
-import {
-  collection,
-  addDoc,
-  doc,
-  setDoc,
-  updateDoc,
-  increment,
-  serverTimestamp,
-} from "firebase/firestore";
+import { collection, addDoc, doc, setDoc, updateDoc, increment } from "firebase/firestore";
+import { getGeoInfo } from "./api/geo.functions";
 
 type UA = {
   device: "Mobile" | "Tablet" | "Desktop";
@@ -75,16 +68,86 @@ let sessionStart = 0;
 let pageViews = 0;
 let entryPage = "";
 let lastPage = "";
+let lastTrackedPath = "";
 let geo: { country?: string; city?: string; region?: string; ip?: string; isp?: string } = {};
+let heartbeatInterval: ReturnType<typeof setInterval> | null = null;
 
 async function fetchGeo() {
   try {
-    const res = await fetch("https://ipapi.co/json/");
-    if (res.ok) {
-      const j = await res.json();
-      geo = { country: j.country_name, city: j.city, region: j.region, ip: j.ip, isp: j.org };
+    // 1. Try server-side lookup via TanStack Start server function
+    const serverGeo = await getGeoInfo();
+    if (serverGeo && serverGeo.ip) {
+      geo = serverGeo;
+      return;
     }
-  } catch {}
+  } catch (err) {
+    console.warn("Server geo lookup failed, trying client fallback:", err);
+  }
+
+  // 2. Client-side fallback APIs in sequence
+  const apis = [
+    async () => {
+      const res = await fetch("https://ipwho.is/");
+      if (!res.ok) throw new Error("ipwho.is client failed");
+      const j = await res.json();
+      if (!j.success) throw new Error("ipwho.is client unsuccessful");
+      return {
+        country: j.country || null,
+        city: j.city || null,
+        region: j.region || null,
+        ip: j.ip || null,
+        isp: j.connection?.isp || j.connection?.org || null,
+      };
+    },
+    async () => {
+      const res = await fetch("https://ipapi.co/json/");
+      if (!res.ok) throw new Error("ipapi.co client failed");
+      const j = await res.json();
+      return {
+        country: j.country_name || null,
+        city: j.city || null,
+        region: j.region || null,
+        ip: j.ip || null,
+        isp: j.org || null,
+      };
+    },
+    async () => {
+      const res = await fetch("https://ipinfo.io/json");
+      if (!res.ok) throw new Error("ipinfo.io client failed");
+      const j = await res.json();
+      return {
+        country: j.country || null,
+        city: j.city || null,
+        region: j.region || null,
+        ip: j.ip || null,
+        isp: j.org || null,
+      };
+    },
+  ];
+
+  for (const api of apis) {
+    try {
+      const data = await api();
+      if (data && data.ip) {
+        geo = data;
+        return;
+      }
+    } catch (err) {
+      console.warn("Client Geo API fallback failed, trying next:", err);
+    }
+  }
+}
+
+function startHeartbeat() {
+  if (heartbeatInterval) return;
+  heartbeatInterval = setInterval(() => {
+    if (!sessionId) return;
+    const duration = Math.round((Date.now() - sessionStart) / 1000);
+    updateDoc(doc(db, "sessions", sessionId), {
+      duration,
+      endedAt: new Date(),
+    }).catch(() => {});
+  }, 15000); // every 15 seconds
 }
 
 export async function initSession() {
@@ -99,12 +162,13 @@ export async function initSession() {
     const ua = parseUA();
     await fetchGeo();
     const params = new URLSearchParams(window.location.search);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const conn = (navigator as any).connection || {};
 
     await setDoc(doc(db, "sessions", sessionId), {
       visitorId,
       isNewVisitor: isNew,
-      startedAt: serverTimestamp(),
+      startedAt: new Date(),
       entryPage,
       referrer: document.referrer || "Direct",
       userAgent: navigator.userAgent,
@@ -133,24 +197,15 @@ export async function initSession() {
     });
 
     trackPageView(window.location.pathname);
+    startHeartbeat();
 
     const endSession = () => {
       if (!sessionId) return;
       const duration = Math.round((Date.now() - sessionStart) / 1000);
-      const payload = JSON.stringify({
-        sessionId,
-        duration,
-        exitPage: lastPage,
-        endedAt: new Date().toISOString(),
-      });
-      navigator.sendBeacon?.(
-        `https://firestore.googleapis.com/v1/projects/portfolio-44af5/databases/(default)/documents/session_ends`,
-        new Blob([payload], { type: "application/json" }),
-      );
       updateDoc(doc(db, "sessions", sessionId), {
         duration,
         exitPage: lastPage,
-        endedAt: serverTimestamp(),
+        endedAt: new Date(),
       }).catch(() => {});
     };
     window.addEventListener("beforeunload", endSession);
@@ -162,36 +217,45 @@ export async function initSession() {
 
 export async function trackPageView(path: string) {
   if (!sessionId) return;
+  if (lastTrackedPath === path) return;
+  lastTrackedPath = path;
   pageViews += 1;
   lastPage = path;
   try {
     await addDoc(collection(db, "pageviews"), {
       sessionId,
       path,
-      timestamp: serverTimestamp(),
+      timestamp: new Date(),
     });
     await updateDoc(doc(db, "sessions", sessionId), {
       pageViews: increment(1),
       exitPage: path,
     });
-  } catch {}
+  } catch (err) {
+    console.error("trackPageView failed:", err);
+  }
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export async function trackEvent(name: string, data: Record<string, any> = {}) {
   try {
     let visitorId = null;
     try {
       visitorId = localStorage.getItem("visitor_id");
-    } catch {}
+    } catch (err) {
+      // Ignore localStorage read failure
+    }
     await addDoc(collection(db, "events"), {
       name,
       sessionId,
       visitorId,
       data,
       path: window.location.pathname,
-      timestamp: serverTimestamp(),
+      timestamp: new Date(),
     });
-  } catch {}
+  } catch (err) {
+    console.error("trackEvent failed:", err);
+  }
 }
 
 export async function trackDownload(type: "resume" | "portfolio" | "brochure", url?: string) {
@@ -207,7 +271,12 @@ const leadSchema = z.object({
   phone: z.string().trim().max(40).optional(),
 });
 
-export async function trackLead(data: { name: string; email: string; message?: string; phone?: string }) {
+export async function trackLead(data: {
+  name: string;
+  email: string;
+  message?: string;
+  phone?: string;
+}) {
   const parsed = leadSchema.safeParse(data);
   if (!parsed.success) {
     throw new Error("Invalid lead data");
@@ -216,14 +285,16 @@ export async function trackLead(data: { name: string; email: string; message?: s
     let visitorId = null;
     try {
       visitorId = localStorage.getItem("visitor_id");
-    } catch {}
+    } catch (err) {
+      // Ignore localStorage read failure
+    }
     await addDoc(collection(db, "leads"), {
       ...parsed.data,
       sessionId,
       visitorId,
-      timestamp: serverTimestamp(),
+      timestamp: new Date(),
     });
   } catch (err) {
-    console.error("trackLead failed", err);
+    console.error("trackLead failed:", err);
   }
 }
