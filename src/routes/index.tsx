@@ -442,7 +442,7 @@ function Experience() {
               company: "Eazr Digipayments",
               date: "June 2024 — July 2025",
             },
-            { role: "SDE", company: "ShareShiksha", date: "Nov 2023 — June 2024" },
+            { role: "SDE", company: "ShareShiksha", date: "Apr 2023 — June 2024" },
           ].map((p) => (
             <div key={p.role} className="glass hover-lift rounded-2xl p-5">
               <div className="text-xs uppercase tracking-wider text-muted-foreground">
