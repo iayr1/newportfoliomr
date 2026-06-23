@@ -1,0 +1,10 @@
+- [x] Define the `triggerChimeSound` Web Audio synthesizer function in `src/routes/index.tsx`.
+- [x] Implement the Audio Control Dashboard widget in `src/routes/index.tsx` (animated equalizer, sound toggles).
+- [x] Upgrade `WebGLBackground.tsx` to update particle/line materials dynamically according to theme and link rotation to scroll activity.
+- [x] Add the AI Diagnostics Dashboard overlay in the Hero section of `src/routes/index.tsx`.
+- [x] Make the Mock Terminal project widget fully interactive with command inputs (`help`, `optimize`, etc.).
+- [x] Make the Mock Content Dashboard project widget interactive (with a runnable Crew simulation button).
+- [x] Add text input capability to the AI Chatbot Assistant (`AIAssistant`) with custom local keyword parsing.
+- [x] Beautify and integrate the Agentic AI subpage (`src/routes/expertise.agentic-ai-development.tsx`) with the global design theme, headers, footers, and overlays.
+- [x] Connect detailed guide links from the Home page's Expertise tabs to the subpage.
+- [/] Verify build compiles cleanly with `npm run build` and check for visual correctness.

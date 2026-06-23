@@ -27,14 +27,15 @@ export function WebGLBackground() {
     renderer.setClearColor(0x000000, 0);
     container.appendChild(renderer.domElement);
 
-    const NODE_COLOR = 0x00a85a;
+    const isDarkInitial = document.documentElement.classList.contains("dark");
+    const initialColor = isDarkInitial ? 0x00a85a : 0x00633b;
 
     // Nodes (AI agents)
     const NODE_COUNT = 60;
     const nodes: THREE.Mesh[] = [];
     const velocities: THREE.Vector3[] = [];
     const nodeGeo = new THREE.IcosahedronGeometry(0.12, 0);
-    const nodeMat = new THREE.MeshBasicMaterial({ color: NODE_COLOR });
+    const nodeMat = new THREE.MeshBasicMaterial({ color: initialColor });
 
     const group = new THREE.Group();
     for (let i = 0; i < NODE_COUNT; i++) {
@@ -57,9 +58,9 @@ export function WebGLBackground() {
 
     // Lines between nearby nodes (dynamic)
     const lineMat = new THREE.LineBasicMaterial({
-      color: NODE_COLOR,
+      color: initialColor,
       transparent: true,
-      opacity: 0.28,
+      opacity: isDarkInitial ? 0.28 : 0.15,
     });
     const lineGeo = new THREE.BufferGeometry();
     const MAX_LINES = 300;
@@ -72,15 +73,42 @@ export function WebGLBackground() {
     const sphere = new THREE.Mesh(
       new THREE.IcosahedronGeometry(4, 1),
       new THREE.MeshBasicMaterial({
-        color: NODE_COLOR,
+        color: initialColor,
         wireframe: true,
         transparent: true,
-        opacity: 0.22,
+        opacity: isDarkInitial ? 0.22 : 0.1,
       }),
     );
     group.add(sphere);
 
     scene.add(group);
+
+    // Function to dynamically update colors on theme change
+    const updateColors = (isDark: boolean) => {
+      const color = isDark ? 0x00a85a : 0x00633b;
+      nodeMat.color.setHex(color);
+      lineMat.color.setHex(color);
+      lineMat.opacity = isDark ? 0.28 : 0.15;
+      (sphere.material as THREE.MeshBasicMaterial).color.setHex(color);
+      (sphere.material as THREE.MeshBasicMaterial).opacity = isDark ? 0.22 : 0.1;
+    };
+
+    // MutationObserver to watch theme changes on documentElement
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (mutation.attributeName === "class") {
+          updateColors(document.documentElement.classList.contains("dark"));
+        }
+      });
+    });
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
+
+    // Scroll tracker
+    let scrollY = 0;
+    const onScroll = () => {
+      scrollY = window.scrollY;
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
 
     // Mouse parallax
     const mouse = { x: 0, y: 0 };
@@ -140,9 +168,10 @@ export function WebGLBackground() {
         lineGeo.attributes.position.needsUpdate = true;
       }
 
-      sphere.rotation.x += 0.0015;
-      sphere.rotation.y += 0.002;
-      group.rotation.y += 0.0008;
+      // Rotate sphere based on scrolling position and time
+      sphere.rotation.x = scrollY * 0.0015 + frame * 0.0015;
+      sphere.rotation.y = scrollY * 0.001 + frame * 0.002;
+      group.rotation.y = scrollY * 0.0002 + frame * 0.0008;
 
       // Parallax
       camera.position.x += (mouse.x * 2 - camera.position.x) * 0.03;
@@ -156,6 +185,8 @@ export function WebGLBackground() {
 
     return () => {
       cancelAnimationFrame(raf);
+      observer.disconnect();
+      window.removeEventListener("scroll", onScroll);
       window.removeEventListener("mousemove", onMove);
       window.removeEventListener("resize", onResize);
       renderer.dispose();
@@ -175,10 +206,7 @@ export function WebGLBackground() {
     <div
       ref={containerRef}
       aria-hidden
-      className="pointer-events-none fixed inset-0 -z-10"
-      style={{
-        background: "radial-gradient(ellipse at top, #E8F5EC 0%, #F7F8F5 55%, #F7F8F5 100%)",
-      }}
+      className="pointer-events-none fixed inset-0 -z-10 webgl-container"
     />
   );
 }
