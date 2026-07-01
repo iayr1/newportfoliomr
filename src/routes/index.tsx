@@ -19,6 +19,7 @@ import {
   ChevronRight,
   Quote,
   PlayCircle,
+  Play,
   Phone,
   Menu,
   X,
@@ -614,8 +615,8 @@ function VideoSection() {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/10 to-transparent" />
                 <div className="absolute inset-0 grid place-items-center">
-                  <span className="grid h-20 w-20 place-items-center rounded-full bg-[#FFDB58] border-2 border-black text-black shadow-[4px_4px_0px_rgba(0,0,0,1)] transition-transform group-hover:translate-x-[-2px] group-hover:translate-y-[-2px] group-hover:shadow-[6px_6px_0px_rgba(0,0,0,1)] active:translate-x-[2px] active:translate-y-[2px] active:shadow-[2px_2px_0px_rgba(0,0,0,1)]">
-                    <PlayCircle className="h-10 w-10" />
+                  <span className="grid h-16 w-16 place-items-center rounded-full bg-white/95 text-black backdrop-blur-md border border-black/10 shadow-xl transition-all duration-300 group-hover:scale-110 group-hover:bg-white active:scale-95">
+                    <Play className="h-6 w-6 fill-current pl-1" />
                   </span>
                 </div>
                 <div className="absolute bottom-5 left-5 right-5 text-left text-white">
@@ -1295,7 +1296,7 @@ function MockTerminal() {
         <button
           onClick={() => runCommand("clear")}
           disabled={isRunning}
-          className="bg-neutral-800 hover:bg-[#FF6B6B] text-white text-[8px] px-2 py-0.5 rounded cursor-pointer transition-colors active:scale-95 disabled:opacity-50 ml-auto"
+          className="bg-neutral-800 hover:bg-[#FF6B6B] text-white text-[8px] px-2 py-0.5 rounded cursor-pointer transition-colors active:scale-95 disabled:opacity-50 sm:ml-auto"
         >
           Clear
         </button>
@@ -1355,20 +1356,20 @@ function MockContentDashboard() {
   };
 
   return (
-    <div className="bg-card/75 dark:bg-black/40 p-4 rounded-xl border border-border mt-4 flex flex-col justify-between h-[155px] shadow-sm relative group/dashboard">
-      <div className="flex items-center justify-between">
-        <span className="text-[10px] font-bold uppercase tracking-wider text-foreground flex items-center gap-1.5">
+    <div className="bg-card/75 dark:bg-black/40 p-4 rounded-xl border border-border mt-4 flex flex-col justify-between h-[155px] shadow-sm relative group/dashboard w-full min-w-0 overflow-hidden">
+      <div className="flex flex-wrap items-center justify-between gap-2">
+        <span className="text-[10px] font-bold uppercase tracking-wider text-foreground flex items-center gap-1.5 shrink-0">
           <span
             className={`h-1.5 w-1.5 rounded-full ${isRunning ? "bg-[#BAFCA2] animate-ping" : "bg-[#7FBC8C]"}`}
           />
           Content Crew Status
         </span>
-        <span className="text-[9px] font-semibold bg-[#BAFCA2] text-black border border-black shadow-[1px_1px_0px_rgba(0,0,0,1)] px-2.5 py-0.5 rounded-md truncate max-w-[170px]">
+        <span className="text-[9px] font-semibold bg-[#BAFCA2] text-black border border-black shadow-[1px_1px_0px_rgba(0,0,0,1)] px-2 py-0.5 rounded-md truncate max-w-[100px] xs:max-w-[130px] sm:max-w-[170px]">
           {status}
         </span>
       </div>
 
-      <div className="mt-2 flex-1 flex flex-col justify-center">
+      <div className="mt-2 flex-1 flex flex-col justify-center min-w-0 w-full">
         <div className="flex justify-between text-[9px] text-muted-foreground mb-1 select-none">
           <span>Task Progress</span>
           <span>{progress}%</span>
@@ -1382,12 +1383,12 @@ function MockContentDashboard() {
         </div>
       </div>
 
-      <div className="flex items-center justify-between text-[8px] text-muted-foreground mt-2 border-t border-border/40 pt-2 select-none">
-        <span>Agents: Planner, Writer, Editor</span>
+      <div className="flex flex-wrap items-center justify-between gap-2 text-[8px] text-muted-foreground mt-2 border-t border-border/40 pt-2 select-none w-full min-w-0">
+        <span className="shrink-0">Agents: Planner, Writer, Editor</span>
         <button
           onClick={startAutomation}
           disabled={isRunning}
-          className="text-black font-bold bg-[#FFDB58] border-2 border-black shadow-[1.5px_1.5px_0px_rgba(0,0,0,1)] px-2.5 py-1 rounded text-[8px] transition-all cursor-pointer active:translate-x-[1px] active:translate-y-[1px]"
+          className="text-black font-bold bg-[#FFDB58] border-2 border-black shadow-[1.5px_1.5px_0px_rgba(0,0,0,1)] px-2.5 py-1 rounded text-[8px] transition-all cursor-pointer active:translate-x-[1px] active:translate-y-[1px] shrink-0"
         >
           {isRunning ? "Running..." : "Run Crew Workflow"}
         </button>
@@ -1543,8 +1544,8 @@ function Projects() {
                 transition={{ duration: 0.3 }}
                 className={`${filter === "All" && idx === 0 ? "lg:col-span-2" : ""}`}
               >
-                <SpotlightCard className="p-5 sm:p-7 flex flex-col justify-between h-full">
-                  <div>
+                <SpotlightCard className="p-5 sm:p-7 flex flex-col justify-between h-full w-full min-w-0 overflow-hidden">
+                  <div className="w-full min-w-0">
                     <div className="flex items-start justify-between gap-4">
                       <div>
                         <span className="text-[10px] uppercase font-bold tracking-wider text-black bg-[#BAFCA2] border border-black shadow-[1.5px_1.5px_0px_rgba(0,0,0,1)] px-2.5 py-0.5 rounded">
