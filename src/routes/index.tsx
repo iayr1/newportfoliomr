@@ -592,22 +592,6 @@ function Hero() {
               <Calendar className="h-4 w-4" />
               <span>Book Consultation</span>
             </a>
-            <a
-              href="https://calendly.com/mayuraimaker"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="neo-btn px-5 py-2.5 text-sm sm:text-base bg-neo-purple text-black border-2 border-black shadow-[3px_3px_0px_rgba(0,0,0,1)] hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[5px_5px_0px_rgba(0,0,0,1)] active:translate-x-[1px] active:translate-y-[1px] active:shadow-[2px_2px_0px_rgba(0,0,0,1)] transition-all rounded-lg font-bold"
-            >
-              <Sparkles className="h-4 w-4" />
-              <span>Book on Calendly</span>
-            </a>
-            <a
-              href="mailto:mayuraimaker@gmail.com"
-              className="neo-btn px-5 py-2.5 text-sm sm:text-base bg-neo-orange text-black border-2 border-black shadow-[3px_3px_0px_rgba(0,0,0,1)] hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[5px_5px_0px_rgba(0,0,0,1)] active:translate-x-[1px] active:translate-y-[1px] active:shadow-[2px_2px_0px_rgba(0,0,0,1)] transition-all rounded-lg font-bold"
-            >
-              <Mail className="h-4 w-4" />
-              <span>Mail to Mayur</span>
-            </a>
           </div>
 
           <div className="mt-12 grid grid-cols-2 gap-4 sm:grid-cols-4">
