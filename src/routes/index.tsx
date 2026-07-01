@@ -1402,46 +1402,112 @@ interface MockMobileProps {
 }
 
 function MockMobileApp({ type }: MockMobileProps) {
-  return (
-    <div className="relative border-4 border-neutral-700 dark:border-neutral-800 rounded-[1.5rem] p-2 mt-4 mx-auto w-[160px] h-[110px] bg-black shadow-lg overflow-hidden flex flex-col justify-between">
-      {/* Notch */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 h-2 w-14 bg-neutral-700 dark:bg-neutral-800 rounded-b-md z-20" />
+  const [reloadCount, setReloadCount] = useState(0);
+  const [isReloading, setIsReloading] = useState(false);
 
-      {/* App Content */}
-      <div className="flex-1 bg-background rounded-lg p-1.5 flex flex-col justify-between text-[7px] overflow-hidden select-none">
-        <div className="flex items-center justify-between border-b border-border/60 pb-1">
-          <span className="font-bold text-[8px] text-foreground truncate max-w-[90px]">
-            {type === "edtech" ? "ShareShiksha App" : "Eazr Wallet"}
+  const triggerReload = () => {
+    if (isReloading) return;
+    setIsReloading(true);
+
+    try {
+      const AudioCtx = window.AudioContext || (window as any).webkitAudioContext;
+      if (AudioCtx && localStorage.getItem("audio_effects") !== "false") {
+        const ctx = new AudioCtx();
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = "sine";
+        osc.frequency.setValueAtTime(1000, ctx.currentTime);
+        gain.gain.setValueAtTime(0.01, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 0.1);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start();
+        osc.stop(ctx.currentTime + 0.1);
+      }
+    } catch (e) {}
+
+    setTimeout(() => {
+      setReloadCount((c) => c + 1);
+      setIsReloading(false);
+    }, 800);
+  };
+
+  return (
+    <div className="bg-card/75 dark:bg-black/40 p-4 rounded-xl border border-border mt-4 flex items-center justify-between h-[155px] shadow-sm relative group/simulator w-full min-w-0 overflow-hidden">
+      {/* Left: Dev Console */}
+      <div className="flex-1 flex flex-col justify-between h-full text-left pr-3 min-w-0">
+        <div>
+          <span className="text-[10px] font-bold uppercase tracking-wider text-foreground flex items-center gap-1.5">
+            <span
+              className={`h-1.5 w-1.5 rounded-full bg-[#BAFCA2] ${isReloading ? "animate-ping" : "animate-pulse"}`}
+            />
+            {type === "edtech" ? "Shiksha Live Sync" : "Eazr Pay Gateway"}
           </span>
-          <span className="h-1 w-1 rounded-full bg-[#BAFCA2] animate-pulse"></span>
+          <div className="mt-2 space-y-1 font-mono text-[8px] text-muted-foreground">
+            <div className="truncate">
+              Status: {isReloading ? "Hot Reloading..." : "Live Connection"}
+            </div>
+            <div className="truncate">
+              Sync: {reloadCount > 0 ? `Synced (${reloadCount} updates)` : "Synced (Clean)"}
+            </div>
+            <div className="truncate">Platform: iOS & Android</div>
+          </div>
         </div>
 
-        {type === "edtech" ? (
-          <div className="space-y-1 my-1">
-            <div className="bg-[#BAFCA2] text-black border border-black p-0.5 rounded text-center text-[6px]">
-              Interactive Classes
-            </div>
-            <div className="flex gap-1">
-              <div className="flex-1 bg-muted/60 p-0.5 rounded text-center text-[5px]">Quiz</div>
-              <div className="flex-1 bg-muted/60 p-0.5 rounded text-center text-[5px]">Video</div>
-            </div>
-          </div>
-        ) : (
-          <div className="space-y-1 my-1">
-            <div className="flex justify-between items-center bg-muted/60 p-1 rounded text-[5px]">
-              <span>Balance:</span>
-              <span className="font-bold text-black">$1,480.00</span>
-            </div>
-            <div className="bg-[#BAFCA2] text-black border border-black text-center font-bold rounded-[3px] text-[5px] py-0.5">
-              Transfer Instantly
-            </div>
-          </div>
-        )}
+        <button
+          onClick={triggerReload}
+          disabled={isReloading}
+          className="text-black font-bold bg-[#FFDB58] border-2 border-black shadow-[1.5px_1.5px_0px_rgba(0,0,0,1)] px-2 py-0.5 rounded text-[8px] transition-all cursor-pointer active:translate-x-[1px] active:translate-y-[1px] disabled:opacity-50 self-start mt-2 shrink-0"
+        >
+          {isReloading ? "Reloading..." : "Hot Reload Sync"}
+        </button>
+      </div>
 
-        <div className="flex justify-around border-t border-border/40 pt-1 text-muted-foreground text-[5px]">
-          <span>Home</span>
-          <span>Learn</span>
-          <span>Wallet</span>
+      {/* Right: Phone Frame Preview */}
+      <div className="relative border-[3px] border-neutral-700 dark:border-neutral-800 rounded-[1rem] p-1 w-[85px] h-[125px] bg-black shadow-md overflow-hidden flex flex-col justify-between shrink-0 select-none">
+        {/* Notch */}
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 h-1 w-8 bg-neutral-700 dark:bg-neutral-800 rounded-b-[2px] z-20" />
+
+        {/* App Screen Content */}
+        <div className="flex-1 bg-background rounded-[0.5rem] p-1 flex flex-col justify-between text-[5px] overflow-hidden">
+          <div className="flex items-center justify-between border-b border-border/60 pb-0.5">
+            <span className="font-bold text-[5.5px] text-foreground truncate max-w-[50px]">
+              {type === "edtech" ? "ShareShiksha" : "Eazr Wallet"}
+            </span>
+            <span className="h-1 w-1 rounded-full bg-[#BAFCA2] animate-pulse" />
+          </div>
+
+          {type === "edtech" ? (
+            <div className="space-y-0.5 my-0.5">
+              <div className="bg-[#BAFCA2] text-black border border-black p-0.5 rounded-[2px] text-center text-[4.5px] font-semibold truncate">
+                Interactive Classes
+              </div>
+              <div className="flex gap-0.5">
+                <div className="flex-1 bg-muted/60 p-0.5 rounded-[2px] text-center text-[4px] truncate">
+                  Quiz
+                </div>
+                <div className="flex-1 bg-muted/60 p-0.5 rounded-[2px] text-center text-[4px] truncate">
+                  Video
+                </div>
+              </div>
+            </div>
+          ) : (
+            <div className="space-y-0.5 my-0.5">
+              <div className="flex justify-between items-center bg-muted/60 p-0.5 rounded-[2px] text-[4px]">
+                <span>Bal:</span>
+                <span className="font-bold text-black">$1,480.00</span>
+              </div>
+              <div className="bg-[#BAFCA2] text-black border border-black text-center font-bold rounded-[2px] text-[4px] py-0.2">
+                Transfer Instant
+              </div>
+            </div>
+          )}
+
+          <div className="flex justify-around border-t border-border/40 pt-0.5 text-muted-foreground text-[4px] font-medium">
+            <span>Home</span>
+            <span>Learn</span>
+            <span>Wallet</span>
+          </div>
         </div>
       </div>
     </div>
@@ -1565,17 +1631,59 @@ function Projects() {
                       <MockMobileApp type="finance" />
                     )}
                     {p.title === "Agentic AI Business Assistant" && (
-                      <div className="bg-card/75 dark:bg-black/40 p-4 rounded-xl border border-border mt-4 flex items-center justify-between text-xs h-[110px] shadow-sm select-none">
-                        <div className="flex-1 pr-4">
-                          <div className="font-bold text-black dark:text-white text-[10px] uppercase">
-                            RAG Memory State
+                      <div className="bg-card/75 dark:bg-black/40 p-4 rounded-xl border border-border mt-4 flex flex-col justify-between h-[155px] shadow-sm relative group/rag-widget w-full min-w-0 overflow-hidden select-none">
+                        <div className="flex flex-wrap items-center justify-between gap-2">
+                          <span className="text-[10px] font-bold uppercase tracking-wider text-foreground flex items-center gap-1.5 shrink-0">
+                            <span className="h-1.5 w-1.5 rounded-full bg-[#BAFCA2] animate-pulse" />
+                            RAG Memory Store
+                          </span>
+                          <span className="text-[9px] font-semibold bg-[#BAFCA2] text-black border border-black shadow-[1px_1px_0px_rgba(0,0,0,1)] px-2 py-0.5 rounded-md truncate max-w-[120px]">
+                            98% Accuracy
+                          </span>
+                        </div>
+
+                        <div className="mt-2 flex-1 flex flex-col justify-center min-w-0 w-full">
+                          <div className="flex justify-between text-[9px] text-muted-foreground mb-1 select-none">
+                            <span>Vector Embedding Chunk</span>
+                            <span className="font-mono">#188a-92b4</span>
                           </div>
-                          <div className="text-[10px] text-muted-foreground mt-1 truncate">
-                            Embedding chunk #188a...
+                          <div className="w-full bg-muted rounded-full h-1.5 overflow-hidden">
+                            <motion.div
+                              animate={{ width: "98%" }}
+                              className="bg-[#BAFCA2] h-1.5 rounded-full"
+                            />
                           </div>
                         </div>
-                        <div className="h-10 w-10 bg-[#FFDB58] border-2 border-black rounded-lg flex items-center justify-center text-black font-extrabold text-xs shadow-[2px_2px_0px_rgba(0,0,0,1)]">
-                          98%
+
+                        <div className="flex flex-wrap items-center justify-between gap-2 text-[8px] text-muted-foreground mt-2 border-t border-border/40 pt-2 select-none w-full min-w-0">
+                          <span className="shrink-0">Memory: Active Semantics</span>
+                          <button
+                            onClick={() => {
+                              try {
+                                const AudioCtx =
+                                  window.AudioContext || (window as any).webkitAudioContext;
+                                if (AudioCtx && localStorage.getItem("audio_effects") !== "false") {
+                                  const ctx = new AudioCtx();
+                                  const osc = ctx.createOscillator();
+                                  const gain = ctx.createGain();
+                                  osc.type = "sine";
+                                  osc.frequency.setValueAtTime(500, ctx.currentTime);
+                                  gain.gain.setValueAtTime(0.01, ctx.currentTime);
+                                  gain.gain.exponentialRampToValueAtTime(
+                                    0.0001,
+                                    ctx.currentTime + 0.1,
+                                  );
+                                  osc.connect(gain);
+                                  gain.connect(ctx.destination);
+                                  osc.start();
+                                  osc.stop(ctx.currentTime + 0.1);
+                                }
+                              } catch (e) {}
+                            }}
+                            className="text-black font-bold bg-[#FFDB58] border-2 border-black shadow-[1.5px_1.5px_0px_rgba(0,0,0,1)] px-2 py-1 rounded text-[8px] transition-all cursor-pointer active:translate-x-[1px] active:translate-y-[1px] shrink-0"
+                          >
+                            Query Vector Store
+                          </button>
                         </div>
                       </div>
                     )}
