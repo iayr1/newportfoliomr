@@ -113,7 +113,6 @@ export function SpotlightCard({ children, className = "", ...props }: SpotlightC
   );
 }
 
-
 export function triggerChimeSound(ctx: AudioContext) {
   if (typeof window !== "undefined" && localStorage.getItem("audio_effects") === "false") {
     return;
@@ -122,7 +121,7 @@ export function triggerChimeSound(ctx: AudioContext) {
     window.dispatchEvent(new CustomEvent("chime-triggered"));
   }
   const now = ctx.currentTime;
-  const notes = [261.63, 329.63, 392.00, 523.25, 659.25, 783.99]; // C4, E4, G4, C5, E5, G5
+  const notes = [261.63, 329.63, 392.0, 523.25, 659.25, 783.99]; // C4, E4, G4, C5, E5, G5
   notes.forEach((freq, idx) => {
     const osc1 = ctx.createOscillator();
     const osc2 = ctx.createOscillator();
@@ -168,7 +167,13 @@ export function triggerChimeSound(ctx: AudioContext) {
   });
 }
 
-function AudioControl({ audioEnabled, toggleAudio }: { audioEnabled: boolean; toggleAudio: () => void }) {
+function AudioControl({
+  audioEnabled,
+  toggleAudio,
+}: {
+  audioEnabled: boolean;
+  toggleAudio: () => void;
+}) {
   const [isPlaying, setIsPlaying] = useState(false);
 
   useEffect(() => {
@@ -205,9 +210,18 @@ function AudioControl({ audioEnabled, toggleAudio }: { audioEnabled: boolean; to
     >
       {audioEnabled ? (
         <div className="flex items-end gap-[2px] h-3.5 w-3.5 px-[1px]">
-          <span className={`w-[2px] rounded-full bg-black dark:bg-white transition-all duration-300 ${isPlaying ? "animate-bounce h-3" : "h-1.5"}`} style={{ animationDelay: "0ms" }} />
-          <span className={`w-[2px] rounded-full bg-black dark:bg-white transition-all duration-300 ${isPlaying ? "animate-bounce h-2" : "h-3"}`} style={{ animationDelay: "150ms" }} />
-          <span className={`w-[2px] rounded-full bg-black dark:bg-white transition-all duration-300 ${isPlaying ? "animate-bounce h-3" : "h-2"}`} style={{ animationDelay: "300ms" }} />
+          <span
+            className={`w-[2px] rounded-full bg-black dark:bg-white transition-all duration-300 ${isPlaying ? "animate-bounce h-3" : "h-1.5"}`}
+            style={{ animationDelay: "0ms" }}
+          />
+          <span
+            className={`w-[2px] rounded-full bg-black dark:bg-white transition-all duration-300 ${isPlaying ? "animate-bounce h-2" : "h-3"}`}
+            style={{ animationDelay: "150ms" }}
+          />
+          <span
+            className={`w-[2px] rounded-full bg-black dark:bg-white transition-all duration-300 ${isPlaying ? "animate-bounce h-3" : "h-2"}`}
+            style={{ animationDelay: "300ms" }}
+          />
         </div>
       ) : (
         <div className="relative h-3.5 w-3.5 flex items-center justify-center">
@@ -233,7 +247,9 @@ function AIDiagnostics() {
     const statuses = ["Reasoning", "Retrieving", "Executing", "Optimizing", "Orchestrating"];
     const interval = setInterval(() => {
       setStatus(statuses[Math.floor(Math.random() * statuses.length)]);
-      setEfficiency((prev) => Math.min(100, Math.max(70, prev + Math.floor(Math.random() * 7) - 3)));
+      setEfficiency((prev) =>
+        Math.min(100, Math.max(70, prev + Math.floor(Math.random() * 7) - 3)),
+      );
       setNodeIndex((prev) => (prev % 5) + 1);
       setPulse((p) => !p);
     }, 4000);
@@ -245,7 +261,9 @@ function AIDiagnostics() {
       <div className="flex items-center justify-between border-b border-border/40 pb-2">
         <span className="font-semibold text-foreground tracking-tight flex items-center gap-1.5">
           <span className="relative flex h-2 w-2">
-            <span className={`animate-ping absolute inline-flex h-full w-full rounded-full bg-[#BAFCA2] opacity-75 ${pulse ? "" : "paused"}`} />
+            <span
+              className={`animate-ping absolute inline-flex h-full w-full rounded-full bg-[#BAFCA2] opacity-75 ${pulse ? "" : "paused"}`}
+            />
             <span className="relative inline-flex rounded-full h-2 w-2 bg-[#BAFCA2] border border-black/30" />
           </span>
           AI Core Diagnostics
@@ -268,7 +286,9 @@ function AIDiagnostics() {
         </div>
         <div>
           <div className="text-[9px] text-muted-foreground uppercase">Active Nodes</div>
-          <div className="font-semibold text-foreground text-xs mt-0.5 font-mono">0{nodeIndex} / 05</div>
+          <div className="font-semibold text-foreground text-xs mt-0.5 font-mono">
+            0{nodeIndex} / 05
+          </div>
         </div>
       </div>
 
@@ -278,7 +298,10 @@ function AIDiagnostics() {
           <span>42°C</span>
         </div>
         <div className="w-full bg-muted border border-black/10 rounded-full h-1 overflow-hidden">
-          <div className="bg-[#BAFCA2] h-1 rounded-full w-[65%]" style={{ transition: "width 0.5s ease" }} />
+          <div
+            className="bg-[#BAFCA2] h-1 rounded-full w-[65%]"
+            style={{ transition: "width 0.5s ease" }}
+          />
         </div>
       </div>
     </div>
@@ -330,9 +353,7 @@ export function Nav({ mounted, audioEnabled, toggleAudio }: NavProps) {
 
           <div className="flex items-center gap-3">
             {/* Audio Control Button */}
-            {mounted && (
-              <AudioControl audioEnabled={audioEnabled} toggleAudio={toggleAudio} />
-            )}
+            {mounted && <AudioControl audioEnabled={audioEnabled} toggleAudio={toggleAudio} />}
 
             <a
               href="https://drive.google.com/file/d/1FgLCjW_7zYTOkBD2QumKM4Oi7E6rpHa4/view?usp=sharing"
@@ -343,10 +364,7 @@ export function Nav({ mounted, audioEnabled, toggleAudio }: NavProps) {
               Resume
             </a>
 
-            <a
-              href="#contact"
-              className="hidden lg:inline-flex neo-btn py-1.5 px-4 text-sm"
-            >
+            <a href="#contact" className="hidden lg:inline-flex neo-btn py-1.5 px-4 text-sm">
               Let's talk
             </a>
 
@@ -410,7 +428,7 @@ export function Nav({ mounted, audioEnabled, toggleAudio }: NavProps) {
 function TypewriterSubtitle() {
   const words = ["Agentic AI", "Workflow Automation", "Intelligent Systems", "AI Strategy"];
   const [index, setIndex] = useState(0);
-  
+
   useEffect(() => {
     const interval = setInterval(() => {
       setIndex((prev) => (prev + 1) % words.length);
@@ -438,7 +456,10 @@ function TypewriterSubtitle() {
 
 function Hero() {
   return (
-    <section id="top" className="relative flex min-h-screen items-center pt-32 pb-20 overflow-hidden">
+    <section
+      id="top"
+      className="relative flex min-h-screen items-center pt-32 pb-20 overflow-hidden"
+    >
       {/* Moving background grids */}
       <div className="perspective-grid" />
 
@@ -464,17 +485,11 @@ function Hero() {
           </p>
 
           <div className="mt-9 flex flex-wrap items-center gap-4">
-            <a
-              href="#projects"
-              className="group neo-btn px-6 py-3 text-base"
-            >
+            <a href="#projects" className="group neo-btn px-6 py-3 text-base">
               <span>View Projects</span>
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
             </a>
-            <a
-              href="#contact"
-              className="neo-btn neo-btn-white px-6 py-3 text-base"
-            >
+            <a href="#contact" className="neo-btn neo-btn-white px-6 py-3 text-base">
               <Calendar className="h-4 w-4 text-[#000000]" />
               <span>Book Consultation</span>
             </a>
@@ -535,7 +550,9 @@ function Hero() {
 
       {/* Mouse scroll down animation indicator */}
       <div className="absolute bottom-6 left-1/2 -translate-x-1/2 hidden flex-col items-center gap-2 sm:flex">
-        <span className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground">Scroll Down</span>
+        <span className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
+          Scroll Down
+        </span>
         <div className="w-[18px] h-[30px] rounded-full border-2 border-muted-foreground/30 flex justify-center p-[4px]">
           <motion.div
             animate={{
@@ -625,7 +642,10 @@ function VideoSection() {
                 YouTube
               </a>
             </div>
-            <a href="#contact" className="text-sm font-bold text-black dark:text-white hover:underline">
+            <a
+              href="#contact"
+              className="text-sm font-bold text-black dark:text-white hover:underline"
+            >
               Want this for your team? →
             </a>
           </div>
@@ -785,7 +805,8 @@ function Experience() {
   ];
 
   return (
-    <section id="experience" className="relative py-32 bg-grid-pattern">
+    <section id="experience" className="relative py-32 overflow-hidden">
+      <div className="absolute inset-0 bg-grid-pattern pointer-events-none -z-10" />
       <div className="mx-auto max-w-6xl px-4">
         <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between mb-16">
           <div>
@@ -816,7 +837,9 @@ function Experience() {
             >
               {/* Central Circle Dot */}
               <div className="absolute left-0 -translate-x-1/2 md:left-1/2 md:-translate-x-1/2 top-1.5 z-10 flex h-6 w-6 items-center justify-center rounded-full bg-neo-yellow border-2 border-black shadow-[2px_2px_0px_rgba(0,0,0,1)]">
-                <span className={`h-2.5 w-2.5 rounded-full ${r.current ? "bg-black animate-ping" : "bg-black"}`} />
+                <span
+                  className={`h-2.5 w-2.5 rounded-full ${r.current ? "bg-black animate-ping" : "bg-black"}`}
+                />
               </div>
 
               {/* Card placement based on index */}
@@ -833,12 +856,17 @@ function Experience() {
                     )}
                   </div>
                   <h3 className="text-xl font-black text-black">{r.role}</h3>
-                  <h4 className="text-sm font-bold text-black mt-1 mb-3 underline decoration-[#FFDB58] decoration-2">{r.company}</h4>
+                  <h4 className="text-sm font-bold text-black mt-1 mb-3 underline decoration-[#FFDB58] decoration-2">
+                    {r.company}
+                  </h4>
                   <p className="text-sm text-black font-semibold mb-4 leading-relaxed">{r.desc}</p>
-                  
+
                   <div className="space-y-2 border-t border-border/60 pt-4">
                     {r.responsibilities.map((resp, i) => (
-                      <div key={i} className="flex items-start gap-2 text-xs text-neutral-800 font-medium">
+                      <div
+                        key={i}
+                        className="flex items-start gap-2 text-xs text-neutral-800 font-medium"
+                      >
                         <ChevronRight className="h-3 w-3 shrink-0 text-black mt-0.5" />
                         <span>{resp}</span>
                       </div>
@@ -859,7 +887,7 @@ function NeuralNetworkGraph({ active }: { active: boolean }) {
     <div className="h-[90px] w-full border border-border/30 rounded-xl overflow-hidden bg-card/20 relative flex items-center justify-center p-2 mt-4 select-none">
       {/* Background grid */}
       <div className="absolute inset-0 bg-grid-pattern opacity-30" />
-      
+
       <svg className="w-full h-full max-w-[280px]" viewBox="0 0 100 30">
         {/* Connection Paths */}
         <motion.path
@@ -869,7 +897,7 @@ function NeuralNetworkGraph({ active }: { active: boolean }) {
           strokeWidth="0.8"
           opacity="0.4"
         />
-        
+
         {/* Animated signal pulse along the path */}
         <motion.path
           d="M10,15 L30,8 M30,8 L60,15 M60,15 L90,15"
@@ -894,7 +922,7 @@ function NeuralNetworkGraph({ active }: { active: boolean }) {
         <circle cx="60" cy="15" r="2" fill="#BAFCA2" />
         <circle cx="90" cy="15" r="2.5" fill="#C4A1FF" className="animate-pulse" />
       </svg>
-      
+
       <div className="absolute bottom-1 right-2 text-[7px] text-muted-foreground font-mono">
         Active Node Orchestration: {active ? "Connected" : "Standby"}
       </div>
@@ -916,14 +944,22 @@ function Expertise() {
         "Autonomous Workflows",
       ],
       desc: "Architecting autonomous systems that can reason, plan, use tools, and collaborate to achieve business outcomes.",
-      stats: { capability: "Core Specialty", scale: "Enterprise Grade", frameworks: "LangGraph / CrewAI" }
+      stats: {
+        capability: "Core Specialty",
+        scale: "Enterprise Grade",
+        frameworks: "LangGraph / CrewAI",
+      },
     },
     {
       icon: Workflow,
       title: "Automation",
       items: ["n8n", "Make", "Zapier", "Workflow Design", "Business Automation", "RPA"],
       desc: "Integrating APIs, triggers, data mappings, and human-in-the-loop steps to eliminate manual bottlenecks.",
-      stats: { capability: "System Integration", scale: "Production Pipelines", tools: "n8n / Make / Zapier" }
+      stats: {
+        capability: "System Integration",
+        scale: "Production Pipelines",
+        tools: "n8n / Make / Zapier",
+      },
     },
     {
       icon: TrendingUp,
@@ -936,21 +972,30 @@ function Expertise() {
         "Digital Transformation",
       ],
       desc: "Translating executive vision into concrete technical roadmaps. Conducting maturity assessments and training teams.",
-      stats: { capability: "Strategic Advisory", scale: "Organizational Lift", outcome: "Measurable Productivity" }
+      stats: {
+        capability: "Strategic Advisory",
+        scale: "Organizational Lift",
+        outcome: "Measurable Productivity",
+      },
     },
     {
       icon: Smartphone,
       title: "Development",
       items: ["Flutter", "Dart", "Firebase", "Node.js", "REST APIs", "Mobile Apps"],
       desc: "Building clean-architecture mobile frontends and secure API backends that bridge AI agents to end users.",
-      stats: { capability: "Full-Stack Dev", scale: "Cross-Platform Mobile", stacks: "Flutter / Node.js" }
+      stats: {
+        capability: "Full-Stack Dev",
+        scale: "Cross-Platform Mobile",
+        stacks: "Flutter / Node.js",
+      },
     },
   ];
 
   const [activeTab, setActiveTab] = useState(0);
 
   return (
-    <section id="expertise" className="relative py-32 bg-grid-pattern/20 overflow-hidden">
+    <section id="expertise" className="relative py-32 overflow-hidden">
+      <div className="absolute inset-0 bg-grid-pattern opacity-20 pointer-events-none -z-10" />
       <div className="mx-auto max-w-6xl px-4">
         <div className="max-w-3xl mb-14">
           <div className="section-eyebrow">Core Expertise</div>
@@ -973,17 +1018,23 @@ function Expertise() {
                 }`}
               >
                 <div className="flex items-center gap-4">
-                  <div className={`grid h-10 w-10 place-items-center rounded-lg border border-black transition-colors ${
-                    activeTab === idx ? "bg-white text-black" : "bg-neo-yellow text-black"
-                  }`}>
+                  <div
+                    className={`grid h-10 w-10 place-items-center rounded-lg border border-black transition-colors ${
+                      activeTab === idx ? "bg-white text-black" : "bg-neo-yellow text-black"
+                    }`}
+                  >
                     <c.icon className="h-5 w-5" />
                   </div>
                   <div>
                     <h3 className="font-semibold text-base">{c.title}</h3>
-                    <p className="text-xs text-muted-foreground mt-0.5 max-w-[200px] truncate">{c.desc}</p>
+                    <p className="text-xs text-muted-foreground mt-0.5 max-w-[200px] truncate">
+                      {c.desc}
+                    </p>
                   </div>
                 </div>
-                <ChevronRight className={`h-4 w-4 transition-transform ${activeTab === idx ? "rotate-90 text-black" : ""}`} />
+                <ChevronRight
+                  className={`h-4 w-4 transition-transform ${activeTab === idx ? "rotate-90 text-black" : ""}`}
+                />
               </button>
             ))}
           </div>
@@ -997,7 +1048,7 @@ function Expertise() {
               exit={{ opacity: 0, x: -20 }}
               transition={{ duration: 0.3 }}
             >
-              <SpotlightCard className="p-8 min-h-[350px] flex flex-col justify-between">
+              <SpotlightCard className="p-5 sm:p-8 min-h-[350px] flex flex-col justify-between">
                 <div>
                   <div className="flex items-center gap-3 mb-6">
                     <div className="grid h-12 w-12 place-items-center rounded-lg border-2 border-black bg-neo-yellow text-black shadow-[2px_2px_0px_rgba(0,0,0,1)]">
@@ -1040,12 +1091,18 @@ function Expertise() {
 
                 {/* Dashboard / Node visualization panel */}
                 <div className="grid grid-cols-2 gap-4 border-t border-border/50 pt-6 bg-card/10 rounded-2xl p-4">
-                  {Object.entries(categories[activeTab].stats).slice(1).map(([key, val]) => (
-                    <div key={key}>
-                      <div className="text-[10px] uppercase tracking-wider text-black dark:text-white font-bold">{key}</div>
-                      <div className="text-xs font-semibold text-foreground mt-1 truncate">{val as string}</div>
-                    </div>
-                  ))}
+                  {Object.entries(categories[activeTab].stats)
+                    .slice(1)
+                    .map(([key, val]) => (
+                      <div key={key}>
+                        <div className="text-[10px] uppercase tracking-wider text-black dark:text-white font-bold">
+                          {key}
+                        </div>
+                        <div className="text-xs font-semibold text-foreground mt-1 truncate">
+                          {val as string}
+                        </div>
+                      </div>
+                    ))}
                   <div className="col-span-2">
                     <NeuralNetworkGraph active={true} />
                   </div>
@@ -1072,7 +1129,10 @@ function Metrics() {
       <div className="mx-auto max-w-6xl px-4">
         <div className="glass-strong grid grid-cols-2 gap-6 rounded-3xl p-8 sm:grid-cols-3 md:grid-cols-5 md:p-12">
           {metrics.map((m, idx) => (
-            <div key={m.v} className={`text-center md:text-left ${idx === 4 ? "col-span-2 sm:col-span-1" : ""}`}>
+            <div
+              key={m.v}
+              className={`text-center md:text-left ${idx === 4 ? "col-span-2 sm:col-span-1" : ""}`}
+            >
               <div className="font-display text-4xl font-semibold text-gradient-green md:text-5xl">
                 {m.k}
               </div>
@@ -1101,9 +1161,9 @@ export function ScrollProgress() {
   }, []);
 
   return (
-    <div 
-      className="fixed top-0 left-0 h-1 bg-[#FFDB58] border-b border-black z-[100] transition-all duration-75" 
-      style={{ width }} 
+    <div
+      className="fixed top-0 left-0 h-1 bg-[#FFDB58] border-b border-black z-[100] transition-all duration-75"
+      style={{ width }}
     />
   );
 }
@@ -1111,7 +1171,7 @@ export function ScrollProgress() {
 function MockTerminal() {
   const [logs, setLogs] = useState<string[]>([
     "[System] agentic-terminal initialized. Ready for operations.",
-    "[Agent] Idle. Listening for webhook triggers..."
+    "[Agent] Idle. Listening for webhook triggers...",
   ]);
   const [isRunning, setIsRunning] = useState(false);
 
@@ -1152,19 +1212,19 @@ function MockTerminal() {
         "[System] Available commands:",
         "  - optimize: Run neural graph optimization",
         "  - audit: Run agent security and cost check",
-        "  - clear: Reset terminal state"
+        "  - clear: Reset terminal state",
       ];
     } else if (cmd === "optimize") {
       commandSequence = [
         "[Agent] Analyzing current LangGraph paths...",
         "[Agent] Found 3 redundant loops in Node: Writer.",
-        "[Success] Restructured graph edges. Speed +35%, Cost -12%."
+        "[Success] Restructured graph edges. Speed +35%, Cost -12%.",
       ];
     } else if (cmd === "audit") {
       commandSequence = [
         "[Security] Starting system-wide token security audit...",
         "[Observability] All API keys masked. RAG permissions locked.",
-        "[Audit Report] Cost threshold: OK, Security rating: A+"
+        "[Audit Report] Cost threshold: OK, Security rating: A+",
       ];
     }
 
@@ -1185,7 +1245,7 @@ function MockTerminal() {
   };
 
   return (
-    <div className="font-mono text-[10px] bg-black/95 dark:bg-black p-4 rounded-xl border border-border text-[#BAFCA2] mt-4 h-[155px] flex flex-col justify-between overflow-hidden shadow-inner relative group/terminal">
+    <div className="font-mono text-[10px] bg-black/95 dark:bg-black p-4 rounded-xl border border-border text-[#BAFCA2] mt-4 h-[155px] flex flex-col justify-between overflow-hidden shadow-inner relative group/terminal w-full min-w-0">
       <div className="flex items-center justify-between border-b border-white/10 pb-1.5 mb-1.5 select-none">
         <span className="text-[9px] uppercase tracking-wider text-muted-foreground font-semibold flex items-center gap-1.5">
           <span className="h-1.5 w-1.5 rounded-full bg-[#BAFCA2] animate-pulse" />
@@ -1198,7 +1258,7 @@ function MockTerminal() {
         </div>
       </div>
 
-      <div className="flex-1 space-y-1 overflow-y-auto mb-2 text-left scrollbar-none">
+      <div className="flex-1 space-y-1 overflow-y-auto mb-2 text-left scrollbar-none min-w-0 w-full">
         {logs.map((log, i) => (
           <div key={i} className="truncate">
             <span className="text-[#BAFCA2]/50 mr-1 select-none">$</span>
@@ -1207,8 +1267,10 @@ function MockTerminal() {
         ))}
       </div>
 
-      <div className="flex items-center gap-1.5 border-t border-white/10 pt-2 select-none flex-wrap">
-        <span className="text-[8px] text-muted-foreground mr-1 uppercase font-bold">Quick Actions:</span>
+      <div className="flex items-center gap-1.5 border-t border-white/10 pt-2 select-none flex-wrap w-full min-w-0">
+        <span className="text-[8px] text-muted-foreground mr-1 uppercase font-bold">
+          Quick Actions:
+        </span>
         <button
           onClick={() => runCommand("help")}
           disabled={isRunning}
@@ -1276,7 +1338,7 @@ function MockContentDashboard() {
       { p: 40, s: "Agent: Writer - Drafting content outline..." },
       { p: 70, s: "Agent: Editor - Proofreading & fact-checking..." },
       { p: 90, s: "API Webhook - Structuring JSON format..." },
-      { p: 100, s: "Published to Webflow CMS!" }
+      { p: 100, s: "Published to Webflow CMS!" },
     ];
 
     let currentStep = 0;
@@ -1296,7 +1358,9 @@ function MockContentDashboard() {
     <div className="bg-card/75 dark:bg-black/40 p-4 rounded-xl border border-border mt-4 flex flex-col justify-between h-[155px] shadow-sm relative group/dashboard">
       <div className="flex items-center justify-between">
         <span className="text-[10px] font-bold uppercase tracking-wider text-foreground flex items-center gap-1.5">
-          <span className={`h-1.5 w-1.5 rounded-full ${isRunning ? "bg-[#BAFCA2] animate-ping" : "bg-[#7FBC8C]"}`} />
+          <span
+            className={`h-1.5 w-1.5 rounded-full ${isRunning ? "bg-[#BAFCA2] animate-ping" : "bg-[#7FBC8C]"}`}
+          />
           Content Crew Status
         </span>
         <span className="text-[9px] font-semibold bg-[#BAFCA2] text-black border border-black shadow-[1px_1px_0px_rgba(0,0,0,1)] px-2.5 py-0.5 rounded-md truncate max-w-[170px]">
@@ -1310,7 +1374,7 @@ function MockContentDashboard() {
           <span>{progress}%</span>
         </div>
         <div className="w-full bg-muted rounded-full h-1.5 overflow-hidden">
-          <motion.div 
+          <motion.div
             animate={{ width: `${progress}%` }}
             transition={{ duration: 0.4, ease: "easeOut" }}
             className="bg-[#BAFCA2] h-1.5 rounded-full"
@@ -1341,7 +1405,7 @@ function MockMobileApp({ type }: MockMobileProps) {
     <div className="relative border-4 border-neutral-700 dark:border-neutral-800 rounded-[1.5rem] p-2 mt-4 mx-auto w-[160px] h-[110px] bg-black shadow-lg overflow-hidden flex flex-col justify-between">
       {/* Notch */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 h-2 w-14 bg-neutral-700 dark:bg-neutral-800 rounded-b-md z-20" />
-      
+
       {/* App Content */}
       <div className="flex-1 bg-background rounded-lg p-1.5 flex flex-col justify-between text-[7px] overflow-hidden select-none">
         <div className="flex items-center justify-between border-b border-border/60 pb-1">
@@ -1350,10 +1414,12 @@ function MockMobileApp({ type }: MockMobileProps) {
           </span>
           <span className="h-1 w-1 rounded-full bg-[#BAFCA2] animate-pulse"></span>
         </div>
-        
+
         {type === "edtech" ? (
           <div className="space-y-1 my-1">
-            <div className="bg-[#BAFCA2] text-black border border-black p-0.5 rounded text-center text-[6px]">Interactive Classes</div>
+            <div className="bg-[#BAFCA2] text-black border border-black p-0.5 rounded text-center text-[6px]">
+              Interactive Classes
+            </div>
             <div className="flex gap-1">
               <div className="flex-1 bg-muted/60 p-0.5 rounded text-center text-[5px]">Quiz</div>
               <div className="flex-1 bg-muted/60 p-0.5 rounded text-center text-[5px]">Video</div>
@@ -1365,7 +1431,9 @@ function MockMobileApp({ type }: MockMobileProps) {
               <span>Balance:</span>
               <span className="font-bold text-black">$1,480.00</span>
             </div>
-            <div className="bg-[#BAFCA2] text-black border border-black text-center font-bold rounded-[3px] text-[5px] py-0.5">Transfer Instantly</div>
+            <div className="bg-[#BAFCA2] text-black border border-black text-center font-bold rounded-[3px] text-[5px] py-0.5">
+              Transfer Instantly
+            </div>
           </div>
         )}
 
@@ -1381,7 +1449,7 @@ function MockMobileApp({ type }: MockMobileProps) {
 
 function Projects() {
   const [filter, setFilter] = useState("All");
-  
+
   const projects = [
     {
       title: "Enterprise AI Automation Framework",
@@ -1390,7 +1458,7 @@ function Projects() {
       solutions: "Designed a unified agent-orchestrated automation framework.",
       results: "60% reduction in manual ops time across pilot teams.",
       tech: ["LangGraph", "n8n", "OpenAI", "Postgres"],
-      category: "AI & Automations"
+      category: "AI & Automations",
     },
     {
       title: "AI Content Production System",
@@ -1399,7 +1467,7 @@ function Projects() {
       solutions: "Multi-agent pipeline for research, drafting, review, and publishing.",
       results: "4x faster content production with editorial QA loops.",
       tech: ["CrewAI", "OpenAI", "Next.js", "Make"],
-      category: "AI & Automations"
+      category: "AI & Automations",
     },
     {
       title: "ShareShiksha EdTech Platform",
@@ -1408,7 +1476,7 @@ function Projects() {
       solutions: "Optimized Flutter architecture with offline-first sync.",
       results: "Smooth experience across thousands of student devices.",
       tech: ["Flutter", "Firebase", "Node.js", "REST"],
-      category: "Web & Mobile"
+      category: "Web & Mobile",
     },
     {
       title: "Eazr Digipayments Mobile Application",
@@ -1417,7 +1485,7 @@ function Projects() {
       solutions: "Layered architecture with secure auth and modular UI.",
       results: "Production-grade app with high reliability under load.",
       tech: ["Flutter", "Dart", "Firebase", "REST"],
-      category: "Web & Mobile"
+      category: "Web & Mobile",
     },
     {
       title: "Agentic AI Business Assistant",
@@ -1426,13 +1494,12 @@ function Projects() {
       solutions: "Agent system with tool-use, memory, and human-in-the-loop.",
       results: "Faster decisions with consistent operational quality.",
       tech: ["OpenAI Agents", "LangGraph", "Vector DB"],
-      category: "AI & Automations"
+      category: "AI & Automations",
     },
   ];
 
-  const filteredProjects = filter === "All" 
-    ? projects 
-    : projects.filter(p => p.category === filter);
+  const filteredProjects =
+    filter === "All" ? projects : projects.filter((p) => p.category === filter);
 
   return (
     <section id="projects" className="relative py-32">
@@ -1441,10 +1508,11 @@ function Projects() {
           <div>
             <div className="section-eyebrow">Featured Projects</div>
             <h2 className="mt-4 text-4xl font-semibold md:text-5xl">
-              Shipping AI systems that <span className="text-gradient-green">move the business</span>.
+              Shipping AI systems that{" "}
+              <span className="text-gradient-green">move the business</span>.
             </h2>
           </div>
-          
+
           {/* Filters */}
           <div className="flex flex-wrap items-center gap-2 bg-white p-1.5 rounded-xl border-2 border-black shadow-[3px_3px_0px_rgba(0,0,0,1)] self-start max-w-full">
             {["All", "AI & Automations", "Web & Mobile"].map((cat) => (
@@ -1463,10 +1531,7 @@ function Projects() {
           </div>
         </div>
 
-        <motion.div 
-          layout
-          className="mt-14 grid gap-6 lg:grid-cols-2"
-        >
+        <motion.div layout className="mt-14 grid gap-6 lg:grid-cols-2">
           <AnimatePresence mode="popLayout">
             {filteredProjects.map((p, idx) => (
               <motion.article
@@ -1478,7 +1543,7 @@ function Projects() {
                 transition={{ duration: 0.3 }}
                 className={`${filter === "All" && idx === 0 ? "lg:col-span-2" : ""}`}
               >
-                <SpotlightCard className="p-7 flex flex-col justify-between h-full">
+                <SpotlightCard className="p-5 sm:p-7 flex flex-col justify-between h-full">
                   <div>
                     <div className="flex items-start justify-between gap-4">
                       <div>
@@ -1495,12 +1560,18 @@ function Projects() {
                     {p.title === "Enterprise AI Automation Framework" && <MockTerminal />}
                     {p.title === "AI Content Production System" && <MockContentDashboard />}
                     {p.title === "ShareShiksha EdTech Platform" && <MockMobileApp type="edtech" />}
-                    {p.title === "Eazr Digipayments Mobile Application" && <MockMobileApp type="finance" />}
+                    {p.title === "Eazr Digipayments Mobile Application" && (
+                      <MockMobileApp type="finance" />
+                    )}
                     {p.title === "Agentic AI Business Assistant" && (
                       <div className="bg-card/75 dark:bg-black/40 p-4 rounded-xl border border-border mt-4 flex items-center justify-between text-xs h-[110px] shadow-sm select-none">
                         <div className="flex-1 pr-4">
-                          <div className="font-bold text-black dark:text-white text-[10px] uppercase">RAG Memory State</div>
-                          <div className="text-[10px] text-muted-foreground mt-1 truncate">Embedding chunk #188a...</div>
+                          <div className="font-bold text-black dark:text-white text-[10px] uppercase">
+                            RAG Memory State
+                          </div>
+                          <div className="text-[10px] text-muted-foreground mt-1 truncate">
+                            Embedding chunk #188a...
+                          </div>
                         </div>
                         <div className="h-10 w-10 bg-[#FFDB58] border-2 border-black rounded-lg flex items-center justify-center text-black font-extrabold text-xs shadow-[2px_2px_0px_rgba(0,0,0,1)]">
                           98%
@@ -1510,16 +1581,24 @@ function Projects() {
 
                     <div className="mt-6 grid gap-4 text-xs sm:grid-cols-3 bg-card/25 p-4 rounded-2xl border border-border/40">
                       <div>
-                        <div className="font-bold text-black dark:text-white uppercase tracking-wider">Challenge</div>
+                        <div className="font-bold text-black dark:text-white uppercase tracking-wider">
+                          Challenge
+                        </div>
                         <div className="mt-1 text-muted-foreground">{p.challenges}</div>
                       </div>
                       <div>
-                        <div className="font-bold text-black dark:text-white uppercase tracking-wider">Solution</div>
+                        <div className="font-bold text-black dark:text-white uppercase tracking-wider">
+                          Solution
+                        </div>
                         <div className="mt-1 text-muted-foreground">{p.solutions}</div>
                       </div>
                       <div>
-                        <div className="font-bold text-black dark:text-white uppercase tracking-wider">Result</div>
-                        <div className="mt-1 text-muted-foreground font-medium text-foreground">{p.results}</div>
+                        <div className="font-bold text-black dark:text-white uppercase tracking-wider">
+                          Result
+                        </div>
+                        <div className="mt-1 text-muted-foreground font-medium text-foreground">
+                          {p.results}
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -1589,9 +1668,11 @@ function Services() {
 
         <div className="mt-14 grid gap-5 md:grid-cols-3">
           {services.map((s) => (
-            <SpotlightCard key={s.title} className="p-7 flex flex-col justify-between">
+            <SpotlightCard key={s.title} className="p-5 sm:p-7 flex flex-col justify-between">
               <div>
-                <div className="text-xs uppercase tracking-wider text-[#FFA07A] font-bold">{s.tier}</div>
+                <div className="text-xs uppercase tracking-wider text-[#FFA07A] font-bold">
+                  {s.tier}
+                </div>
                 <h3 className="mt-3 text-lg font-semibold">{s.title}</h3>
                 <p className="mt-2 text-sm text-muted-foreground">{s.desc}</p>
               </div>
@@ -1638,7 +1719,9 @@ function Articles() {
               className="glass hover-lift group flex items-center justify-between rounded-2xl p-6"
             >
               <div>
-                <div className="text-xs uppercase tracking-wider text-[#FFA07A] font-bold">{a.tag}</div>
+                <div className="text-xs uppercase tracking-wider text-[#FFA07A] font-bold">
+                  {a.tag}
+                </div>
                 <h3 className="mt-2 text-lg font-semibold">{a.title}</h3>
                 <div className="mt-1 text-xs text-muted-foreground">{a.read}</div>
               </div>
@@ -1690,7 +1773,7 @@ function Testimonials() {
 
         <div className="glass-strong relative mt-12 overflow-hidden rounded-3xl p-8 md:p-14 min-h-[250px] flex flex-col justify-between">
           <Quote className="absolute right-8 top-8 h-12 w-12 text-black/[0.05] dark:text-white/[0.05] pointer-events-none" />
-          
+
           <AnimatePresence mode="wait">
             <motion.div
               key={i}
@@ -1722,7 +1805,9 @@ function Testimonials() {
                 onClick={() => setI(idx)}
                 aria-label={`Testimonial ${idx + 1}`}
                 className={`h-1.5 rounded-full transition-all duration-300 cursor-pointer ${
-                  i === idx ? "w-8 bg-[#FFDB58] border border-black shadow-[1px_1px_0px_rgba(0,0,0,1)]" : "w-4 bg-border hover:bg-muted-foreground/30"
+                  i === idx
+                    ? "w-8 bg-[#FFDB58] border border-black shadow-[1px_1px_0px_rgba(0,0,0,1)]"
+                    : "w-4 bg-border hover:bg-muted-foreground/30"
                 }`}
               />
             ))}
@@ -1757,10 +1842,7 @@ function Contact() {
                 <Calendar className="h-4 w-4" />
                 <span>Book on Calendly</span>
               </a>
-              <a
-                href="mailto:mayuraimaker@gmail.com"
-                className="neo-btn neo-btn-white px-6 py-3"
-              >
+              <a href="mailto:mayuraimaker@gmail.com" className="neo-btn neo-btn-white px-6 py-3">
                 <Mail className="h-4 w-4" />
                 <span>mayuraimaker@gmail.com</span>
               </a>
@@ -1850,7 +1932,6 @@ export function Footer() {
     </footer>
   );
 }
-
 
 function Portfolio() {
   const [mounted, setMounted] = useState(false);

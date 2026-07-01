@@ -13,13 +13,7 @@ import {
   TrendingUp,
 } from "lucide-react";
 import { motion } from "framer-motion";
-import { 
-  Nav, 
-  Footer, 
-  ScrollProgress, 
-  SpotlightCard, 
-  triggerChimeSound 
-} from "./index";
+import { Nav, Footer, ScrollProgress, SpotlightCard, triggerChimeSound } from "./index";
 import { WebGLBackground } from "@/components/WebGLBackground";
 
 export const Route = createFileRoute("/expertise/agentic-ai-development")({
@@ -189,7 +183,7 @@ function AgenticAIDevelopmentPage() {
     <div className="relative min-h-screen text-foreground transition-colors duration-300 overflow-hidden">
       <ScrollProgress />
       <WebGLBackground />
-      
+
       {mounted && (
         <div
           aria-hidden
@@ -197,15 +191,22 @@ function AgenticAIDevelopmentPage() {
           style={{
             left: pos.x - 200,
             top: pos.y - 200,
-            background: theme === "dark" 
-              ? "radial-gradient(circle, rgba(0,168,90,0.1) 0%, transparent 60%)" 
-              : "radial-gradient(circle, rgba(0,168,90,0.18) 0%, transparent 60%)",
+            background:
+              theme === "dark"
+                ? "radial-gradient(circle, rgba(0,168,90,0.1) 0%, transparent 60%)"
+                : "radial-gradient(circle, rgba(0,168,90,0.18) 0%, transparent 60%)",
             transition: "left 0.15s ease-out, top 0.15s ease-out, background 0.3s ease",
           }}
         />
       )}
 
-      <Nav theme={theme} setTheme={setTheme} mounted={mounted} audioEnabled={audioEnabled} toggleAudio={toggleAudio} />
+      <Nav
+        theme={theme}
+        setTheme={setTheme}
+        mounted={mounted}
+        audioEnabled={audioEnabled}
+        toggleAudio={toggleAudio}
+      />
 
       <main className="relative z-10 pt-32 pb-16">
         {/* Background grids */}
@@ -217,28 +218,29 @@ function AgenticAIDevelopmentPage() {
             to="/"
             className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-[#FFDB58] transition-colors mb-8 cursor-pointer group"
           >
-            <ArrowRight className="w-4 h-4 rotate-180 transition-transform group-hover:-translate-x-1" /> 
+            <ArrowRight className="w-4 h-4 rotate-180 transition-transform group-hover:-translate-x-1" />
             Back to portfolio
           </Link>
-          
+
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
             <div className="chip mb-6">
-              <Bot className="w-3.5 h-3.5" /> 
+              <Bot className="w-3.5 h-3.5" />
               <span>Expertise Deep Dive</span>
             </div>
-            
+
             <h1 className="text-4xl md:text-6xl font-bold leading-[1.15] tracking-tight mb-8">
-              Agentic AI Development Company for <span className="text-gradient-green">Multi-Agent Systems</span>
+              Agentic AI Development Company for{" "}
+              <span className="text-gradient-green">Multi-Agent Systems</span>
             </h1>
-            
+
             <p className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-3xl">
-              A practical guide to how we design, build, and deploy multi-agent systems using LangGraph
-              and CrewAI — and how autonomous AI agents transform business operations like content
-              production, research, and financial analysis.
+              A practical guide to how we design, build, and deploy multi-agent systems using
+              LangGraph and CrewAI — and how autonomous AI agents transform business operations like
+              content production, research, and financial analysis.
             </p>
           </motion.div>
         </Section>
@@ -255,16 +257,17 @@ function AgenticAIDevelopmentPage() {
               <h2 className="text-2xl md:text-4xl font-semibold mb-6">What is agentic AI?</h2>
               <div className="space-y-6 text-base text-muted-foreground leading-relaxed">
                 <p>
-                  Agentic AI describes software systems where one or more LLM-powered agents plan, decide,
-                  and act across multiple steps to complete a goal. Unlike a single prompt-and-response
-                  chatbot, an agentic system maintains state, calls tools, retries on failures, and coordinates with
-                  other specialized agents.
+                  Agentic AI describes software systems where one or more LLM-powered agents plan,
+                  decide, and act across multiple steps to complete a goal. Unlike a single
+                  prompt-and-response chatbot, an agentic system maintains state, calls tools,
+                  retries on failures, and coordinates with other specialized agents.
                 </p>
                 <p>
-                  As an agentic AI development partner, our focus is on shipping these systems into real
-                  business workflows — not just building static demos. That means implementing robust observability, 
-                  continuous evaluation metrics, policy guardrails, and a clear path from pilot to production deployments 
-                  your team can rely on day in and day out.
+                  As an agentic AI development partner, our focus is on shipping these systems into
+                  real business workflows — not just building static demos. That means implementing
+                  robust observability, continuous evaluation metrics, policy guardrails, and a
+                  clear path from pilot to production deployments your team can rely on day in and
+                  day out.
                 </p>
               </div>
             </SpotlightCard>
@@ -343,7 +346,8 @@ function AgenticAIDevelopmentPage() {
               LangGraph <span className="text-gradient">vs</span> CrewAI
             </h2>
             <p className="text-muted-foreground mt-4 max-w-2xl text-base leading-relaxed">
-              Most agentic AI projects live or die on framework fit. We design architecture around your specific workflow requirements:
+              Most agentic AI projects live or die on framework fit. We design architecture around
+              your specific workflow requirements:
             </p>
           </div>
 
@@ -375,7 +379,9 @@ function AgenticAIDevelopmentPage() {
                   </p>
                 </div>
                 <div className="bg-card/30 p-4 rounded-xl border border-border/40 text-xs text-muted-foreground">
-                  <div className="font-bold text-foreground mb-1 uppercase tracking-wider text-[9px]">Use Case Match:</div>
+                  <div className="font-bold text-foreground mb-1 uppercase tracking-wider text-[9px]">
+                    Use Case Match:
+                  </div>
                   Complex decision trees, regulatory data parsing, critical CRM integrations.
                 </div>
               </SpotlightCard>
@@ -402,13 +408,15 @@ function AgenticAIDevelopmentPage() {
                   </div>
                   <p className="text-muted-foreground text-sm leading-relaxed mb-6">
                     Best for role-based collaboration. A researcher, writer, and editor agent
-                    collaborating on a deliverable maps cleanly to a CrewAI crew. We reach for CrewAI when
-                    the work is naturally modeled as a team and orchestration overhead should stay light,
-                    allowing autonomous role-play behaviors.
+                    collaborating on a deliverable maps cleanly to a CrewAI crew. We reach for
+                    CrewAI when the work is naturally modeled as a team and orchestration overhead
+                    should stay light, allowing autonomous role-play behaviors.
                   </p>
                 </div>
                 <div className="bg-card/30 p-4 rounded-xl border border-border/40 text-xs text-muted-foreground">
-                  <div className="font-bold text-foreground mb-1 uppercase tracking-wider text-[9px]">Use Case Match:</div>
+                  <div className="font-bold text-foreground mb-1 uppercase tracking-wider text-[9px]">
+                    Use Case Match:
+                  </div>
                   Content drafting pipelines, competitive analysis, automated social campaigns.
                 </div>
               </SpotlightCard>
@@ -456,8 +464,12 @@ function AgenticAIDevelopmentPage() {
                       <item.icon className="w-6 h-6" />
                     </div>
                     <div>
-                      <h3 className="font-semibold text-lg md:text-xl text-foreground mb-2">{item.title}</h3>
-                      <p className="text-sm md:text-base text-muted-foreground leading-relaxed">{item.desc}</p>
+                      <h3 className="font-semibold text-lg md:text-xl text-foreground mb-2">
+                        {item.title}
+                      </h3>
+                      <p className="text-sm md:text-base text-muted-foreground leading-relaxed">
+                        {item.desc}
+                      </p>
                     </div>
                   </div>
                 </SpotlightCard>
@@ -475,16 +487,16 @@ function AgenticAIDevelopmentPage() {
             transition={{ duration: 0.6 }}
           >
             <div className="glass-strong p-8 md:p-16 rounded-3xl text-center relative overflow-hidden">
-              
               <h2 className="text-3xl md:text-5xl font-bold mb-4">
                 Ready to scope an <span className="text-gradient-green">Agentic Build</span>?
               </h2>
-              
+
               <p className="text-muted-foreground mb-8 max-w-2xl mx-auto text-sm md:text-base leading-relaxed">
-                I help teams move from "we should try agents" to a deployed, measurable system. Start
-                with a discovery call to identify the highest-leverage use case in your operations.
+                I help teams move from "we should try agents" to a deployed, measurable system.
+                Start with a discovery call to identify the highest-leverage use case in your
+                operations.
               </p>
-              
+
               <div className="flex justify-center gap-4 flex-wrap">
                 <a
                   href="https://calendly.com/mayurchaudhari1675/30min"
