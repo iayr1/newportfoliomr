@@ -1608,7 +1608,7 @@ function Projects() {
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.9 }}
                 transition={{ duration: 0.3 }}
-                className={`${filter === "All" && idx === 0 ? "lg:col-span-2" : ""}`}
+                className={`w-full min-w-0 overflow-hidden ${filter === "All" && idx === 0 ? "lg:col-span-2" : ""}`}
               >
                 <SpotlightCard className="p-5 sm:p-7 flex flex-col justify-between h-full w-full min-w-0 overflow-hidden">
                   <div className="w-full min-w-0">
