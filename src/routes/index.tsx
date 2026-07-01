@@ -464,6 +464,98 @@ function Hero() {
       {/* Moving background grids */}
       <div className="perspective-grid" />
 
+      {/* Dotted background overlays for the hero section, similar to the mockup */}
+      <div className="absolute top-24 left-12 text-black/5 dark:text-white/5 pointer-events-none select-none hidden xl:block z-0">
+        <svg width="100" height="100" viewBox="0 0 100 100" fill="currentColor">
+          <pattern id="dotGridHero" width="16" height="16" patternUnits="userSpaceOnUse">
+            <circle cx="2" cy="2" r="2" />
+          </pattern>
+          <rect width="100" height="100" fill="url(#dotGridHero)" />
+        </svg>
+      </div>
+
+      <div className="absolute bottom-24 right-12 text-black/5 dark:text-white/5 pointer-events-none select-none hidden xl:block z-0">
+        <svg width="120" height="120" viewBox="0 0 120 120" fill="currentColor">
+          <pattern id="dotGridHero2" width="16" height="16" patternUnits="userSpaceOnUse">
+            <circle cx="2" cy="2" r="2" />
+          </pattern>
+          <rect width="120" height="120" fill="url(#dotGridHero2)" />
+        </svg>
+      </div>
+
+      {/* Floating Outline Triangle (Mockup style) */}
+      <div
+        className="absolute bottom-1/4 left-8 text-[#FF7A5C] dark:text-[#FF7A5C]/80 rotate-[-15deg] animate-bounce pointer-events-none select-none hidden lg:block z-10"
+        style={{ animationDuration: "8s" }}
+      >
+        <svg
+          width="56"
+          height="48"
+          viewBox="0 0 56 48"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="3"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <polygon points="28,4 52,44 4,44" className="fill-[#FF7A5C]/5" />
+        </svg>
+      </div>
+
+      {/* Floating Outline Semi-circle (Mockup style) */}
+      <div
+        className="absolute top-1/4 right-[42%] text-[#C4A1FF] dark:text-[#C4A1FF]/80 rotate-[25deg] animate-pulse pointer-events-none select-none hidden lg:block z-10"
+        style={{ animationDuration: "4s" }}
+      >
+        <svg
+          width="60"
+          height="32"
+          viewBox="0 0 60 32"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="3"
+          strokeLinecap="round"
+        >
+          <path d="M3,30 C3,15.1 15.1,3 30,3 C44.9,3 57,15.1 57,30" className="fill-[#C4A1FF]/5" />
+        </svg>
+      </div>
+
+      {/* Floating Star (Mockup style) */}
+      <div
+        className="absolute top-20 left-[48%] text-[#BAFCA2] rotate-[12deg] animate-bounce pointer-events-none select-none hidden md:block z-10"
+        style={{ animationDuration: "6s" }}
+      >
+        <svg
+          width="42"
+          height="42"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          className="fill-[#BAFCA2]/15"
+        >
+          <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+        </svg>
+      </div>
+
+      {/* Grid Cross Indicator */}
+      <div className="absolute bottom-28 left-[45%] text-[#FFDB58] opacity-60 pointer-events-none select-none hidden md:block z-10">
+        <svg
+          width="30"
+          height="30"
+          viewBox="0 0 30 30"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2.5"
+          strokeLinecap="round"
+        >
+          <line x1="15" y1="0" x2="15" y2="30" />
+          <line x1="0" y1="15" x2="30" y2="15" />
+        </svg>
+      </div>
+
       <div className="relative mx-auto grid max-w-6xl grid-cols-1 items-center gap-12 px-4 lg:grid-cols-[1.25fr_1fr]">
         <motion.div
           initial={{ opacity: 0, x: -30 }}
