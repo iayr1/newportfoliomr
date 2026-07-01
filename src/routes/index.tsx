@@ -485,14 +485,36 @@ function Hero() {
             systems that create measurable business impact.
           </p>
 
-          <div className="mt-9 flex flex-wrap items-center gap-4">
-            <a href="#projects" className="group neo-btn px-6 py-3 text-base">
+          <div className="mt-9 flex flex-wrap items-center gap-3.5">
+            <a
+              href="#projects"
+              className="group neo-btn px-5 py-2.5 text-sm sm:text-base bg-neo-yellow text-black border-2 border-black shadow-[3px_3px_0px_rgba(0,0,0,1)] hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[5px_5px_0px_rgba(0,0,0,1)] active:translate-x-[1px] active:translate-y-[1px] active:shadow-[2px_2px_0px_rgba(0,0,0,1)] transition-all rounded-lg font-bold"
+            >
               <span>View Projects</span>
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
             </a>
-            <a href="#contact" className="neo-btn neo-btn-white px-6 py-3 text-base">
-              <Calendar className="h-4 w-4 text-[#000000]" />
+            <a
+              href="#contact"
+              className="neo-btn px-5 py-2.5 text-sm sm:text-base bg-neo-green text-black border-2 border-black shadow-[3px_3px_0px_rgba(0,0,0,1)] hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[5px_5px_0px_rgba(0,0,0,1)] active:translate-x-[1px] active:translate-y-[1px] active:shadow-[2px_2px_0px_rgba(0,0,0,1)] transition-all rounded-lg font-bold"
+            >
+              <Calendar className="h-4 w-4" />
               <span>Book Consultation</span>
+            </a>
+            <a
+              href="https://calendly.com/mayuraimaker"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="neo-btn px-5 py-2.5 text-sm sm:text-base bg-neo-purple text-black border-2 border-black shadow-[3px_3px_0px_rgba(0,0,0,1)] hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[5px_5px_0px_rgba(0,0,0,1)] active:translate-x-[1px] active:translate-y-[1px] active:shadow-[2px_2px_0px_rgba(0,0,0,1)] transition-all rounded-lg font-bold"
+            >
+              <Sparkles className="h-4 w-4" />
+              <span>Book on Calendly</span>
+            </a>
+            <a
+              href="mailto:mayuraimaker@gmail.com"
+              className="neo-btn px-5 py-2.5 text-sm sm:text-base bg-neo-orange text-black border-2 border-black shadow-[3px_3px_0px_rgba(0,0,0,1)] hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[5px_5px_0px_rgba(0,0,0,1)] active:translate-x-[1px] active:translate-y-[1px] active:shadow-[2px_2px_0px_rgba(0,0,0,1)] transition-all rounded-lg font-bold"
+            >
+              <Mail className="h-4 w-4" />
+              <span>Mail to Mayur</span>
             </a>
           </div>
 
@@ -520,7 +542,11 @@ function Hero() {
           className="relative mx-auto w-full max-w-md lg:max-w-none group"
         >
           {/* Portrait Image container in Neo-brutalist card */}
-          <div className="relative overflow-hidden rounded-2xl border-2.5 border-black bg-white p-2.5 shadow-[6px_6px_0px_rgba(0,0,0,1)] dark:shadow-[6px_6px_0px_var(--neo-shadow)]">
+          <div className="relative overflow-hidden rounded-2xl border-4 border-black bg-white p-2.5 shadow-[10px_10px_0px_rgba(0,0,0,1)] dark:shadow-[10px_10px_0px_var(--neo-shadow)]">
+            {/* Minimal Sticker Overlay */}
+            <div className="absolute top-4 left-4 bg-neo-yellow text-black border-2 border-black shadow-[2px_2px_0px_rgba(0,0,0,1)] font-extrabold text-[9px] uppercase tracking-wider px-2.5 py-0.5 rounded-md z-30 select-none">
+              ✨ verified expert
+            </div>
             <img
               src={mayurPortrait}
               alt="Mayur Chaudhari, AI Business Transformation Manager"
@@ -537,7 +563,7 @@ function Hero() {
             <AIDiagnostics />
           </div>
 
-          <div className="glass absolute -bottom-5 -left-5 hidden items-center gap-3 rounded-xl px-4 py-3 sm:flex">
+          <div className="absolute -bottom-5 -left-5 hidden items-center gap-3 bg-white dark:bg-[#1E1E1E] border-2.5 border-black shadow-[4px_4px_0px_rgba(0,0,0,1)] dark:shadow-[4px_4px_0px_var(--neo-shadow)] rounded-xl px-4 py-3 sm:flex z-20">
             <span className="grid h-9 w-9 place-items-center rounded-full bg-neo-yellow border border-black text-black shadow-[1.5px_1.5px_0px_rgba(0,0,0,1)]">
               <Bot className="h-4 w-4" />
             </span>
