@@ -30,40 +30,72 @@ export function WebGLBackground() {
     const isDarkInitial = document.documentElement.classList.contains("dark");
     const initialColor = isDarkInitial ? 0xbafca2 : 0x7fbc8c;
 
-    // Nodes (AI agents)
+    // Nodes (AI agents & Hexagons)
     const NODE_COUNT = 60;
     const nodes: THREE.Mesh[] = [];
     const velocities: THREE.Vector3[] = [];
-    const nodeGeo = new THREE.IcosahedronGeometry(0.12, 0);
-    const nodeMat = new THREE.MeshBasicMaterial({ color: initialColor });
+    
+    // Mix of icosahedrons and hexagons (6-segmented circles)
+    const sphereGeo = new THREE.IcosahedronGeometry(0.12, 0);
+    const hexGeo = new THREE.CircleGeometry(0.14, 6);
+    const nodeMat = new THREE.MeshBasicMaterial({ 
+      color: initialColor,
+      side: THREE.DoubleSide
+    });
 
     const group = new THREE.Group();
     for (let i = 0; i < NODE_COUNT; i++) {
-      const m = new THREE.Mesh(nodeGeo, nodeMat);
+      const isHex = i % 2 === 0;
+      const m = new THREE.Mesh(isHex ? hexGeo : sphereGeo, nodeMat);
       m.position.set(
         (Math.random() - 0.5) * 30,
         (Math.random() - 0.5) * 18,
         (Math.random() - 0.5) * 14,
       );
+      if (isHex) {
+        m.rotation.set(Math.random() * Math.PI, Math.random() * Math.PI, 0);
+      }
       velocities.push(
         new THREE.Vector3(
-          (Math.random() - 0.5) * 0.01,
-          (Math.random() - 0.5) * 0.01,
-          (Math.random() - 0.5) * 0.01,
+          (Math.random() - 0.5) * 0.008,
+          (Math.random() - 0.5) * 0.008,
+          (Math.random() - 0.5) * 0.008,
         ),
       );
       nodes.push(m);
       group.add(m);
     }
 
+    // Secondary Particle Field (Soft moving background dust)
+    const PARTICLE_COUNT = 120;
+    const particleGeo = new THREE.BufferGeometry();
+    const particlePositions = new Float32Array(PARTICLE_COUNT * 3);
+    const particleVelocities: number[] = [];
+    for (let i = 0; i < PARTICLE_COUNT; i++) {
+      particlePositions[i * 3 + 0] = (Math.random() - 0.5) * 36;
+      particlePositions[i * 3 + 1] = (Math.random() - 0.5) * 22;
+      particlePositions[i * 3 + 2] = (Math.random() - 0.5) * 18;
+      particleVelocities.push((Math.random() - 0.5) * 0.004); // Drift velocity
+    }
+    particleGeo.setAttribute("position", new THREE.BufferAttribute(particlePositions, 3));
+    const particleMat = new THREE.PointsMaterial({
+      color: initialColor,
+      size: 0.06,
+      transparent: true,
+      opacity: isDarkInitial ? 0.32 : 0.18,
+      sizeAttenuation: true,
+    });
+    const particles = new THREE.Points(particleGeo, particleMat);
+    group.add(particles);
+
     // Lines between nearby nodes (dynamic)
     const lineMat = new THREE.LineBasicMaterial({
       color: initialColor,
       transparent: true,
-      opacity: isDarkInitial ? 0.28 : 0.15,
+      opacity: isDarkInitial ? 0.22 : 0.12,
     });
     const lineGeo = new THREE.BufferGeometry();
-    const MAX_LINES = 300;
+    const MAX_LINES = 250;
     const linePositions = new Float32Array(MAX_LINES * 2 * 3);
     lineGeo.setAttribute("position", new THREE.BufferAttribute(linePositions, 3));
     const lines = new THREE.LineSegments(lineGeo, lineMat);
@@ -71,12 +103,12 @@ export function WebGLBackground() {
 
     // Central wireframe sphere
     const sphere = new THREE.Mesh(
-      new THREE.IcosahedronGeometry(4, 1),
+      new THREE.IcosahedronGeometry(4.2, 1),
       new THREE.MeshBasicMaterial({
         color: initialColor,
         wireframe: true,
         transparent: true,
-        opacity: isDarkInitial ? 0.22 : 0.1,
+        opacity: isDarkInitial ? 0.16 : 0.06,
       }),
     );
     group.add(sphere);
@@ -88,9 +120,11 @@ export function WebGLBackground() {
       const color = isDark ? 0xbafca2 : 0x7fbc8c;
       nodeMat.color.setHex(color);
       lineMat.color.setHex(color);
-      lineMat.opacity = isDark ? 0.28 : 0.15;
+      lineMat.opacity = isDark ? 0.22 : 0.12;
+      particleMat.color.setHex(color);
+      particleMat.opacity = isDark ? 0.32 : 0.18;
       (sphere.material as THREE.MeshBasicMaterial).color.setHex(color);
-      (sphere.material as THREE.MeshBasicMaterial).opacity = isDark ? 0.22 : 0.1;
+      (sphere.material as THREE.MeshBasicMaterial).opacity = isDark ? 0.16 : 0.06;
     };
 
     // MutationObserver to watch theme changes on documentElement
@@ -139,7 +173,23 @@ export function WebGLBackground() {
         if (Math.abs(p.x) > 15) v.x *= -1;
         if (Math.abs(p.y) > 9) v.y *= -1;
         if (Math.abs(p.z) > 7) v.z *= -1;
+
+        // Rotate hexagons slightly over time
+        if (i % 2 === 0) {
+          nodes[i].rotation.x += 0.002;
+          nodes[i].rotation.y += 0.003;
+        }
       }
+
+      // Update soft moving background dust particles
+      const positions = particleGeo.attributes.position.array as Float32Array;
+      for (let i = 0; i < PARTICLE_COUNT; i++) {
+        positions[i * 3 + 1] += particleVelocities[i];
+        if (Math.abs(positions[i * 3 + 1]) > 11) {
+          positions[i * 3 + 1] = -positions[i * 3 + 1];
+        }
+      }
+      particleGeo.attributes.position.needsUpdate = true;
 
       // Update lines every 2nd frame for perf
       if (frame % 2 === 0) {
@@ -190,10 +240,13 @@ export function WebGLBackground() {
       window.removeEventListener("mousemove", onMove);
       window.removeEventListener("resize", onResize);
       renderer.dispose();
-      nodeGeo.dispose();
+      sphereGeo.dispose();
+      hexGeo.dispose();
       nodeMat.dispose();
       lineGeo.dispose();
       lineMat.dispose();
+      particleGeo.dispose();
+      particleMat.dispose();
       sphere.geometry.dispose();
       (sphere.material as THREE.Material).dispose();
       if (renderer.domElement.parentNode) {

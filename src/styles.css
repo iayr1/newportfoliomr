@@ -458,14 +458,14 @@
   display: block;
 }
 
-/* Neo-brutalist Button Styles */
+/* Neo-brutalist Button Styles with physical click depth */
 .neo-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
   font-family: var(--font-display);
-  font-weight: 700;
+  font-weight: 800; /* Extra bold */
   text-align: center;
   text-decoration: none;
   cursor: pointer;
@@ -473,21 +473,57 @@
   color: #000000;
   border: 2px solid #000000;
   border-radius: 8px;
-  box-shadow: 3px 3px 0px #000000;
-  transition: all 0.2s ease;
+  box-shadow: 4px 4px 0px #000000, 6px 6px 12px rgba(0, 0, 0, 0.08);
+  transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .neo-btn:hover {
-  transform: translate(-2px, -2px);
-  box-shadow: 5px 5px 0px #000000;
+  transform: translate(-3px, -3px) rotate(-0.5deg);
+  box-shadow: 7px 7px 0px #000000, 9px 9px 16px rgba(0, 0, 0, 0.12);
 }
 
 .neo-btn:active {
-  transform: translate(1px, 1px);
-  box-shadow: 2px 2px 0px #000000;
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0px #000000, 2px 2px 4px rgba(0, 0, 0, 0.04);
 }
 
 .neo-btn-white {
   background: #ffffff;
   color: #000000;
+}
+
+/* Premium Neo-brutalist cards with layered shadows & physical rotation depth */
+.neo-premium-card {
+  background: var(--glass-bg);
+  border: 2px solid #000000;
+  border-radius: 20px;
+  box-shadow: 
+    6px 6px 0px #000000, 
+    10px 10px 20px -4px rgba(0, 0, 0, 0.06), 
+    3px 3px 8px rgba(0, 0, 0, 0.03);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.15);
+  position: relative;
+}
+
+.dark .neo-premium-card {
+  border-color: #000000;
+  box-shadow: 
+    6px 6px 0px var(--neo-shadow), 
+    10px 10px 20px -4px rgba(0, 0, 0, 0.3), 
+    3px 3px 8px rgba(0, 0, 0, 0.15);
+}
+
+.neo-premium-card:hover {
+  transform: translate(-4px, -4px) rotate(0.6deg);
+  box-shadow: 
+    10px 10px 0px #000000, 
+    16px 16px 30px -4px rgba(0, 0, 0, 0.12), 
+    6px 6px 14px rgba(0, 0, 0, 0.05);
+}
+
+.dark .neo-premium-card:hover {
+  box-shadow: 
+    10px 10px 0px var(--neo-shadow), 
+    16px 16px 30px -4px rgba(0, 0, 0, 0.4), 
+    6px 6px 14px rgba(0, 0, 0, 0.2);
 }

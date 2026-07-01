@@ -25,6 +25,9 @@ import {
   X,
   Sun,
   Moon,
+  Compass,
+  Settings,
+  Users,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { WebGLBackground } from "@/components/WebGLBackground";
@@ -567,12 +570,12 @@ function Hero() {
             <span className="text-foreground">AI Business Transformation Manager · EDGE</span>
           </div>
 
-          <h1 className="mt-6 text-4xl font-bold leading-[1.1] sm:text-5xl md:text-6xl lg:text-7xl">
+          <h1 className="mt-6 text-4xl font-black leading-[1.05] tracking-tight sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl text-black dark:text-white">
             Transforming Businesses with <br className="hidden sm:inline" />
             <TypewriterSubtitle />
           </h1>
 
-          <p className="mt-7 max-w-xl text-lg text-muted-foreground md:text-xl">
+          <p className="mt-8 max-w-xl text-lg md:text-xl text-muted-foreground leading-relaxed font-sans">
             I help organizations automate workflows, redesign operations, and deploy intelligent AI
             systems that create measurable business impact.
           </p>
@@ -596,16 +599,24 @@ function Hero() {
 
           <div className="mt-12 grid grid-cols-2 gap-4 sm:grid-cols-4">
             {[
-              { k: "50+", v: "AI Workflows" },
-              { k: "20+", v: "Processes Automated" },
-              { k: "3+", v: "Years Experience" },
-              { k: "1000s", v: "Users Impacted" },
+              { k: "50+", v: "AI Workflows", color: "bg-[#BAFCA2]" },
+              { k: "20+", v: "Processes Automated", color: "bg-[#FFDB58]" },
+              { k: "3+", v: "Years Experience", color: "bg-[#C4A1FF]" },
+              { k: "1000s", v: "Users Impacted", color: "bg-[#FFA07A]" },
             ].map((s) => (
-              <div key={s.v} className="glass p-4 rounded-xl">
-                <div className="font-display text-2xl font-extrabold text-black dark:text-white md:text-3xl">
+              <div
+                key={s.v}
+                className="bg-white dark:bg-[#1E1E1E] p-4 rounded-xl border-2 border-black shadow-[3px_3px_0px_rgba(0,0,0,1)] hover:translate-y-[-2px] transition-transform select-none"
+              >
+                <div className="font-display text-2xl font-black text-black dark:text-white md:text-3xl">
                   {s.k}
                 </div>
-                <div className="mt-1 text-xs text-muted-foreground md:text-sm">{s.v}</div>
+                <div className="mt-1 text-[10px] uppercase font-extrabold text-muted-foreground tracking-wider">
+                  {s.v}
+                </div>
+                <div className="mt-2.5 w-full bg-neutral-100 dark:bg-neutral-800 h-1 rounded-full overflow-hidden">
+                  <div className={`h-full ${s.color} w-3/4 rounded-full`} />
+                </div>
               </div>
             ))}
           </div>
@@ -618,7 +629,7 @@ function Hero() {
           className="relative mx-auto w-full max-w-md lg:max-w-none group"
         >
           {/* Portrait Image container in Neo-brutalist card */}
-          <div className="relative overflow-hidden rounded-2xl border-4 border-black bg-white p-2.5 shadow-[10px_10px_0px_rgba(0,0,0,1)] dark:shadow-[10px_10px_0px_var(--neo-shadow)]">
+          <div className="relative overflow-hidden rounded-2xl border-4 border-black bg-white p-2.5 shadow-[10px_10px_0px_rgba(0,0,0,1)] dark:shadow-[10px_10px_0px_var(--neo-shadow)] z-10">
             {/* Minimal Sticker Overlay */}
             <div className="absolute top-4 left-4 bg-neo-yellow text-black border-2 border-black shadow-[2px_2px_0px_rgba(0,0,0,1)] font-extrabold text-[9px] uppercase tracking-wider px-2.5 py-0.5 rounded-md z-30 select-none">
               ✨ verified expert
@@ -635,6 +646,18 @@ function Hero() {
             />
           </div>
 
+          {/* Floating AI Notification Sticker Left */}
+          <div className="absolute top-12 -left-8 bg-white dark:bg-[#1E1E1E] border-2 border-black p-2 rounded-lg shadow-[3px_3px_0px_rgba(0,0,0,1)] text-[9px] font-mono hidden xl:flex items-center gap-1.5 rotate-[-4deg] animate-pulse z-20 select-none">
+            <span className="h-1.5 w-1.5 rounded-full bg-[#BAFCA2] animate-ping" />
+            <span>agent-runner.js &rarr; connected</span>
+          </div>
+
+          {/* Floating AI Metrics Sticker Right */}
+          <div className="absolute bottom-20 -right-6 bg-white dark:bg-[#1E1E1E] border-2 border-black p-2 rounded-lg shadow-[3px_3px_0px_rgba(0,0,0,1)] text-[9px] font-mono hidden xl:flex flex-col gap-0.5 rotate-[3deg] z-20 select-none">
+            <div className="text-muted-foreground font-bold">WORKFLOW RATING</div>
+            <div className="text-neo-green font-extrabold">+92.4% Optimal</div>
+          </div>
+
           <div className="absolute -top-6 -right-6 hidden md:block z-20">
             <AIDiagnostics />
           </div>
@@ -644,8 +667,8 @@ function Hero() {
               <Bot className="h-4 w-4" />
             </span>
             <div className="text-left">
-              <div className="text-xs text-muted-foreground">Currently leading</div>
-              <div className="text-sm font-bold">AI Transformation @ EDGE</div>
+              <div className="text-xs text-muted-foreground font-semibold">Currently leading</div>
+              <div className="text-sm font-extrabold">AI Transformation @ EDGE</div>
             </div>
           </div>
         </motion.div>
@@ -799,14 +822,19 @@ function StackMarquee() {
 
 function About() {
   return (
-    <section id="about" className="relative py-32">
-      <div className="mx-auto max-w-6xl px-4">
+    <section id="about" className="relative py-32 overflow-hidden">
+      {/* Outlined Section Number Separator */}
+      <div className="absolute -top-10 -left-6 text-[12rem] font-black text-black/[0.03] dark:text-white/[0.02] select-none pointer-events-none font-display leading-none">
+        01
+      </div>
+
+      <div className="mx-auto max-w-6xl px-4 relative">
         <div className="max-w-3xl">
           <div className="section-eyebrow">Who I Am</div>
-          <h2 className="mt-4 text-4xl font-semibold md:text-6xl">
+          <h2 className="mt-4 text-4xl font-extrabold md:text-6xl tracking-tight text-black dark:text-white">
             Beyond AI. <span className="text-gradient">Beyond Automation.</span>
           </h2>
-          <div className="mt-8 space-y-5 text-lg text-muted-foreground">
+          <div className="mt-8 space-y-5 text-lg text-muted-foreground leading-relaxed">
             <p>
               I am an AI Business Transformation Manager focused on helping organizations unlock
               productivity through Agentic AI, workflow automation, and intelligent digital systems.
@@ -819,7 +847,7 @@ function About() {
           </div>
         </div>
 
-        <div className="mt-16 grid gap-4 md:grid-cols-3">
+        <div className="mt-16 grid gap-6 md:grid-cols-3">
           {[
             {
               icon: Brain,
@@ -844,10 +872,12 @@ function About() {
               viewport={{ once: true, margin: "-20px" }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
             >
-              <SpotlightCard className="p-6">
-                <c.icon className="h-6 w-6 text-black dark:text-white" />
-                <h3 className="mt-4 text-lg font-semibold">{c.title}</h3>
-                <p className="mt-2 text-sm text-muted-foreground">{c.desc}</p>
+              <SpotlightCard className="p-6 neo-premium-card h-full">
+                <div className="grid h-12 w-12 place-items-center rounded-lg border-2 border-black bg-[#BAFCA2] text-black shadow-[2px_2px_0px_rgba(0,0,0,1)] mb-4">
+                  <c.icon className="h-6 w-6" />
+                </div>
+                <h3 className="text-lg font-bold text-black dark:text-white">{c.title}</h3>
+                <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{c.desc}</p>
               </SpotlightCard>
             </motion.div>
           ))}
@@ -909,12 +939,16 @@ function Experience() {
 
   return (
     <section id="experience" className="relative py-32 overflow-hidden">
-      <div className="absolute inset-0 bg-grid-pattern pointer-events-none -z-10" />
-      <div className="mx-auto max-w-6xl px-4">
+      {/* Outlined Section Number Separator */}
+      <div className="absolute -top-10 -left-6 text-[12rem] font-black text-black/[0.03] dark:text-white/[0.02] select-none pointer-events-none font-display leading-none">
+        02
+      </div>
+
+      <div className="mx-auto max-w-6xl px-4 relative">
         <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between mb-16">
           <div>
             <div className="section-eyebrow">Professional Path</div>
-            <h2 className="mt-4 text-4xl font-semibold md:text-5xl">
+            <h2 className="mt-4 text-4xl font-extrabold md:text-5xl tracking-tight text-black dark:text-white">
               My <span className="text-gradient-green">Experience Journey</span>
             </h2>
           </div>
@@ -939,7 +973,7 @@ function Experience() {
               }`}
             >
               {/* Central Circle Dot */}
-              <div className="absolute left-0 -translate-x-1/2 md:left-1/2 md:-translate-x-1/2 top-1.5 z-10 flex h-6 w-6 items-center justify-center rounded-full bg-neo-yellow border-2 border-black shadow-[2px_2px_0px_rgba(0,0,0,1)]">
+              <div className="absolute left-0 -translate-x-1/2 md:left-1/2 md:-translate-x-1/2 top-1.5 z-10 flex h-7 w-7 items-center justify-center rounded-full bg-neo-yellow border-2 border-black shadow-[2px_2px_0px_rgba(0,0,0,1)]">
                 <span
                   className={`h-2.5 w-2.5 rounded-full ${r.current ? "bg-black animate-ping" : "bg-black"}`}
                 />
@@ -947,7 +981,7 @@ function Experience() {
 
               {/* Card placement based on index */}
               <div className={`${idx % 2 === 0 ? "md:order-1" : "md:order-2 md:col-start-2"}`}>
-                <SpotlightCard className="p-6 md:p-8">
+                <SpotlightCard className="p-6 md:p-8 neo-premium-card">
                   <div className="flex flex-wrap items-center justify-between gap-2 mb-4">
                     <span className="text-xs font-extrabold uppercase tracking-wider text-black bg-[#FFC0CB] border border-black shadow-[1.5px_1.5px_0px_rgba(0,0,0,1)] px-2.5 py-0.5 rounded">
                       {r.date}
@@ -1098,11 +1132,15 @@ function Expertise() {
 
   return (
     <section id="expertise" className="relative py-32 overflow-hidden">
-      <div className="absolute inset-0 bg-grid-pattern opacity-20 pointer-events-none -z-10" />
-      <div className="mx-auto max-w-6xl px-4">
+      {/* Outlined Section Number Separator */}
+      <div className="absolute -top-10 -left-6 text-[12rem] font-black text-black/[0.03] dark:text-white/[0.02] select-none pointer-events-none font-display leading-none">
+        03
+      </div>
+
+      <div className="mx-auto max-w-6xl px-4 relative">
         <div className="max-w-3xl mb-14">
           <div className="section-eyebrow">Core Expertise</div>
-          <h2 className="mt-4 text-4xl font-semibold md:text-5xl">
+          <h2 className="mt-4 text-4xl font-extrabold md:text-5xl tracking-tight text-black dark:text-white">
             A full stack for <span className="text-gradient-green">AI transformation</span>.
           </h2>
         </div>
@@ -1151,7 +1189,7 @@ function Expertise() {
               exit={{ opacity: 0, x: -20 }}
               transition={{ duration: 0.3 }}
             >
-              <SpotlightCard className="p-5 sm:p-8 min-h-[350px] flex flex-col justify-between">
+              <SpotlightCard className="p-5 sm:p-8 min-h-[350px] flex flex-col justify-between neo-premium-card">
                 <div>
                   <div className="flex items-center gap-3 mb-6">
                     <div className="grid h-12 w-12 place-items-center rounded-lg border-2 border-black bg-neo-yellow text-black shadow-[2px_2px_0px_rgba(0,0,0,1)]">
@@ -1671,12 +1709,17 @@ function Projects() {
     filter === "All" ? projects : projects.filter((p) => p.category === filter);
 
   return (
-    <section id="projects" className="relative py-32">
-      <div className="mx-auto max-w-6xl px-4">
+    <section id="projects" className="relative py-32 overflow-hidden">
+      {/* Outlined Section Number Separator */}
+      <div className="absolute -top-10 -left-6 text-[12rem] font-black text-black/[0.03] dark:text-white/[0.02] select-none pointer-events-none font-display leading-none">
+        04
+      </div>
+
+      <div className="mx-auto max-w-6xl px-4 relative">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
           <div>
             <div className="section-eyebrow">Featured Projects</div>
-            <h2 className="mt-4 text-4xl font-semibold md:text-5xl">
+            <h2 className="mt-4 text-4xl font-extrabold md:text-5xl tracking-tight text-black dark:text-white">
               Shipping AI systems that{" "}
               <span className="text-gradient-green">move the business</span>.
             </h2>
@@ -1712,8 +1755,62 @@ function Projects() {
                 transition={{ duration: 0.3 }}
                 className={`w-full min-w-0 overflow-hidden ${filter === "All" && idx === 0 ? "lg:col-span-2" : ""}`}
               >
-                <SpotlightCard className="p-5 sm:p-7 flex flex-col justify-between h-full w-full min-w-0 overflow-hidden">
-                  <div className="w-full min-w-0">
+                <SpotlightCard className="p-5 sm:p-7 flex flex-col justify-between h-full w-full min-w-0 overflow-hidden neo-premium-card relative">
+                  {/* Card Personality Variation */}
+                  {idx === 0 && (
+                    <div className="absolute top-0 left-0 right-0 h-2 bg-neo-yellow" />
+                  )}
+                  {idx === 1 && (
+                    <div className="absolute inset-0 bg-dot-pattern opacity-[0.08] pointer-events-none" />
+                  )}
+                  {idx === 2 && (
+                    <div className="absolute top-4 right-4 text-black/10 dark:text-white/10 pointer-events-none hidden sm:block">
+                      <svg
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                      >
+                        <line x1="12" y1="0" x2="12" y2="24" />
+                        <line x1="0" y1="12" x2="24" y2="12" />
+                      </svg>
+                    </div>
+                  )}
+                  {idx === 3 && (
+                    <div className="absolute top-4 right-12 bg-neo-green text-black border border-black shadow-[1px_1px_0px_rgba(0,0,0,1)] text-[8px] font-bold uppercase tracking-wider px-2 py-0.5 rounded rotate-[5deg] select-none z-10">
+                      ✨ live
+                    </div>
+                  )}
+                  {idx === 4 && (
+                    <div className="absolute bottom-4 right-4 text-black/10 dark:text-white/15 pointer-events-none hidden sm:block">
+                      <svg
+                        width="32"
+                        height="32"
+                        viewBox="0 0 32 32"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="1.5"
+                      >
+                        <rect x="6" y="6" width="20" height="20" rx="2" />
+                        <line x1="10" y1="6" x2="10" y2="2" />
+                        <line x1="16" y1="6" x2="16" y2="2" />
+                        <line x1="22" y1="6" x2="22" y2="2" />
+                        <line x1="10" y1="26" x2="10" y2="30" />
+                        <line x1="16" y1="26" x2="16" y2="30" />
+                        <line x1="22" y1="26" x2="22" y2="30" />
+                        <line x1="6" y1="10" x2="2" y2="10" />
+                        <line x1="6" y1="16" x2="2" y2="16" />
+                        <line x1="6" y1="22" x2="2" y2="22" />
+                        <line x1="26" y1="10" x2="30" y2="10" />
+                        <line x1="26" y1="16" x2="30" y2="16" />
+                        <line x1="26" y1="22" x2="30" y2="22" />
+                      </svg>
+                    </div>
+                  )}
+
+                  <div className="w-full min-w-0 relative z-10">
                     <div className="flex items-start justify-between gap-4">
                       <div>
                         <span className="text-[10px] uppercase font-bold tracking-wider text-black bg-[#BAFCA2] border border-black shadow-[1.5px_1.5px_0px_rgba(0,0,0,1)] px-2.5 py-0.5 rounded">
@@ -1840,58 +1937,102 @@ function Services() {
       title: "AI Transformation Consulting",
       desc: "End-to-end roadmap for adopting AI across your organization.",
       tier: "Strategic",
+      icon: Compass,
+      num: "01",
+      badgeColor: "bg-[#BAFCA2]",
+      pattern: false,
     },
     {
       title: "Business Process Automation",
       desc: "Eliminate manual workflows with intelligent automation systems.",
       tier: "Operational",
+      icon: Settings,
+      num: "02",
+      badgeColor: "bg-[#FFDB58]",
+      pattern: true,
     },
     {
       title: "Agentic AI Solutions",
       desc: "Custom multi-agent systems built for your business workflows.",
       tier: "Engineering",
+      icon: Bot,
+      num: "03",
+      badgeColor: "bg-[#C4A1FF]",
+      pattern: false,
     },
     {
       title: "AI Strategy Workshops",
       desc: "Align leadership on AI opportunities and prioritize initiatives.",
       tier: "Advisory",
+      icon: Zap,
+      num: "04",
+      badgeColor: "bg-[#FFC0CB]",
+      pattern: true,
     },
     {
       title: "Flutter App Development",
       desc: "Scalable, modern mobile applications with clean architecture.",
       tier: "Engineering",
+      icon: Smartphone,
+      num: "05",
+      badgeColor: "bg-[#A7DBD8]",
+      pattern: false,
     },
     {
       title: "Enterprise AI Adoption",
       desc: "Change management and rollout programs that actually stick.",
       tier: "Transformation",
+      icon: Users,
+      num: "06",
+      badgeColor: "bg-[#FFA07A]",
+      pattern: false,
     },
   ];
   return (
-    <section id="services" className="relative py-32">
-      <div className="mx-auto max-w-6xl px-4">
+    <section id="services" className="relative py-32 overflow-hidden">
+      {/* Outlined Section Number Separator */}
+      <div className="absolute -top-10 -left-6 text-[12rem] font-black text-black/[0.03] dark:text-white/[0.02] select-none pointer-events-none font-display leading-none">
+        05
+      </div>
+
+      <div className="mx-auto max-w-6xl px-4 relative">
         <div className="max-w-3xl">
           <div className="section-eyebrow">Services</div>
-          <h2 className="mt-4 text-4xl font-semibold md:text-6xl">
+          <h2 className="mt-4 text-4xl font-extrabold md:text-6xl tracking-tight text-black dark:text-white">
             How we can <span className="text-gradient-green">work together</span>.
           </h2>
         </div>
 
-        <div className="mt-14 grid gap-5 md:grid-cols-3">
+        <div className="mt-14 grid gap-6 md:grid-cols-3">
           {services.map((s) => (
-            <SpotlightCard key={s.title} className="p-5 sm:p-7 flex flex-col justify-between">
-              <div>
-                <div className="text-xs uppercase tracking-wider text-[#FFA07A] font-bold">
+            <SpotlightCard
+              key={s.title}
+              className="p-6 sm:p-7 flex flex-col justify-between neo-premium-card overflow-hidden"
+            >
+              {s.pattern && (
+                <div className="absolute inset-0 bg-dot-pattern opacity-[0.06] pointer-events-none" />
+              )}
+              <div className="relative z-10 w-full">
+                <div className="flex items-start justify-between">
+                  <div className={`grid h-12 w-12 place-items-center rounded-lg border-2 border-black ${s.badgeColor} text-black shadow-[2px_2px_0px_rgba(0,0,0,1)] mb-4`}>
+                    <s.icon className="h-6 w-6" />
+                  </div>
+                  <span className="text-4xl font-black text-black/5 dark:text-white/5 select-none pointer-events-none font-display leading-none">
+                    {s.num}
+                  </span>
+                </div>
+                <div className="text-xs uppercase tracking-wider text-muted-foreground font-extrabold">
                   {s.tier}
                 </div>
-                <h3 className="mt-3 text-lg font-semibold">{s.title}</h3>
-                <p className="mt-2 text-sm text-muted-foreground">{s.desc}</p>
+                <h3 className="mt-3 text-lg font-bold text-black dark:text-white">{s.title}</h3>
+                <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{s.desc}</p>
               </div>
               <a
                 href="#contact"
-                className="mt-5 inline-flex items-center gap-1 text-sm font-extrabold text-black dark:text-white hover:underline self-start"
+                className="mt-6 inline-flex items-center gap-1.5 text-xs font-black uppercase tracking-wider text-black dark:text-white hover:underline self-start relative z-10 group/link"
               >
-                Discuss scope <ArrowRight className="h-3.5 w-3.5" />
+                <span>Discuss scope</span>
+                <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover/link:translate-x-1" />
               </a>
             </SpotlightCard>
           ))}
@@ -1903,40 +2044,52 @@ function Services() {
 
 function Articles() {
   const articles = [
-    { title: "The Future of Agentic AI", read: "8 min read", tag: "Agentic AI" },
-    { title: "How Businesses Can Adopt AI Successfully", read: "6 min read", tag: "Strategy" },
+    { title: "The Future of Agentic AI", read: "8 min read", tag: "Agentic AI", color: "bg-[#BAFCA2]" },
+    { title: "How Businesses Can Adopt AI Successfully", read: "6 min read", tag: "Strategy", color: "bg-[#FFDB58]" },
     {
       title: "Building AI Workflows That Actually Deliver ROI",
       read: "10 min read",
       tag: "Automation",
+      color: "bg-[#C4A1FF]",
     },
-    { title: "AI Transformation vs Digital Transformation", read: "7 min read", tag: "Leadership" },
+    { title: "AI Transformation vs Digital Transformation", read: "7 min read", tag: "Leadership", color: "bg-[#FFA07A]" },
   ];
   return (
-    <section className="relative py-32">
-      <div className="mx-auto max-w-6xl px-4">
+    <section className="relative py-32 overflow-hidden">
+      {/* Outlined Section Number Separator */}
+      <div className="absolute -top-10 -left-6 text-[12rem] font-black text-black/[0.03] dark:text-white/[0.02] select-none pointer-events-none font-display leading-none">
+        06
+      </div>
+
+      <div className="mx-auto max-w-6xl px-4 relative">
         <div className="max-w-3xl">
           <div className="section-eyebrow">Thought Leadership</div>
-          <h2 className="mt-4 text-4xl font-semibold md:text-6xl">
+          <h2 className="mt-4 text-4xl font-extrabold md:text-6xl tracking-tight text-black dark:text-white">
             Writing on AI, automation, and{" "}
             <span className="text-gradient-green">business impact</span>.
           </h2>
         </div>
-        <div className="mt-14 grid gap-5 md:grid-cols-2">
+        <div className="mt-14 grid gap-6 md:grid-cols-2">
           {articles.map((a) => (
             <a
               key={a.title}
               href="#"
-              className="glass hover-lift group flex items-center justify-between rounded-2xl p-6"
+              className="neo-premium-card flex items-center justify-between p-6 w-full relative group/art"
             >
-              <div>
-                <div className="text-xs uppercase tracking-wider text-[#FFA07A] font-bold">
-                  {a.tag}
+              <div className="w-full pr-4">
+                <div className="flex items-center gap-2 flex-wrap">
+                  <span className={`text-[9px] uppercase font-extrabold tracking-wider text-black ${a.color} border border-black shadow-[1px_1px_0px_rgba(0,0,0,1)] px-2.5 py-0.5 rounded`}>
+                    {a.tag}
+                  </span>
+                  <span className="text-[9px] font-extrabold bg-white dark:bg-black text-black dark:text-white border border-black shadow-[1px_1px_0px_rgba(0,0,0,1)] px-2.5 py-0.5 rounded">
+                    {a.read}
+                  </span>
                 </div>
-                <h3 className="mt-2 text-lg font-semibold">{a.title}</h3>
-                <div className="mt-1 text-xs text-muted-foreground">{a.read}</div>
+                <h3 className="mt-4 text-lg font-bold text-black dark:text-white leading-snug group-hover/art:underline">
+                  {a.title}
+                </h3>
               </div>
-              <ArrowRight className="h-5 w-5 text-muted-foreground transition-all group-hover:translate-x-1 group-hover:text-[#FFDB58]" />
+              <ArrowRight className="h-5 w-5 text-muted-foreground transition-all group-hover/art:translate-x-1 group-hover/art:text-[#FFDB58] shrink-0" />
             </a>
           ))}
         </div>
@@ -1973,16 +2126,27 @@ function Testimonials() {
   }, [items.length]);
 
   return (
-    <section className="relative py-32">
-      <div className="mx-auto max-w-4xl px-4">
+    <section className="relative py-32 overflow-hidden">
+      {/* Outlined Section Number Separator */}
+      <div className="absolute -top-10 -left-6 text-[12rem] font-black text-black/[0.03] dark:text-white/[0.02] select-none pointer-events-none font-display leading-none">
+        07
+      </div>
+
+      <div className="mx-auto max-w-4xl px-4 relative">
         <div className="text-center">
           <div className="section-eyebrow justify-center">Testimonials</div>
-          <h2 className="mt-4 text-4xl font-semibold md:text-5xl">
+          <h2 className="mt-4 text-4xl font-extrabold md:text-5xl tracking-tight text-black dark:text-white">
             Trusted by <span className="text-gradient-green">teams shipping AI</span>.
           </h2>
         </div>
 
-        <div className="glass-strong relative mt-12 overflow-hidden rounded-3xl p-8 md:p-14 min-h-[250px] flex flex-col justify-between">
+        <div className="relative mt-12 overflow-hidden rounded-3xl border-4 border-black bg-white dark:bg-[#1E1E1E] p-8 md:p-14 min-h-[250px] flex flex-col justify-between shadow-[8px_8px_0px_rgba(0,0,0,1)] dark:shadow-[8px_8px_0px_var(--neo-shadow)]">
+          {/* Micro Paper Clip Sticker */}
+          <div className="absolute top-4 right-12 text-black/20 dark:text-white/20 select-none pointer-events-none hidden sm:block">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M6 7.91V16a6 6 0 0 0 12 0V7.91a4 4 0 0 0-8 0V15a2 2 0 0 0 4 0V7.91" />
+            </svg>
+          </div>
           <Quote className="absolute right-8 top-8 h-12 w-12 text-black/[0.05] dark:text-white/[0.05] pointer-events-none" />
 
           <AnimatePresence mode="wait">
@@ -1994,6 +2158,11 @@ function Testimonials() {
               transition={{ duration: 0.3 }}
               className="flex-1"
             >
+              <div className="flex gap-1 mb-4 text-[#FFDB58]">
+                {[...Array(5)].map((_, idx) => (
+                  <span key={idx} className="text-xl">★</span>
+                ))}
+              </div>
               <p className="font-display text-xl leading-relaxed md:text-2xl text-foreground italic">
                 "{items[i].q}"
               </p>
@@ -2030,15 +2199,60 @@ function Testimonials() {
 }
 
 function Contact() {
+  const [copied, setCopied] = useState(false);
+
+  const handleCopyEmail = (e: React.MouseEvent) => {
+    e.preventDefault();
+    navigator.clipboard.writeText("mayuraimaker@gmail.com");
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+
+    // Audio click feedback
+    try {
+      const AudioCtx = window.AudioContext || (window as any).webkitAudioContext;
+      if (AudioCtx) {
+        const ctx = new AudioCtx();
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.frequency.setValueAtTime(600, ctx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(1000, ctx.currentTime + 0.12);
+        gain.gain.setValueAtTime(0.04, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.12);
+        osc.start();
+        osc.stop(ctx.currentTime + 0.12);
+      }
+    } catch (err) {}
+  };
+
   return (
-    <section id="contact" className="relative py-32">
-      <div className="mx-auto max-w-6xl px-4">
-        <div className="glass-strong relative overflow-hidden rounded-3xl p-6 sm:p-10 md:p-16">
+    <section id="contact" className="relative py-32 overflow-hidden">
+      {/* Outlined Section Number Separator */}
+      <div className="absolute -top-10 -left-6 text-[12rem] font-black text-black/[0.03] dark:text-white/[0.02] select-none pointer-events-none font-display leading-none">
+        08
+      </div>
+
+      <div className="mx-auto max-w-6xl px-4 relative">
+        <div className="relative overflow-hidden rounded-3xl border-4 border-black bg-white dark:bg-[#1E1E1E] p-6 sm:p-10 md:p-16 shadow-[12px_12px_0px_rgba(0,0,0,1)] dark:shadow-[12px_12px_0px_var(--neo-shadow)]">
+          {/* Subtle Rotating Grid Shape in background */}
+          <div className="absolute -bottom-16 -right-16 text-black/5 dark:text-white/5 pointer-events-none hidden sm:block animate-spin-slow">
+            <svg width="240" height="240" viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="2">
+              <circle cx="50" cy="50" r="45" strokeDasharray="6 6" />
+            </svg>
+          </div>
+
           <div className="relative">
-            <h2 className="text-4xl font-semibold md:text-6xl">
+            {/* Availability Badge */}
+            <div className="inline-flex items-center gap-2 bg-[#BAFCA2] border-2 border-black shadow-[2px_2px_0px_rgba(0,0,0,1)] px-4 py-1.5 rounded-full text-xs font-black text-black mb-8 select-none">
+              <span className="h-2 w-2 rounded-full bg-black animate-ping" />
+              <span>Available for Projects (Q3 2026)</span>
+            </div>
+
+            <h2 className="text-4xl font-extrabold md:text-6xl tracking-tight text-black dark:text-white">
               Let's build the <span className="text-gradient-green">future together</span>.
             </h2>
-            <p className="mt-5 max-w-2xl text-lg text-muted-foreground">
+            <p className="mt-6 max-w-2xl text-lg text-muted-foreground leading-relaxed">
               Whether you're exploring AI strategy, automating a workflow, or building an agentic
               system — I'd love to help you ship it.
             </p>
@@ -2053,20 +2267,28 @@ function Contact() {
                 <Calendar className="h-4 w-4" />
                 <span>Book on Calendly</span>
               </a>
-              <a href="mailto:mayuraimaker@gmail.com" className="neo-btn neo-btn-white px-6 py-3">
+              <button
+                onClick={handleCopyEmail}
+                className="neo-btn neo-btn-white px-6 py-3 relative overflow-visible"
+              >
                 <Mail className="h-4 w-4" />
-                <span>mayuraimaker@gmail.com</span>
-              </a>
+                <span>{copied ? "Copied Email!" : "mayuraimaker@gmail.com"}</span>
+                {copied && (
+                  <div className="absolute -top-10 left-1/2 -translate-x-1/2 bg-black text-white text-[10px] font-bold px-2.5 py-1 rounded border border-black shadow-[2px_2px_0px_rgba(186,252,162,1)] whitespace-nowrap animate-bounce">
+                    Copied to Clipboard!
+                  </div>
+                )}
+              </button>
             </div>
 
-            <div className="mt-12 grid gap-6 sm:grid-cols-2 md:grid-cols-4">
+            <div className="mt-12 grid gap-6 sm:grid-cols-2 md:grid-cols-4 border-t border-black/10 dark:border-white/10 pt-8">
               <div className="flex items-center gap-3">
                 <MapPin className="h-5 w-5 text-black dark:text-white" />
                 <div>
-                  <div className="text-xs uppercase tracking-wider text-muted-foreground">
+                  <div className="text-[10px] uppercase font-bold text-muted-foreground tracking-wider">
                     Location
                   </div>
-                  <div className="text-sm font-medium">Mumbai, India</div>
+                  <div className="text-sm font-extrabold">Mumbai, India</div>
                 </div>
               </div>
               <a
@@ -2075,10 +2297,10 @@ function Contact() {
               >
                 <Phone className="h-5 w-5 text-black dark:text-white" />
                 <div>
-                  <div className="text-xs uppercase tracking-wider text-muted-foreground">
+                  <div className="text-[10px] uppercase font-bold text-muted-foreground tracking-wider">
                     Phone
                   </div>
-                  <div className="text-sm font-medium">+91 808 720 5660</div>
+                  <div className="text-sm font-extrabold">+91 808 720 5660</div>
                 </div>
               </a>
               <a
@@ -2089,10 +2311,10 @@ function Contact() {
               >
                 <Linkedin className="h-5 w-5 text-black dark:text-white" />
                 <div>
-                  <div className="text-xs uppercase tracking-wider text-muted-foreground">
+                  <div className="text-[10px] uppercase font-bold text-muted-foreground tracking-wider">
                     LinkedIn
                   </div>
-                  <div className="text-sm font-medium">Connect</div>
+                  <div className="text-sm font-extrabold">Connect</div>
                 </div>
               </a>
               <a
@@ -2103,10 +2325,10 @@ function Contact() {
               >
                 <Github className="h-5 w-5 text-black dark:text-white" />
                 <div>
-                  <div className="text-xs uppercase tracking-wider text-muted-foreground">
+                  <div className="text-[10px] uppercase font-bold text-muted-foreground tracking-wider">
                     GitHub
                   </div>
-                  <div className="text-sm font-medium">View Code</div>
+                  <div className="text-sm font-extrabold">View Code</div>
                 </div>
               </a>
             </div>
@@ -2141,6 +2363,96 @@ export function Footer() {
         </div>
       </div>
     </footer>
+  );
+}
+
+function CustomCursor() {
+  const cursorRef = useRef<HTMLDivElement>(null);
+  const ringRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const cursor = cursorRef.current;
+    const ring = ringRef.current;
+    if (!cursor || !ring) return;
+
+    let cursorX = 0;
+    let cursorY = 0;
+    let ringX = 0;
+    let ringY = 0;
+
+    const onMove = (e: MouseEvent) => {
+      cursorX = e.clientX;
+      cursorY = e.clientY;
+      cursor.style.transform = `translate3d(${cursorX}px, ${cursorY}px, 0)`;
+    };
+
+    const tick = () => {
+      ringX += (cursorX - ringX) * 0.12;
+      ringY += (cursorY - ringY) * 0.12;
+      if (ring) {
+        ring.style.transform = `translate3d(${ringX}px, ${ringY}px, 0)`;
+      }
+      requestAnimationFrame(tick);
+    };
+
+    window.addEventListener("mousemove", onMove, { passive: true });
+    const raf = requestAnimationFrame(tick);
+
+    // Hover triggers
+    const onEnter = () => {
+      ring.classList.add("scale-150", "border-[#BAFCA2]", "bg-[#BAFCA2]/10");
+      cursor.classList.add("scale-50");
+    };
+    const onLeave = () => {
+      ring.classList.remove("scale-150", "border-[#BAFCA2]", "bg-[#BAFCA2]/10");
+      cursor.classList.remove("scale-50");
+    };
+
+    const registerHoverables = () => {
+      const hoverables = document.querySelectorAll(
+        "a, button, [role='button'], .neo-premium-card, .spotlight-card, input, textarea"
+      );
+      hoverables.forEach((el) => {
+        el.addEventListener("mouseenter", onEnter);
+        el.addEventListener("mouseleave", onLeave);
+      });
+      return hoverables;
+    };
+
+    let hoverables = registerHoverables();
+
+    // Re-register hoverables if DOM updates
+    const observer = new MutationObserver(() => {
+      hoverables.forEach((el) => {
+        el.removeEventListener("mouseenter", onEnter);
+        el.removeEventListener("mouseleave", onLeave);
+      });
+      hoverables = registerHoverables();
+    });
+    observer.observe(document.body, { childList: true, subtree: true });
+
+    return () => {
+      window.removeEventListener("mousemove", onMove);
+      cancelAnimationFrame(raf);
+      observer.disconnect();
+      hoverables.forEach((el) => {
+        el.removeEventListener("mouseenter", onEnter);
+        el.removeEventListener("mouseleave", onLeave);
+      });
+    };
+  }, []);
+
+  return (
+    <>
+      <div
+        ref={cursorRef}
+        className="pointer-events-none fixed left-0 top-0 z-50 h-2.5 w-2.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-black dark:bg-white transition-transform duration-100 ease-out hidden md:block"
+      />
+      <div
+        ref={ringRef}
+        className="pointer-events-none fixed left-0 top-0 z-50 h-8 w-8 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-black dark:border-white transition-all duration-300 ease-out hidden md:block"
+      />
+    </>
   );
 }
 
@@ -2199,30 +2511,16 @@ function Portfolio() {
     playChime();
   }, []);
 
-  // Subtle cursor glow
-  const [pos, setPos] = useState({ x: -200, y: -200 });
-  useEffect(() => {
-    const onMove = (e: MouseEvent) => setPos({ x: e.clientX, y: e.clientY });
-    window.addEventListener("mousemove", onMove, { passive: true });
-    return () => window.removeEventListener("mousemove", onMove);
-  }, []);
-
   return (
     <div className="relative min-h-screen text-foreground transition-colors duration-300 overflow-x-hidden">
       <ScrollProgress />
       <WebGLBackground />
-      {mounted && (
-        <div
-          aria-hidden
-          className="pointer-events-none fixed -z-[5] h-[400px] w-[400px] rounded-full"
-          style={{
-            left: pos.x - 200,
-            top: pos.y - 200,
-            background: "radial-gradient(circle, rgba(186,252,162,0.18) 0%, transparent 60%)",
-            transition: "left 0.15s ease-out, top 0.15s ease-out",
-          }}
-        />
-      )}
+      {/* Ambient gradient blobs */}
+      <div className="absolute top-[10%] left-[-100px] w-[500px] h-[500px] bg-neo-green/10 rounded-full blur-[150px] pointer-events-none -z-20 select-none" />
+      <div className="absolute top-[45%] right-[-100px] w-[500px] h-[500px] bg-neo-purple/10 rounded-full blur-[150px] pointer-events-none -z-20 select-none" />
+      <div className="absolute bottom-[10%] left-[10%] w-[600px] h-[600px] bg-neo-yellow/10 rounded-full blur-[150px] pointer-events-none -z-20 select-none" />
+
+      {mounted && <CustomCursor />}
       <Nav mounted={mounted} audioEnabled={audioEnabled} toggleAudio={toggleAudio} />
       <main>
         <Hero />
