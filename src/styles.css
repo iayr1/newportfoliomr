@@ -445,5 +445,11 @@
   background: radial-gradient(ellipse at top, #020c07 0%, #010403 60%, #000201 100%);
 }
 
+.webgl-container canvas {
+  width: 100% !important;
+  height: 100% !important;
+  display: block;
+}
+
 
 

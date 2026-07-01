@@ -806,7 +806,7 @@ function Experience() {
         </div>
 
         {/* Timeline structure */}
-        <div className="relative border-l-2 border-black md:border-l-0 md:before:absolute md:before:left-1/2 md:before:top-0 md:before:h-full md:before:w-[2px] md:before:bg-black pl-8 md:pl-0 space-y-12">
+        <div className="relative border-l-2 border-black md:border-l-0 md:before:absolute md:before:left-1/2 md:before:top-0 md:before:h-full md:before:w-[2px] md:before:bg-black pl-6 md:pl-0 space-y-12">
           {roles.map((r, idx) => (
             <div
               key={r.company}
@@ -815,7 +815,7 @@ function Experience() {
               }`}
             >
               {/* Central Circle Dot */}
-              <div className="absolute -left-[43px] md:left-1/2 md:-translate-x-1/2 top-1.5 z-10 flex h-6 w-6 items-center justify-center rounded-full bg-neo-yellow border-2 border-black shadow-[2px_2px_0px_rgba(0,0,0,1)]">
+              <div className="absolute left-0 -translate-x-1/2 md:left-1/2 md:-translate-x-1/2 top-1.5 z-10 flex h-6 w-6 items-center justify-center rounded-full bg-neo-yellow border-2 border-black shadow-[2px_2px_0px_rgba(0,0,0,1)]">
                 <span className={`h-2.5 w-2.5 rounded-full ${r.current ? "bg-black animate-ping" : "bg-black"}`} />
               </div>
 
@@ -1916,7 +1916,7 @@ function Portfolio() {
   }, []);
 
   return (
-    <div className="relative min-h-screen text-foreground transition-colors duration-300">
+    <div className="relative min-h-screen text-foreground transition-colors duration-300 overflow-x-hidden">
       <ScrollProgress />
       <WebGLBackground />
       {mounted && (

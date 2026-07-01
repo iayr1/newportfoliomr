@@ -206,7 +206,7 @@ export function WebGLBackground() {
     <div
       ref={containerRef}
       aria-hidden
-      className="pointer-events-none fixed inset-0 -z-10 webgl-container"
+      className="pointer-events-none fixed inset-0 -z-10 webgl-container w-full h-full overflow-hidden"
     />
   );
 }
