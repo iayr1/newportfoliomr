@@ -28,7 +28,7 @@ export function WebGLBackground() {
     container.appendChild(renderer.domElement);
 
     const isDarkInitial = document.documentElement.classList.contains("dark");
-    const initialColor = isDarkInitial ? 0x00a85a : 0x00633b;
+    const initialColor = isDarkInitial ? 0xbafca2 : 0x7fbc8c;
 
     // Nodes (AI agents)
     const NODE_COUNT = 60;
@@ -85,7 +85,7 @@ export function WebGLBackground() {
 
     // Function to dynamically update colors on theme change
     const updateColors = (isDark: boolean) => {
-      const color = isDark ? 0x00a85a : 0x00633b;
+      const color = isDark ? 0xbafca2 : 0x7fbc8c;
       nodeMat.color.setHex(color);
       lineMat.color.setHex(color);
       lineMat.opacity = isDark ? 0.28 : 0.15;

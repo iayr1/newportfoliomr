@@ -16,7 +16,6 @@ import { motion } from "framer-motion";
 import { 
   Nav, 
   Footer, 
-  AIAssistant, 
   ScrollProgress, 
   SpotlightCard, 
   triggerChimeSound 
@@ -216,7 +215,7 @@ function AgenticAIDevelopmentPage() {
         <Section className="pt-8">
           <Link
             to="/"
-            className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-[#00A85A] transition-colors mb-8 cursor-pointer group"
+            className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-[#FFDB58] transition-colors mb-8 cursor-pointer group"
           >
             <ArrowRight className="w-4 h-4 rotate-180 transition-transform group-hover:-translate-x-1" /> 
             Back to portfolio
@@ -227,7 +226,7 @@ function AgenticAIDevelopmentPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <div className="glass inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs text-[#00723D] mb-6">
+            <div className="chip mb-6">
               <Bot className="w-3.5 h-3.5" /> 
               <span>Expertise Deep Dive</span>
             </div>
@@ -249,7 +248,7 @@ function AgenticAIDevelopmentPage() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
+            viewport={{ once: true, margin: "-20px" }}
             transition={{ duration: 0.6 }}
           >
             <SpotlightCard className="p-8 md:p-12">
@@ -318,13 +317,13 @@ function AgenticAIDevelopmentPage() {
                 key={step.title}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
+                viewport={{ once: true, margin: "-20px" }}
                 transition={{ duration: 0.5, delay: idx * 0.08 }}
                 className="flex"
               >
                 <SpotlightCard className="p-6 flex flex-col justify-between h-full w-full">
                   <div>
-                    <div className="w-10 h-10 rounded-xl bg-[#00A85A]/15 text-[#00723D] flex items-center justify-center mb-5">
+                    <div className="w-10 h-10 rounded-lg border-2 border-black bg-neo-yellow text-black flex items-center justify-center mb-5 shadow-[2px_2px_0px_rgba(0,0,0,1)]">
                       <step.icon className="w-5 h-5" />
                     </div>
                     <h3 className="font-semibold text-lg mb-3">{step.title}</h3>
@@ -355,15 +354,15 @@ function AgenticAIDevelopmentPage() {
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
             >
-              <SpotlightCard className="p-8 h-full flex flex-col justify-between border-[#00A85A]/20">
+              <SpotlightCard className="p-8 h-full flex flex-col justify-between">
                 <div>
                   <div className="flex items-center gap-3 mb-6">
-                    <div className="w-12 h-12 rounded-2xl bg-[#00A85A]/15 text-[#00723D] flex items-center justify-center">
+                    <div className="w-12 h-12 rounded-lg border-2 border-black bg-neo-yellow text-black flex items-center justify-center shadow-[2px_2px_0px_rgba(0,0,0,1)]">
                       <Layers className="w-6 h-6" />
                     </div>
                     <div>
                       <h3 className="text-2xl font-bold">LangGraph</h3>
-                      <span className="text-[10px] uppercase font-bold tracking-wider text-[#00723D] bg-[#00A85A]/10 px-2.5 py-0.5 rounded-full mt-1 inline-block">
+                      <span className="text-[10px] uppercase font-bold tracking-wider text-black bg-[#BAFCA2] border border-black px-2.5 py-0.5 rounded mt-1 inline-block shadow-[1px_1px_0px_rgba(0,0,0,1)]">
                         Stateful Graph Orchestration
                       </span>
                     </div>
@@ -388,15 +387,15 @@ function AgenticAIDevelopmentPage() {
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
             >
-              <SpotlightCard className="p-8 h-full flex flex-col justify-between border-[#00A85A]/20">
+              <SpotlightCard className="p-8 h-full flex flex-col justify-between">
                 <div>
                   <div className="flex items-center gap-3 mb-6">
-                    <div className="w-12 h-12 rounded-2xl bg-[#00A85A]/15 text-[#00723D] flex items-center justify-center">
+                    <div className="w-12 h-12 rounded-lg border-2 border-black bg-neo-yellow text-black flex items-center justify-center shadow-[2px_2px_0px_rgba(0,0,0,1)]">
                       <Bot className="w-6 h-6" />
                     </div>
                     <div>
                       <h3 className="text-2xl font-bold">CrewAI</h3>
-                      <span className="text-[10px] uppercase font-bold tracking-wider text-[#00723D] bg-[#00A85A]/10 px-2.5 py-0.5 rounded-full mt-1 inline-block">
+                      <span className="text-[10px] uppercase font-bold tracking-wider text-black bg-[#BAFCA2] border border-black px-2.5 py-0.5 rounded mt-1 inline-block shadow-[1px_1px_0px_rgba(0,0,0,1)]">
                         Role-Based Agent Crews
                       </span>
                     </div>
@@ -448,12 +447,12 @@ function AgenticAIDevelopmentPage() {
                 key={item.title}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
+                viewport={{ once: true, margin: "-20px" }}
                 transition={{ duration: 0.5, delay: idx * 0.1 }}
               >
                 <SpotlightCard className="p-6 md:p-8">
                   <div className="flex gap-4 flex-col sm:flex-row">
-                    <div className="shrink-0 w-12 h-12 rounded-xl bg-[#00A85A]/15 text-[#00723D] flex items-center justify-center self-start sm:self-center">
+                    <div className="shrink-0 w-12 h-12 rounded-xl bg-[#BAFCA2] border border-black text-black shadow-[1.5px_1.5px_0px_rgba(0,0,0,1)] flex items-center justify-center self-start sm:self-center">
                       <item.icon className="w-6 h-6" />
                     </div>
                     <div>
@@ -476,7 +475,6 @@ function AgenticAIDevelopmentPage() {
             transition={{ duration: 0.6 }}
           >
             <div className="glass-strong p-8 md:p-16 rounded-3xl text-center relative overflow-hidden">
-              <div className="aurora-blob left-1/3 top-1/2 h-[350px] w-[350px] bg-[#00A85A]/15 -z-10" />
               
               <h2 className="text-3xl md:text-5xl font-bold mb-4">
                 Ready to scope an <span className="text-gradient-green">Agentic Build</span>?
@@ -492,14 +490,14 @@ function AgenticAIDevelopmentPage() {
                   href="https://calendly.com/mayurchaudhari1675/30min"
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex items-center gap-2 rounded-full bg-[#00A85A] px-6 py-3 font-medium text-black transition-transform hover:scale-105 glow-green"
+                  className="neo-btn px-6 py-3 flex items-center gap-2 text-black"
                 >
                   Book on Calendly
                 </a>
                 <Link
                   to="/"
                   hash="contact"
-                  className="glass inline-flex items-center gap-2 rounded-full px-6 py-3 font-medium text-foreground transition-colors hover:border-[#00A85A]/40"
+                  className="neo-btn neo-btn-white px-6 py-3 flex items-center gap-2 text-black"
                 >
                   Get in touch
                 </Link>
@@ -510,7 +508,6 @@ function AgenticAIDevelopmentPage() {
       </main>
 
       <Footer />
-      <AIAssistant />
     </div>
   );
 }
