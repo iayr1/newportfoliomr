@@ -360,7 +360,7 @@ export function Nav({ mounted, audioEnabled, toggleAudio }: NavProps) {
             {mounted && <AudioControl audioEnabled={audioEnabled} toggleAudio={toggleAudio} />}
 
             <a
-              href="https://drive.google.com/file/d/1FgLCjW_7zYTOkBD2QumKM4Oi7E6rpHa4/view?usp=sharing"
+              href="https://drive.google.com/file/d/1s2oNwDboOIICgA8PMPOqUFK-m_yQVCdp/view?usp=sharing"
               target="_blank"
               rel="noopener noreferrer"
               className="hidden lg:inline-flex neo-btn neo-btn-white py-1 px-3.5 text-xs lg:text-sm"
@@ -406,7 +406,7 @@ export function Nav({ mounted, audioEnabled, toggleAudio }: NavProps) {
                 </a>
               ))}
               <a
-                href="https://drive.google.com/file/d/1FgLCjW_7zYTOkBD2QumKM4Oi7E6rpHa4/view?usp=sharing"
+                href="https://drive.google.com/file/d/1s2oNwDboOIICgA8PMPOqUFK-m_yQVCdp/view?usp=sharing"
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => setIsOpen(false)}
@@ -944,7 +944,7 @@ function Experience() {
             </h2>
           </div>
           <a
-            href="https://drive.google.com/file/d/1FgLCjW_7zYTOkBD2QumKM4Oi7E6rpHa4/view?usp=sharing"
+            href="https://drive.google.com/file/d/1s2oNwDboOIICgA8PMPOqUFK-m_yQVCdp/view?usp=sharing"
             target="_blank"
             rel="noopener noreferrer"
             className="neo-btn neo-btn-white py-2 px-5 text-sm self-start"
@@ -2338,7 +2338,7 @@ export function Footer() {
         <div className="flex items-center gap-4">
           <span>AI Business Transformation · Mumbai, India</span>
           <a
-            href="https://drive.google.com/file/d/1FgLCjW_7zYTOkBD2QumKM4Oi7E6rpHa4/view?usp=sharing"
+            href="https://drive.google.com/file/d/1s2oNwDboOIICgA8PMPOqUFK-m_yQVCdp/view?usp=sharing"
             target="_blank"
             rel="noopener noreferrer"
             className="text-xs text-muted-foreground/60 hover:text-[#FFDB58] transition-colors"
