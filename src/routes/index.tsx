@@ -567,7 +567,7 @@ function Hero() {
         >
           <div className="chip text-xs mb-4">
             <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-[#BAFCA2] border border-black" />
-            <span className="text-foreground">AI Business Transformation Manager · EDGE</span>
+            <span className="text-foreground">AI Systems & Business Transformation Manager · EDGE</span>
           </div>
 
           <h1 className="mt-6 text-4xl font-black leading-[1.05] tracking-tight sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl text-black dark:text-white">
@@ -601,7 +601,7 @@ function Hero() {
             {[
               { k: "50+", v: "AI Workflows", color: "bg-[#BAFCA2]" },
               { k: "20+", v: "Processes Automated", color: "bg-[#FFDB58]" },
-              { k: "3+", v: "Years Experience", color: "bg-[#C4A1FF]" },
+              { k: "6+", v: "Years Experience", color: "bg-[#C4A1FF]" },
               { k: "1000s", v: "Users Impacted", color: "bg-[#FFA07A]" },
             ].map((s) => (
               <div
@@ -890,49 +890,40 @@ function About() {
 function Experience() {
   const roles = [
     {
-      role: "AI Business Transformation Manager",
+      role: "AI Systems & Business Transformation Manager",
       company: "EDGE",
-      date: "July 2026 — Present",
-      desc: "Leading AI strategy, business process transformation, enterprise workflow automation, and productivity optimization.",
+      date: "Jul 2026 — Present",
+      desc: "Leading AI, CRM, automation, and digital transformation initiatives, translating business requirements into scalable technology solutions.",
       responsibilities: [
-        "AI strategy development & opportunity assessment",
-        "Business process transformation & enterprise workflow automation",
-        "AI adoption programs & cross-functional implementation",
-        "Internal AI systems design & productivity optimization",
+        "Lead AI, CRM, automation, and digital transformation initiatives, translating business requirements into scalable technology solutions.",
+        "Led end-to-end transformation of offline business operations into Zoho CRM, digitizing manual workflows and centralizing business processes and customer data.",
+        "Design CRM architecture across inquiries, leads, customers, sales pipelines, follow-ups, and operations; manage Zoho CRM and work with Salesforce for CRM processes and integrations.",
+        "Identify Generative AI and Agentic AI use cases for customer profiling, lead qualification, sales automation, decision support, and operational efficiency.",
+        "Bridge management, sales, marketing, operations, and technology teams to drive adoption of AI-enabled business processes.",
       ],
       current: true,
     },
     {
-      role: "Agentic AI Engineer",
+      role: "AI Automation Engineer / LLM Engineer",
       company: "Colage Communication",
-      date: "July 2025 — July 2026",
-      desc: "Designed and built multi-agent AI systems, custom workflows, and LLM integrations to optimize business communication processes.",
+      date: "Apr 2023 — Jul 2026",
+      desc: "Designed LLM, Agentic AI, RAG, and intelligent automation solutions integrating business workflows, APIs, data, and external systems.",
       responsibilities: [
-        "Developing multi-agent orchestration structures using LangGraph & CrewAI",
-        "Integrating advanced reasoning LLMs for specialized communications",
-        "Optimizing LLM response speed, prompt design, and cost metrics",
+        "Designed LLM, Agentic AI, RAG, and intelligent automation solutions integrating business workflows, APIs, data, and external systems.",
+        "Built AI orchestration and multi-step automation using LangChain, LangGraph, n8n, Make, Zapier, FastAPI, and webhooks.",
+        "Translated business and product requirements into scalable AI solutions, building the technical foundation for AI transformation leadership.",
       ],
     },
     {
-      role: "Chatbot Developer",
-      company: "Eazr Digipayments",
-      date: "June 2024 — July 2025",
-      desc: "Created highly conversational payment support bots, handling customer queries, automated receipt validation, and transactional support.",
+      role: "Business Operation and Technology Executive",
+      company: "Mauli Global Pvt Ltd",
+      date: "May 2020 — Dec 2022",
+      desc: "Managed daily business operations and coordinated cross-functional teams to streamline workflows, reporting, and process execution.",
       responsibilities: [
-        "Building payment bot integration pipelines with payment gateways",
-        "Developing secure conversational dialog management systems",
-        "Reducing support ticket backlog by 45% through automated resolution flows",
-      ],
-    },
-    {
-      role: "Software Development Engineer (SDE)",
-      company: "ShareShiksha",
-      date: "Apr 2023 — June 2024",
-      desc: "Developed cross-platform EdTech features using Flutter, Dart, and Firebase to deliver seamless mobile and web classroom tools.",
-      responsibilities: [
-        "Designing modular mobile features and offline state syncing in Flutter",
-        "Creating back-end logic, REST APIs, and database structures",
-        "Implementing security configurations for customer payment details",
+        "Managed daily business operations and coordinated cross-functional teams to streamline workflows, reporting, and process execution.",
+        "Implemented technology-driven tools and digital tracking systems to replace manual processes, improving operational efficiency and data accuracy.",
+        "Analyzed operational bottlenecks and recommended process improvements, laying the groundwork for later digital and CRM transformation initiatives.",
+        "Coordinated with vendors, stakeholders, and internal teams to support technology adoption and smooth day-to-day business operations.",
       ],
     },
   ];
@@ -1261,7 +1252,7 @@ function Metrics() {
   const metrics = [
     { k: "50+", v: "AI Workflows Designed" },
     { k: "20+", v: "Business Processes Automated" },
-    { k: "3+", v: "Years Technology Experience" },
+    { k: "6+", v: "Years Technology Experience" },
     { k: "10+", v: "Production AI Systems" },
     { k: "1000s", v: "End Users Impacted" },
   ];
@@ -2203,7 +2194,7 @@ function Contact() {
 
   const handleCopyEmail = (e: React.MouseEvent) => {
     e.preventDefault();
-    navigator.clipboard.writeText("mayuraimaker@gmail.com");
+    navigator.clipboard.writeText("mayurailead@gmail.com");
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
 
@@ -2272,7 +2263,7 @@ function Contact() {
                 className="neo-btn neo-btn-white px-6 py-3 relative overflow-visible"
               >
                 <Mail className="h-4 w-4" />
-                <span>{copied ? "Copied Email!" : "mayuraimaker@gmail.com"}</span>
+                <span>{copied ? "Copied Email!" : "mayurailead@gmail.com"}</span>
                 {copied && (
                   <div className="absolute -top-10 left-1/2 -translate-x-1/2 bg-black text-white text-[10px] font-bold px-2.5 py-1 rounded border border-black shadow-[2px_2px_0px_rgba(186,252,162,1)] whitespace-nowrap animate-bounce">
                     Copied to Clipboard!

@@ -16,5 +16,5 @@ export const firebaseApp = getApps().length ? getApp() : initializeApp(firebaseC
 export const auth = getAuth(firebaseApp);
 export const db = getFirestore(firebaseApp);
 
-export const ADMIN_EMAIL = "mayuraimaker@gmail.com";
+export const ADMIN_EMAIL = "mayurailead@gmail.com";
 export const CLARITY_PROJECT_ID = "x6drraa6yi";
