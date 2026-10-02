@@ -893,7 +893,7 @@ function Experience() {
       role: "AI Systems & Business Transformation Manager",
       company: "EDGE",
       date: "Jul 2026 — Present",
-      desc: "Leading AI, CRM, automation, and digital transformation initiatives, translating business requirements into scalable technology solutions.",
+      desc: "Lead AI, CRM, automation, and digital transformation initiatives, translating business requirements into scalable technology solutions.",
       responsibilities: [
         "Lead AI, CRM, automation, and digital transformation initiatives, translating business requirements into scalable technology solutions.",
         "Led end-to-end transformation of offline business operations into Zoho CRM, digitizing manual workflows and centralizing business processes and customer data.",
@@ -904,7 +904,7 @@ function Experience() {
       current: true,
     },
     {
-      role: "AI Automation Engineer / LLM Engineer",
+      role: "Senior AI Engineer / Agentic AI - Automation",
       company: "Colage Communication",
       date: "Apr 2023 — Jul 2026",
       desc: "Designed LLM, Agentic AI, RAG, and intelligent automation solutions integrating business workflows, APIs, data, and external systems.",
@@ -915,15 +915,15 @@ function Experience() {
       ],
     },
     {
-      role: "Business Operation and Technology Executive",
-      company: "Mauli Global Pvt Ltd",
-      date: "May 2020 — Dec 2022",
-      desc: "Managed daily business operations and coordinated cross-functional teams to streamline workflows, reporting, and process execution.",
+      role: "Flutter Developer (Chatbot Developer)",
+      company: "Eazr Digipayments Pvt Ltd",
+      date: "Aug 2020 — Dec 2022",
+      desc: "Built an AI-driven chatbot to assist insurance agents by answering policy and customer queries instantly, reducing manual support effort.",
       responsibilities: [
-        "Managed daily business operations and coordinated cross-functional teams to streamline workflows, reporting, and process execution.",
-        "Implemented technology-driven tools and digital tracking systems to replace manual processes, improving operational efficiency and data accuracy.",
-        "Analyzed operational bottlenecks and recommended process improvements, laying the groundwork for later digital and CRM transformation initiatives.",
-        "Coordinated with vendors, stakeholders, and internal teams to support technology adoption and smooth day-to-day business operations.",
+        "Built an AI-driven chatbot to assist insurance agents by answering policy and customer queries instantly, reducing manual support effort.",
+        "Developed personal loan mobile applications in Flutter covering onboarding, application flows, and customer-facing journeys for Android and iOS.",
+        "Created conversational chatbots and cross-platform mobile apps, integrating REST APIs and backend services for fintech and insurance use cases.",
+        "Collaborated with product, backend, and business teams to deliver features, fix bugs, and ship app releases.",
       ],
     },
   ];
