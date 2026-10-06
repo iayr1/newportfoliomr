@@ -255,8 +255,8 @@ function PortraitCard({ ready }: { ready: boolean }) {
 
         {/* Floating: diagnostics */}
         <div
-          style={{ transform: "translateZ(80px)" }}
-          className="absolute -right-6 -top-8 z-20 hidden md:block lg:-right-14"
+          style={{ transform: "translateZ(40px)" }}
+          className="absolute -right-6 -top-8 z-20 hidden md:block lg:hidden xl:block xl:-right-14"
         >
           <AIDiagnostics />
         </div>
@@ -377,7 +377,7 @@ function Hero({ ready }: { ready: boolean }) {
 
           <motion.div
             {...fadeUp(0.8)}
-            className="mt-14 grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-white/[0.08] bg-white/[0.06] sm:grid-cols-4"
+            className="mt-14 grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-white/[0.08] bg-white/[0.06] sm:grid-cols-4 lg:grid-cols-2 xl:grid-cols-4"
           >
             {[
               { k: "50+", v: "AI Workflows", color: "from-lime" },
