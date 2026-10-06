@@ -959,7 +959,7 @@ function Expertise() {
 
         <div className="grid items-start gap-6 lg:grid-cols-[1fr_1.25fr] lg:gap-8">
           {/* Tabs */}
-          <div className="-mx-4 flex gap-3 overflow-x-auto px-4 pb-2 scrollbar-none lg:mx-0 lg:flex-col lg:overflow-visible lg:px-0 lg:pb-0">
+          <div className="grid grid-cols-2 gap-3 lg:flex lg:flex-col">
             {categories.map((c, idx) => {
               const isActive = activeTab === idx;
               return (
@@ -969,7 +969,7 @@ function Expertise() {
                     setActiveTab(idx);
                     playBlip(700, 0.01, 0.06);
                   }}
-                  className={`relative flex min-w-[240px] cursor-pointer items-center justify-between gap-4 rounded-2xl border p-4 text-left transition-colors duration-300 sm:p-5 lg:min-w-0 lg:w-full ${
+                  className={`relative flex min-w-0 cursor-pointer items-center justify-between gap-4 rounded-2xl border p-3.5 text-left transition-colors duration-300 sm:p-5 lg:w-full ${
                     isActive
                       ? "border-white/15 text-foreground"
                       : "border-white/[0.06] bg-white/[0.015] text-muted-foreground hover:border-white/12 hover:text-foreground"
@@ -982,9 +982,9 @@ function Expertise() {
                       transition={{ type: "spring", stiffness: 300, damping: 30 }}
                     />
                   )}
-                  <div className="relative flex items-center gap-4">
+                  <div className="relative flex min-w-0 flex-col items-start gap-3 sm:flex-row sm:items-center sm:gap-4">
                     <div
-                      className={`icon-tile h-11 w-11 shrink-0 transition-all duration-300 ${isActive ? "" : "opacity-60 grayscale"}`}
+                      className={`icon-tile h-10 w-10 shrink-0 sm:h-11 sm:w-11 transition-all duration-300 ${isActive ? "" : "opacity-60 grayscale"}`}
                       style={{ "--tile": c.tile } as React.CSSProperties}
                     >
                       <c.icon className="h-5 w-5" />
@@ -994,15 +994,15 @@ function Expertise() {
                         <span className="font-mono text-[10px] text-muted-foreground">
                           0{idx + 1}
                         </span>
-                        <h3 className="text-base font-semibold">{c.title}</h3>
+                        <h3 className="truncate text-sm font-semibold sm:text-base">{c.title}</h3>
                       </div>
-                      <p className="mt-0.5 max-w-[220px] truncate text-xs text-muted-foreground">
+                      <p className="mt-0.5 hidden text-xs text-muted-foreground sm:line-clamp-1 lg:max-w-[260px]">
                         {c.desc}
                       </p>
                     </div>
                   </div>
                   <ChevronRight
-                    className={`relative h-4 w-4 shrink-0 transition-all duration-300 ${isActive ? "translate-x-0.5 text-lime" : "opacity-40"}`}
+                    className={`relative hidden h-4 w-4 shrink-0 sm:block transition-all duration-300 ${isActive ? "translate-x-0.5 text-lime" : "opacity-40"}`}
                   />
                 </button>
               );
@@ -1081,7 +1081,7 @@ function Expertise() {
                         <div className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground">
                           {key}
                         </div>
-                        <div className="mt-1 truncate text-sm font-medium text-foreground">
+                        <div className="mt-1 text-sm font-medium text-foreground sm:truncate">
                           {val as string}
                         </div>
                       </div>
