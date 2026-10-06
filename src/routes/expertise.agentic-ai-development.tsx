@@ -14,6 +14,7 @@ import {
 } from "lucide-react";
 import { motion } from "framer-motion";
 import { Nav, Footer, ScrollProgress, SpotlightCard, triggerChimeSound } from "./index";
+import { CustomCursor, NoiseOverlay } from "@/components/site/chrome";
 import { WebGLBackground } from "@/components/WebGLBackground";
 
 export const Route = createFileRoute("/expertise/agentic-ai-development")({
@@ -180,9 +181,11 @@ function AgenticAIDevelopmentPage() {
   }, []);
 
   return (
-    <div className="relative min-h-screen text-foreground transition-colors duration-300 overflow-hidden">
+    <div className="relative min-h-screen text-foreground overflow-x-clip">
       <ScrollProgress />
       <WebGLBackground />
+      <NoiseOverlay />
+      {mounted && <CustomCursor />}
 
       {mounted && (
         <div
@@ -193,8 +196,8 @@ function AgenticAIDevelopmentPage() {
             top: pos.y - 200,
             background:
               theme === "dark"
-                ? "radial-gradient(circle, rgba(0,168,90,0.1) 0%, transparent 60%)"
-                : "radial-gradient(circle, rgba(0,168,90,0.18) 0%, transparent 60%)",
+                ? "radial-gradient(circle, rgba(200,255,77,0.08) 0%, transparent 60%)"
+                : "radial-gradient(circle, rgba(200,255,77,0.12) 0%, transparent 60%)",
             transition: "left 0.15s ease-out, top 0.15s ease-out, background 0.3s ease",
           }}
         />
@@ -216,7 +219,7 @@ function AgenticAIDevelopmentPage() {
         <Section className="pt-8">
           <Link
             to="/"
-            className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-[#FFDB58] transition-colors mb-8 cursor-pointer group"
+            className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-lime transition-colors mb-8 cursor-pointer group"
           >
             <ArrowRight className="w-4 h-4 rotate-180 transition-transform group-hover:-translate-x-1" />
             Back to portfolio
@@ -232,9 +235,9 @@ function AgenticAIDevelopmentPage() {
               <span>Expertise Deep Dive</span>
             </div>
 
-            <h1 className="text-4xl md:text-6xl font-bold leading-[1.15] tracking-tight mb-8">
+            <h1 className="text-[2.5rem] sm:text-5xl md:text-7xl font-semibold leading-[1.02] tracking-[-0.045em] mb-8">
               Agentic AI Development Company for{" "}
-              <span className="text-gradient-green">Multi-Agent Systems</span>
+              <span className="text-serif text-gradient-green">Multi-Agent Systems</span>
             </h1>
 
             <p className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-3xl">
@@ -254,7 +257,7 @@ function AgenticAIDevelopmentPage() {
             transition={{ duration: 0.6 }}
           >
             <SpotlightCard className="p-8 md:p-12">
-              <h2 className="text-2xl md:text-4xl font-semibold mb-6">What is agentic AI?</h2>
+              <h2 className="text-3xl md:text-5xl font-semibold tracking-[-0.04em] mb-6">What is <span className="text-serif text-gradient-green">agentic AI</span>?</h2>
               <div className="space-y-6 text-base text-muted-foreground leading-relaxed">
                 <p>
                   Agentic AI describes software systems where one or more LLM-powered agents plan,
@@ -278,8 +281,8 @@ function AgenticAIDevelopmentPage() {
         <Section>
           <div className="text-center md:text-left mb-12">
             <div className="section-eyebrow">Development Lifecycle</div>
-            <h2 className="text-3xl md:text-5xl font-semibold mt-4">
-              Our <span className="text-gradient-green">Agentic Lifecycle</span>
+            <h2 className="text-4xl md:text-6xl font-semibold tracking-[-0.04em] mt-5">
+              Our <span className="text-serif text-gradient-green">Agentic Lifecycle</span>
             </h2>
           </div>
 
@@ -326,7 +329,7 @@ function AgenticAIDevelopmentPage() {
               >
                 <SpotlightCard className="p-6 flex flex-col justify-between h-full w-full">
                   <div>
-                    <div className="w-10 h-10 rounded-lg border-2 border-black bg-neo-yellow text-black flex items-center justify-center mb-5 shadow-[2px_2px_0px_rgba(0,0,0,1)]">
+                    <div className="icon-tile w-11 h-11 mb-5">
                       <step.icon className="w-5 h-5" />
                     </div>
                     <h3 className="font-semibold text-lg mb-3">{step.title}</h3>
@@ -342,8 +345,8 @@ function AgenticAIDevelopmentPage() {
         <Section>
           <div className="text-center md:text-left mb-12">
             <div className="section-eyebrow">Framework Comparison</div>
-            <h2 className="text-3xl md:text-5xl font-semibold mt-4">
-              LangGraph <span className="text-gradient">vs</span> CrewAI
+            <h2 className="text-4xl md:text-6xl font-semibold tracking-[-0.04em] mt-5">
+              LangGraph <span className="text-serif text-gradient-green">vs</span> CrewAI
             </h2>
             <p className="text-muted-foreground mt-4 max-w-2xl text-base leading-relaxed">
               Most agentic AI projects live or die on framework fit. We design architecture around
@@ -361,12 +364,12 @@ function AgenticAIDevelopmentPage() {
               <SpotlightCard className="p-8 h-full flex flex-col justify-between">
                 <div>
                   <div className="flex items-center gap-3 mb-6">
-                    <div className="w-12 h-12 rounded-lg border-2 border-black bg-neo-yellow text-black flex items-center justify-center shadow-[2px_2px_0px_rgba(0,0,0,1)]">
+                    <div className="icon-tile w-12 h-12">
                       <Layers className="w-6 h-6" />
                     </div>
                     <div>
                       <h3 className="text-2xl font-bold">LangGraph</h3>
-                      <span className="text-[10px] uppercase font-bold tracking-wider text-black bg-[#BAFCA2] border border-black px-2.5 py-0.5 rounded mt-1 inline-block shadow-[1px_1px_0px_rgba(0,0,0,1)]">
+                      <span className="mt-1.5 inline-block rounded-full border border-lime/30 bg-lime/10 px-2.5 py-0.5 font-mono text-[10px] uppercase tracking-wider text-lime">
                         Stateful Graph Orchestration
                       </span>
                     </div>
@@ -396,12 +399,12 @@ function AgenticAIDevelopmentPage() {
               <SpotlightCard className="p-8 h-full flex flex-col justify-between">
                 <div>
                   <div className="flex items-center gap-3 mb-6">
-                    <div className="w-12 h-12 rounded-lg border-2 border-black bg-neo-yellow text-black flex items-center justify-center shadow-[2px_2px_0px_rgba(0,0,0,1)]">
+                    <div className="icon-tile w-12 h-12">
                       <Bot className="w-6 h-6" />
                     </div>
                     <div>
                       <h3 className="text-2xl font-bold">CrewAI</h3>
-                      <span className="text-[10px] uppercase font-bold tracking-wider text-black bg-[#BAFCA2] border border-black px-2.5 py-0.5 rounded mt-1 inline-block shadow-[1px_1px_0px_rgba(0,0,0,1)]">
+                      <span className="mt-1.5 inline-block rounded-full border border-lime/30 bg-lime/10 px-2.5 py-0.5 font-mono text-[10px] uppercase tracking-wider text-lime">
                         Role-Based Agent Crews
                       </span>
                     </div>
@@ -428,8 +431,8 @@ function AgenticAIDevelopmentPage() {
         <Section>
           <div className="text-center md:text-left mb-12">
             <div className="section-eyebrow">Business Impact</div>
-            <h2 className="text-3xl md:text-5xl font-semibold mt-4">
-              Real-World <span className="text-gradient-green">Business Transformation</span>
+            <h2 className="text-4xl md:text-6xl font-semibold tracking-[-0.04em] mt-5">
+              Real-World <span className="text-serif text-gradient-green">Business Transformation</span>
             </h2>
           </div>
 
@@ -460,7 +463,7 @@ function AgenticAIDevelopmentPage() {
               >
                 <SpotlightCard className="p-6 md:p-8">
                   <div className="flex gap-4 flex-col sm:flex-row">
-                    <div className="shrink-0 w-12 h-12 rounded-xl bg-[#BAFCA2] border border-black text-black shadow-[1.5px_1.5px_0px_rgba(0,0,0,1)] flex items-center justify-center self-start sm:self-center">
+                    <div className="icon-tile shrink-0 w-12 h-12 self-start sm:self-center [--tile:#5eead4]">
                       <item.icon className="w-6 h-6" />
                     </div>
                     <div>
@@ -486,9 +489,13 @@ function AgenticAIDevelopmentPage() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <div className="glass-strong p-8 md:p-16 rounded-3xl text-center relative overflow-hidden">
-              <h2 className="text-3xl md:text-5xl font-bold mb-4">
-                Ready to scope an <span className="text-gradient-green">Agentic Build</span>?
+            <div className="glass-strong p-8 md:p-16 rounded-[2rem] text-center relative overflow-hidden">
+              <span className="conic-ring rounded-[2rem]" />
+              <div className="aurora-blob -left-24 -top-24 h-72 w-72 bg-lime/20" />
+              <div className="aurora-blob -right-24 -bottom-24 h-72 w-72 bg-violet/25" />
+              <div className="relative">
+              <h2 className="text-4xl md:text-6xl font-semibold tracking-[-0.04em] mb-5">
+                Ready to scope an <span className="text-serif text-gradient-green">Agentic Build</span>?
               </h2>
 
               <p className="text-muted-foreground mb-8 max-w-2xl mx-auto text-sm md:text-base leading-relaxed">
@@ -502,17 +509,18 @@ function AgenticAIDevelopmentPage() {
                   href="https://calendly.com/mayurchaudhari1675/30min"
                   target="_blank"
                   rel="noreferrer"
-                  className="neo-btn px-6 py-3 flex items-center gap-2 text-black"
+                  className="neo-btn px-6 py-3"
                 >
                   Book on Calendly
                 </a>
                 <Link
                   to="/"
                   hash="contact"
-                  className="neo-btn neo-btn-white px-6 py-3 flex items-center gap-2 text-black"
+                  className="neo-btn neo-btn-white px-6 py-3"
                 >
                   Get in touch
                 </Link>
+              </div>
               </div>
             </div>
           </motion.div>
