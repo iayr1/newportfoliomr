@@ -662,7 +662,7 @@ function VideoSection() {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-black/10" />
                   <div className="absolute inset-0 grid place-items-center">
-                    <span className="relative grid h-20 w-20 place-items-center sm:h-24 sm:w-24">
+                    <span className="relative grid h-16 w-16 place-items-center sm:h-24 sm:w-24">
                       <span className="absolute inset-0 rounded-full bg-lime/40 animate-pulse-ring" />
                       <span
                         className="absolute inset-0 rounded-full bg-lime/30 animate-pulse-ring"
@@ -677,7 +677,7 @@ function VideoSection() {
                     <div className="font-mono text-[11px] uppercase tracking-[0.22em] text-lime">
                       Featured talk
                     </div>
-                    <div className="mt-1.5 text-xl font-semibold tracking-tight sm:text-3xl">
+                    <div className="mt-1.5 hidden text-xl font-semibold tracking-tight sm:block sm:text-3xl">
                       AI Automation for Business Teams
                     </div>
                   </div>
