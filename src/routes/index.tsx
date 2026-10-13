@@ -76,61 +76,115 @@ import {
   NeuralNetworkGraph,
   RagMemoryWidget,
 } from "@/components/site/widgets";
+import {
+  PERSON_ID,
+  SITE_URL,
+  WEBSITE_ID,
+  faqSchema,
+  jsonLd,
+  pageMeta,
+  personSchema,
+  type Faq,
+} from "@/lib/seo";
+import { FaqSection } from "@/components/site/faq";
 import mayurPortrait from "@/assets/mayur-portrait.png";
 import videoPoster from "@/assets/mayur-video-poster.png";
 
 // Shared building blocks are re-exported so other routes can keep importing them from here.
 export { Nav, Footer, ScrollProgress, SpotlightCard, triggerChimeSound };
 
+const HOME_FAQS: Faq[] = [
+  {
+    q: "Who is Mayur Chaudhari?",
+    a: "Mayur Chaudhari is an AI Systems & Business Transformation Manager at EDGE, based in Mumbai, India. With 6+ years in technology, he designs Agentic AI systems, workflow automation, and CRM transformations that turn business problems into measurable outcomes.",
+  },
+  {
+    q: "What services does Mayur Chaudhari offer?",
+    a: "AI transformation consulting, business process automation, custom Agentic AI and multi-agent solutions, AI strategy workshops for leadership teams, enterprise AI adoption programs, and Flutter mobile app development.",
+  },
+  {
+    q: "What is Agentic AI and how can it help my business?",
+    a: "Agentic AI is software made of autonomous AI agents that plan, use tools, and complete multi-step tasks with minimal supervision. Businesses use it to automate lead qualification, research, content production, customer support, and reporting — work that rigid rule-based automation cannot handle.",
+  },
+  {
+    q: "Which AI tools and frameworks does Mayur work with?",
+    a: "LangGraph, CrewAI, and LangChain for agent orchestration; RAG pipelines with vector databases; n8n, Make, and Zapier for workflow automation; FastAPI and webhooks for integrations; Zoho CRM and Salesforce for CRM; and Flutter for cross-platform apps.",
+  },
+  {
+    q: "How do I start an AI automation project with Mayur?",
+    a: "Book a free 30-minute discovery call via Calendly or email mayurailead@gmail.com. The call identifies the highest-leverage workflow to automate first, then a scoped plan covers design, build, evaluation, and rollout.",
+  },
+  {
+    q: "Does Mayur work with clients outside India?",
+    a: "Yes. Mayur is based in Mumbai and works remotely with teams globally across consulting, implementation, and AI adoption engagements.",
+  },
+];
+
 export const Route = createFileRoute("/")({
-  head: () => ({
-    meta: [
-      { title: "Mayur Chaudhari | AI Business Transformation Manager" },
-      {
-        name: "description",
-        content:
-          "AI Business Transformation Manager specializing in Agentic AI, Workflow Automation, Business Process Optimization, AI Strategy, and Flutter Development.",
-      },
-      { property: "og:title", content: "Mayur Chaudhari | AI Business Transformation Manager" },
-      {
-        property: "og:description",
-        content:
-          "Transforming Businesses with Agentic AI. Workflow automation, AI strategy, and intelligent systems for measurable impact.",
-      },
-      { property: "og:url", content: "/" },
-      {
-        property: "og:image",
-        content:
-          "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/b1c4b602-3de3-4ac2-9607-51748b390274",
-      },
-      {
-        name: "twitter:image",
-        content:
-          "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/b1c4b602-3de3-4ac2-9607-51748b390274",
-      },
-    ],
-    links: [
-      { rel: "canonical", href: "/" },
-      { rel: "preload", as: "image", href: mayurPortrait, fetchPriority: "high" },
-    ],
-    scripts: [
-      {
-        type: "application/ld+json",
-        children: JSON.stringify({
+  head: () => {
+    const seo = pageMeta({
+      title: "Mayur Chaudhari | AI Business Transformation Manager & Agentic AI Consultant",
+      description:
+        "Mayur Chaudhari is a Mumbai-based AI Business Transformation Manager building Agentic AI systems, multi-agent workflows (LangGraph, CrewAI), RAG, and business process automation that deliver measurable ROI. Book a free AI strategy call.",
+      path: "/",
+      type: "profile",
+      keywords:
+        "Mayur Chaudhari, AI Business Transformation Manager, Agentic AI consultant, AI automation expert Mumbai, multi-agent systems, LangGraph developer, CrewAI developer, workflow automation consultant, Zoho CRM automation, AI strategy consultant India, Flutter developer",
+    });
+    return {
+      meta: [
+        ...seo.meta,
+        { property: "profile:first_name", content: "Mayur" },
+        { property: "profile:last_name", content: "Chaudhari" },
+      ],
+      links: [
+        ...seo.links,
+        { rel: "preload", as: "image", href: mayurPortrait, fetchPriority: "high" },
+      ],
+      scripts: [
+        jsonLd({
           "@context": "https://schema.org",
-          "@type": "Person",
-          name: "Mayur Chaudhari",
-          jobTitle: "AI Business Transformation Manager",
-          worksFor: {
-            "@type": "Organization",
-            name: "EDGE",
-          },
-          url: "https://mayuro.lovable.app/",
-          sameAs: ["https://www.linkedin.com/in/iayr1", "https://www.github.com/iayr1"],
+          "@type": "ProfilePage",
+          "@id": `${SITE_URL}/#profile`,
+          url: `${SITE_URL}/`,
+          name: "Mayur Chaudhari — AI Business Transformation Manager",
+          isPartOf: { "@id": WEBSITE_ID },
+          dateModified: "2026-10-13",
+          mainEntity: personSchema,
         }),
-      },
-    ],
-  }),
+        jsonLd({
+          "@context": "https://schema.org",
+          "@type": "ProfessionalService",
+          "@id": `${SITE_URL}/#service`,
+          name: "Mayur Chaudhari — AI Transformation & Automation Consulting",
+          url: `${SITE_URL}/`,
+          image: personSchema.image,
+          email: "mayurailead@gmail.com",
+          telephone: "+91-808-720-5660",
+          address: personSchema.address,
+          areaServed: "Worldwide",
+          founder: { "@id": PERSON_ID },
+          provider: { "@id": PERSON_ID },
+          hasOfferCatalog: {
+            "@type": "OfferCatalog",
+            name: "AI transformation services",
+            itemListElement: [
+              "AI Transformation Consulting",
+              "Business Process Automation",
+              "Agentic AI Solutions",
+              "AI Strategy Workshops",
+              "Flutter App Development",
+              "Enterprise AI Adoption",
+            ].map((name) => ({
+              "@type": "Offer",
+              itemOffered: { "@type": "Service", name },
+            })),
+          },
+        }),
+        jsonLd(faqSchema(HOME_FAQS)),
+      ],
+    };
+  },
   component: Portfolio,
 });
 
@@ -173,7 +227,10 @@ function PortraitCard({ ready }: { ready: boolean }) {
   const reduce = useReducedMotion();
   const mx = useMotionValue(0);
   const my = useMotionValue(0);
-  const rotateX = useSpring(useTransform(my, [-0.5, 0.5], [8, -8]), { stiffness: 150, damping: 18 });
+  const rotateX = useSpring(useTransform(my, [-0.5, 0.5], [8, -8]), {
+    stiffness: 150,
+    damping: 18,
+  });
   const rotateY = useSpring(useTransform(mx, [-0.5, 0.5], [-10, 10]), {
     stiffness: 150,
     damping: 18,
@@ -281,7 +338,10 @@ function PortraitCard({ ready }: { ready: boolean }) {
 
 function Hero({ ready }: { ready: boolean }) {
   const sectionRef = useRef<HTMLElement>(null);
-  const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start start", "end start"] });
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start start", "end start"],
+  });
   const contentY = useTransform(scrollYProgress, [0, 1], [0, 120]);
   const contentOpacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
 
@@ -340,6 +400,7 @@ function Hero({ ready }: { ready: boolean }) {
           </motion.div>
 
           <h1 className="mt-7 text-[clamp(2.6rem,6.6vw,5.4rem)] font-semibold leading-[0.98] tracking-[-0.055em] text-foreground">
+            <span className="sr-only">Mayur Chaudhari — AI Business Transformation Manager. </span>
             <SplitReveal text="Transforming" play={ready} className="block" />
             <SplitReveal
               text="Businesses with"
@@ -620,8 +681,8 @@ function VideoSection() {
           eyebrow="Watch"
           title={
             <>
-              AI Automation, <span className="text-serif text-gradient-green">explained simply</span>
-              .
+              AI Automation,{" "}
+              <span className="text-serif text-gradient-green">explained simply</span>.
             </>
           }
         >
@@ -1322,7 +1383,12 @@ function Projects() {
 
                     <div className="relative mt-6 grid gap-px overflow-hidden rounded-2xl border border-white/[0.06] bg-white/[0.06] text-xs sm:grid-cols-3">
                       {[
-                        { l: "Challenge", v: p.challenges, icon: AlertTriangle, c: "text-[#fdba74]" },
+                        {
+                          l: "Challenge",
+                          v: p.challenges,
+                          icon: AlertTriangle,
+                          c: "text-[#fdba74]",
+                        },
                         { l: "Solution", v: p.solutions, icon: Lightbulb, c: "text-cyan" },
                         { l: "Result", v: p.results, icon: Trophy, c: "text-lime" },
                       ].map((b) => (
@@ -1342,7 +1408,9 @@ function Projects() {
                       ))}
                     </div>
 
-                    <div className={`relative mt-5 flex flex-wrap gap-2 ${featured ? "lg:hidden" : ""}`}>
+                    <div
+                      className={`relative mt-5 flex flex-wrap gap-2 ${featured ? "lg:hidden" : ""}`}
+                    >
                       {p.tech.map((t) => (
                         <span key={t} className="tag cursor-default">
                           {t}
@@ -1933,6 +2001,16 @@ function Portfolio() {
         <Services />
         <Articles />
         <Testimonials />
+        <FaqSection
+          number="08"
+          eyebrow="Questions, answered"
+          faqs={HOME_FAQS}
+          title={
+            <>
+              Frequently asked <span className="text-serif text-gradient-green">questions</span>
+            </>
+          }
+        />
         <Contact />
       </main>
       <Footer />

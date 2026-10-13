@@ -12,21 +12,21 @@ import { useEffect, type ReactNode } from "react";
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { AnalyticsProvider } from "../components/AnalyticsProvider";
+import { PERSON_ID, SITE_NAME, SITE_URL, WEBSITE_ID, jsonLd } from "../lib/seo";
 
 function NotFoundComponent() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
       <div className="max-w-md text-center">
-        <h1 className="text-[8rem] font-black leading-none tracking-tighter text-gradient-green">404</h1>
+        <h1 className="text-[8rem] font-black leading-none tracking-tighter text-gradient-green">
+          404
+        </h1>
         <h2 className="mt-4 text-xl font-semibold text-foreground">Page not found</h2>
         <p className="mt-2 text-sm text-muted-foreground">
           The page you're looking for doesn't exist or has been moved.
         </p>
         <div className="mt-6">
-          <Link
-            to="/"
-            className="neo-btn px-6 py-2.5 text-sm"
-          >
+          <Link to="/" className="neo-btn px-6 py-2.5 text-sm">
             Go home
           </Link>
         </div>
@@ -92,12 +92,24 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         content:
           "Agentic AI, AI Business Transformation, Workflow Automation, AI Consultant, Business Automation, AI Strategy, Chatbot Developer, Digital Transformation, AI Manager",
       },
+      {
+        name: "robots",
+        content: "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      },
+      { property: "og:site_name", content: SITE_NAME },
+      { property: "og:locale", content: "en_US" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "google-site-verification", content: "iDC9yTz5Zz7qJytI5JKbAad1NhVOqa2YYIXD1FjWP8Q" },
     ],
     links: [
       { rel: "icon", type: "image/svg+xml", href: "/favicon.svg" },
+      {
+        rel: "alternate",
+        type: "text/plain",
+        href: "/llms.txt",
+        title: "LLM-readable site summary",
+      },
       { rel: "stylesheet", href: appCss },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
@@ -107,24 +119,17 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
     ],
     scripts: [
-      {
-        type: "application/ld+json",
-        children: JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "WebSite",
-          name: "Mayur Chaudhari",
-          url: "https://mayuro.lovable.app/",
-        }),
-      },
-      {
-        type: "application/ld+json",
-        children: JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "Organization",
-          name: "EDGE",
-          url: "https://mayuro.lovable.app/",
-        }),
-      },
+      jsonLd({
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "@id": WEBSITE_ID,
+        name: SITE_NAME,
+        alternateName: "Mayur Chaudhari — AI Business Transformation",
+        url: `${SITE_URL}/`,
+        inLanguage: "en",
+        publisher: { "@id": PERSON_ID },
+        about: { "@id": PERSON_ID },
+      }),
     ],
   }),
   shellComponent: RootShell,

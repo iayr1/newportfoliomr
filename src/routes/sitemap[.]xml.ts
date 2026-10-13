@@ -1,7 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
 import type {} from "@tanstack/react-start";
 
-const BASE_URL = "https://mayuro.lovable.app";
+import { SITE_URL as BASE_URL } from "@/lib/seo";
+
+// Bump when page content changes so crawlers re-fetch.
+const LASTMOD = "2026-10-13";
 
 interface SitemapEntry {
   path: string;
@@ -15,8 +18,13 @@ export const Route = createFileRoute("/sitemap.xml")({
     handlers: {
       GET: async () => {
         const entries: SitemapEntry[] = [
-          { path: "/", changefreq: "weekly", priority: "1.0" },
-          { path: "/expertise/agentic-ai-development", changefreq: "monthly", priority: "0.8" },
+          { path: "/", lastmod: LASTMOD, changefreq: "weekly", priority: "1.0" },
+          {
+            path: "/expertise/agentic-ai-development",
+            lastmod: LASTMOD,
+            changefreq: "monthly",
+            priority: "0.8",
+          },
         ];
 
         const urls = entries.map((e) =>

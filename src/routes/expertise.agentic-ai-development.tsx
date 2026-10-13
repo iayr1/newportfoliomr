@@ -16,90 +16,98 @@ import { motion } from "framer-motion";
 import { Nav, Footer, ScrollProgress, SpotlightCard, triggerChimeSound } from "./index";
 import { CustomCursor, NoiseOverlay } from "@/components/site/chrome";
 import { WebGLBackground } from "@/components/WebGLBackground";
+import { FaqSection } from "@/components/site/faq";
+import {
+  DEFAULT_OG_IMAGE,
+  PERSON_ID,
+  absoluteUrl,
+  breadcrumbSchema,
+  faqSchema,
+  jsonLd,
+  pageMeta,
+  personSchema,
+  type Faq,
+} from "@/lib/seo";
+
+const PATH = "/expertise/agentic-ai-development";
+
+const FAQS: Faq[] = [
+  {
+    q: "What is an agentic AI development company?",
+    a: "An agentic AI development company designs and ships autonomous, multi-agent software systems that can plan, use tools, and complete multi-step business tasks with minimal human oversight — typically built on frameworks like LangGraph or CrewAI.",
+  },
+  {
+    q: "How do AI agents transform business operations?",
+    a: "AI agents transform business operations by automating multi-step knowledge work — content production, financial analysis, research, customer operations — through specialized agents that collaborate, call tools, and adapt to new inputs without rigid scripted workflows.",
+  },
+  {
+    q: "When should you use LangGraph vs CrewAI?",
+    a: "LangGraph fits stateful, branching workflows where you need explicit control over agent state, retries, and human-in-the-loop checkpoints. CrewAI fits role-based crews where multiple agents collaborate on a shared goal with lightweight orchestration.",
+  },
+  {
+    q: "How long does it take to build a multi-agent system?",
+    a: "It depends on scope. The first milestone is a focused pilot on a single workflow — discovery and design, a working build, evaluation against real data, and a guarded rollout. Broader multi-workflow programs are delivered in phases once the pilot proves ROI.",
+  },
+  {
+    q: "How do you keep AI agents reliable in production?",
+    a: "Through evaluation suites run on real examples, guardrails and tool permissions, human-in-the-loop checkpoints for high-impact actions, tracing and logging of every agent step, and fallbacks when a model or tool fails.",
+  },
+];
 
 export const Route = createFileRoute("/expertise/agentic-ai-development")({
-  head: () => ({
-    meta: [
-      {
-        title: "Agentic AI Development Company | Multi-Agent Systems with LangGraph & CrewAI",
-      },
-      {
-        name: "description",
-        content:
-          "Agentic AI development services for businesses. We design, build, and deploy multi-agent systems with LangGraph and CrewAI that transform content production, financial analysis, and core business operations.",
-      },
-      {
-        name: "keywords",
-        content:
-          "agentic ai development company, ai agent services, multi-agent systems, LangGraph, CrewAI, how ai agents transform business operations",
-      },
-      {
-        property: "og:title",
-        content: "Agentic AI Development Company | Multi-Agent Systems with LangGraph & CrewAI",
-      },
-      {
-        property: "og:description",
-        content:
-          "End-to-end agentic AI development: discovery, design, build, evaluation, and deployment of autonomous multi-agent systems for measurable business impact.",
-      },
-      { property: "og:url", content: "/expertise/agentic-ai-development" },
-      { property: "og:type", content: "article" },
-    ],
-    links: [{ rel: "canonical", href: "/expertise/agentic-ai-development" }],
-    scripts: [
-      {
-        type: "application/ld+json",
-        children: JSON.stringify({
+  head: () => {
+    const seo = pageMeta({
+      title:
+        "Agentic AI Development | Multi-Agent Systems with LangGraph & CrewAI — Mayur Chaudhari",
+      description:
+        "Agentic AI development services: design, build, and deploy multi-agent systems with LangGraph and CrewAI that automate content production, research, financial analysis, and core business operations.",
+      path: PATH,
+      type: "article",
+      imageAlt: "Agentic AI development with LangGraph and CrewAI",
+      keywords:
+        "agentic ai development company, ai agent development services, multi-agent systems, LangGraph developer, CrewAI developer, how ai agents transform business operations, agentic ai consultant India",
+    });
+    return {
+      ...seo,
+      scripts: [
+        jsonLd({
           "@context": "https://schema.org",
           "@type": "Service",
+          "@id": absoluteUrl(`${PATH}#service`),
+          name: "Agentic AI Development",
           serviceType: "Agentic AI Development",
-          provider: {
-            "@type": "Person",
-            name: "Mayur Chaudhari",
-            jobTitle: "AI Business Transformation Manager",
-            url: "https://mayuro.lovable.app/",
-          },
-          areaServed: "Global",
+          provider: personSchema,
+          areaServed: "Worldwide",
           description:
-            "Design, build, and deployment of multi-agent systems using LangGraph and CrewAI for business transformation.",
-          url: "https://mayuro.lovable.app/expertise/agentic-ai-development",
+            "Design, build, evaluation, and deployment of multi-agent systems using LangGraph and CrewAI for business transformation.",
+          url: absoluteUrl(PATH),
         }),
-      },
-      {
-        type: "application/ld+json",
-        children: JSON.stringify({
+        jsonLd({
           "@context": "https://schema.org",
-          "@type": "FAQPage",
-          mainEntity: [
-            {
-              "@type": "Question",
-              name: "What is an agentic AI development company?",
-              acceptedAnswer: {
-                "@type": "Answer",
-                text: "An agentic AI development company designs and ships autonomous, multi-agent software systems that can plan, use tools, and complete multi-step business tasks with minimal human oversight — typically built on frameworks like LangGraph or CrewAI.",
-              },
-            },
-            {
-              "@type": "Question",
-              name: "How do AI agents transform business operations?",
-              acceptedAnswer: {
-                "@type": "Answer",
-                text: "AI agents transform business operations by automating multi-step knowledge work — content production, financial analysis, research, customer operations — through specialized agents that collaborate, call tools, and adapt to new inputs without rigid scripted workflows.",
-              },
-            },
-            {
-              "@type": "Question",
-              name: "When should you use LangGraph vs CrewAI?",
-              acceptedAnswer: {
-                "@type": "Answer",
-                text: "LangGraph fits stateful, branching workflows where you need explicit control over agent state, retries, and human-in-the-loop checkpoints. CrewAI fits role-based crews where multiple agents collaborate on a shared goal with lightweight orchestration.",
-              },
-            },
-          ],
+          "@type": "TechArticle",
+          headline: "Agentic AI Development Company for Multi-Agent Systems",
+          description:
+            "A practical guide to designing, building, and deploying multi-agent systems with LangGraph and CrewAI.",
+          url: absoluteUrl(PATH),
+          mainEntityOfPage: absoluteUrl(PATH),
+          image: DEFAULT_OG_IMAGE,
+          author: { "@id": PERSON_ID },
+          publisher: { "@id": PERSON_ID },
+          datePublished: "2026-06-13",
+          dateModified: "2026-10-13",
+          inLanguage: "en",
+          about: ["Agentic AI", "Multi-agent systems", "LangGraph", "CrewAI"],
         }),
-      },
-    ],
-  }),
+        jsonLd(
+          breadcrumbSchema([
+            { name: "Home", path: "/" },
+            { name: "Agentic AI Development", path: PATH },
+          ]),
+        ),
+        jsonLd(faqSchema(FAQS)),
+      ],
+    };
+  },
   component: AgenticAIDevelopmentPage,
 });
 
@@ -257,7 +265,9 @@ function AgenticAIDevelopmentPage() {
             transition={{ duration: 0.6 }}
           >
             <SpotlightCard className="p-8 md:p-12">
-              <h2 className="text-3xl md:text-5xl font-semibold tracking-[-0.04em] mb-6">What is <span className="text-serif text-gradient-green">agentic AI</span>?</h2>
+              <h2 className="text-3xl md:text-5xl font-semibold tracking-[-0.04em] mb-6">
+                What is <span className="text-serif text-gradient-green">agentic AI</span>?
+              </h2>
               <div className="space-y-6 text-base text-muted-foreground leading-relaxed">
                 <p>
                   Agentic AI describes software systems where one or more LLM-powered agents plan,
@@ -432,7 +442,8 @@ function AgenticAIDevelopmentPage() {
           <div className="text-center md:text-left mb-12">
             <div className="section-eyebrow">Business Impact</div>
             <h2 className="text-4xl md:text-6xl font-semibold tracking-[-0.04em] mt-5">
-              Real-World <span className="text-serif text-gradient-green">Business Transformation</span>
+              Real-World{" "}
+              <span className="text-serif text-gradient-green">Business Transformation</span>
             </h2>
           </div>
 
@@ -481,6 +492,16 @@ function AgenticAIDevelopmentPage() {
           </div>
         </Section>
 
+        <FaqSection
+          faqs={FAQS}
+          eyebrow="Agentic AI FAQ"
+          title={
+            <>
+              Agentic AI, <span className="text-serif text-gradient-green">answered</span>
+            </>
+          }
+        />
+
         {/* CTA */}
         <Section>
           <motion.div
@@ -494,33 +515,30 @@ function AgenticAIDevelopmentPage() {
               <div className="aurora-blob -left-24 -top-24 h-72 w-72 bg-lime/20" />
               <div className="aurora-blob -right-24 -bottom-24 h-72 w-72 bg-violet/25" />
               <div className="relative">
-              <h2 className="text-4xl md:text-6xl font-semibold tracking-[-0.04em] mb-5">
-                Ready to scope an <span className="text-serif text-gradient-green">Agentic Build</span>?
-              </h2>
+                <h2 className="text-4xl md:text-6xl font-semibold tracking-[-0.04em] mb-5">
+                  Ready to scope an{" "}
+                  <span className="text-serif text-gradient-green">Agentic Build</span>?
+                </h2>
 
-              <p className="text-muted-foreground mb-8 max-w-2xl mx-auto text-sm md:text-base leading-relaxed">
-                I help teams move from "we should try agents" to a deployed, measurable system.
-                Start with a discovery call to identify the highest-leverage use case in your
-                operations.
-              </p>
+                <p className="text-muted-foreground mb-8 max-w-2xl mx-auto text-sm md:text-base leading-relaxed">
+                  I help teams move from "we should try agents" to a deployed, measurable system.
+                  Start with a discovery call to identify the highest-leverage use case in your
+                  operations.
+                </p>
 
-              <div className="flex justify-center gap-4 flex-wrap">
-                <a
-                  href="https://calendly.com/mayurchaudhari1675/30min"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="neo-btn px-6 py-3"
-                >
-                  Book on Calendly
-                </a>
-                <Link
-                  to="/"
-                  hash="contact"
-                  className="neo-btn neo-btn-white px-6 py-3"
-                >
-                  Get in touch
-                </Link>
-              </div>
+                <div className="flex justify-center gap-4 flex-wrap">
+                  <a
+                    href="https://calendly.com/mayurchaudhari1675/30min"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="neo-btn px-6 py-3"
+                  >
+                    Book on Calendly
+                  </a>
+                  <Link to="/" hash="contact" className="neo-btn neo-btn-white px-6 py-3">
+                    Get in touch
+                  </Link>
+                </div>
               </div>
             </div>
           </motion.div>
