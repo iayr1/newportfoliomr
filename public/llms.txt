@@ -1,14 +1,32 @@
 # Mayur Chaudhari
 
-> AI Business Transformation Manager helping organizations unlock productivity through Agentic AI, workflow automation, and intelligent digital systems.
+> Mayur Chaudhari is an AI Systems & Business Transformation Manager at EDGE, based in Mumbai, India. He helps organizations unlock productivity through Agentic AI, multi-agent systems (LangGraph, CrewAI), RAG, workflow automation, CRM transformation, and Flutter apps — with a focus on measurable business impact.
 
-Mayur Chaudhari is an AI Business Transformation Manager focused on connecting business problems with AI-powered solutions. He designs systems that improve operations, automate repetitive work, and create scalable business outcomes. Currently leading AI Transformation at EDGE, he specializes in multi-agent systems, business process automation, AI strategy consulting, and cross-platform development with Flutter.
+## Key facts
+
+- Name: Mayur Chaudhari
+- Role: AI Systems & Business Transformation Manager at EDGE (Jul 2026 – present)
+- Location: Mumbai, India; works with teams worldwide (remote)
+- Experience: 6+ years in technology; 50+ AI workflows designed, 20+ business processes automated, 10+ production AI systems
+- Previously: Senior AI Engineer / Agentic AI – Automation at Colage Communication (Apr 2023 – Jul 2026); Flutter Developer (Chatbot Developer) at Eazr Digipayments Pvt Ltd (Aug 2020 – Dec 2022)
+- Core skills: Agentic AI, multi-agent systems, LangGraph, CrewAI, LangChain, RAG, LLM applications, n8n, Make, Zapier, FastAPI, webhooks, Zoho CRM, Salesforce, Flutter, AI strategy
+- Contact: mayurailead@gmail.com · +91 808 720 5660 · Book a call: https://calendly.com/mayurchaudhari1675/30min
+
+## Services
+
+- AI Transformation Consulting: end-to-end roadmap for adopting AI across an organization
+- Business Process Automation: replacing manual workflows with intelligent automation
+- Agentic AI Solutions: custom multi-agent systems built for business workflows
+- AI Strategy Workshops: aligning leadership on AI opportunities and priorities
+- Enterprise AI Adoption: change management and rollout programs
+- Flutter App Development: scalable cross-platform mobile apps
 
 ## Pages
 
-- [Home](/): Portfolio and landing page with services overview, experience, expertise, projects, and contact information.
+- [Home](https://mayuro.lovable.app/): Portfolio — about, experience, expertise, projects, services, FAQ, and contact.
+- [Agentic AI Development](https://mayuro.lovable.app/expertise/agentic-ai-development): Guide to designing, building, and deploying multi-agent systems with LangGraph and CrewAI, and how AI agents transform business operations.
 
 ## Optional
 
-- [LinkedIn](https://www.linkedin.com/in/mayuro/): Professional profile and network.
-- [GitHub](https://github.com/mayuro): Open-source projects and code repositories.
+- [LinkedIn](https://www.linkedin.com/in/iayr1): Professional profile.
+- [GitHub](https://github.com/iayr1): Code repositories.
