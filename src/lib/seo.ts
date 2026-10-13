@@ -1,7 +1,7 @@
 // Single source of truth for search (SEO) and AI-answer-engine (GEO) metadata.
 // Absolute URLs everywhere: crawlers and social previews ignore relative canonicals/og:urls.
 
-export const SITE_URL = "https://mayuro.lovable.app";
+export const SITE_URL = "https://mayuro.in";
 export const SITE_NAME = "Mayur Chaudhari";
 export const DEFAULT_OG_IMAGE =
   "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/b1c4b602-3de3-4ac2-9607-51748b390274";

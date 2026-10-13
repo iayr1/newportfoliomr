@@ -23,8 +23,8 @@
 
 ## Pages
 
-- [Home](https://mayuro.lovable.app/): Portfolio — about, experience, expertise, projects, services, FAQ, and contact.
-- [Agentic AI Development](https://mayuro.lovable.app/expertise/agentic-ai-development): Guide to designing, building, and deploying multi-agent systems with LangGraph and CrewAI, and how AI agents transform business operations.
+- [Home](https://mayuro.in/): Portfolio — about, experience, expertise, projects, services, FAQ, and contact.
+- [Agentic AI Development](https://mayuro.in/expertise/agentic-ai-development): Guide to designing, building, and deploying multi-agent systems with LangGraph and CrewAI, and how AI agents transform business operations.
 
 ## Optional
 

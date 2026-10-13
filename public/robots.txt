@@ -21,4 +21,4 @@ Allow: /
 Disallow: /admin/
 Disallow: /lovable/
 
-Sitemap: https://mayuro.lovable.app/sitemap.xml
+Sitemap: https://mayuro.in/sitemap.xml
